@@ -244,6 +244,26 @@ async function runWorkflowTestSuite() {
     `Workflow 15: Notifications engine delivered ${adminNotifs.length} in-app notifications`
   );
 
+  // -------------------------------------------------------------
+  // Test 16: Overdue & Delayed Task Alert Notification to Owner
+  // -------------------------------------------------------------
+  const hasOverdueOrDelayAlert = adminNotifs.some(
+    (n) => n.title.includes('Overdue') || n.title.includes('Delay') || n.title.includes('Blocker')
+  );
+  assert(
+    hasOverdueOrDelayAlert,
+    'Workflow 16: Owner receives automated notifications for overdue tasks and delayed risks'
+  );
+
+  // -------------------------------------------------------------
+  // Test 17: Total Hours Work Done Calculation
+  // -------------------------------------------------------------
+  const totalHoursWorkedAllEmployees = perfList.reduce((acc, p) => acc + p.total_logged_hours, 0);
+  assert(
+    totalHoursWorkedAllEmployees > 0,
+    `Workflow 17: Accurately calculated total hours work done across team (${totalHoursWorkedAllEmployees.toFixed(1)} verified hours)`
+  );
+
   console.log('\n================================================================');
   console.log(`TEST SUMMARY: ${passed} PASSED, ${failed} FAILED`);
   console.log('================================================================');

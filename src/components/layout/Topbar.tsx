@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Bell } from 'lucide-react';
+import { Bell, LogOut } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { QuickRoleSwitcher } from '../shared/QuickRoleSwitcher';
 import { NotificationsDrawer } from './NotificationsDrawer';
 import { Profile } from '@/lib/types';
@@ -13,9 +14,10 @@ interface TopbarProps {
 export function Topbar({ user }: TopbarProps) {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
-    // Check notifications
+    // Check notifications & auto-detect overdue/delayed tasks
     fetch('/api/notifications')
       .then((res) => res.json())
       .then((data) => {
@@ -26,6 +28,17 @@ export function Topbar({ user }: TopbarProps) {
       })
       .catch((err) => console.error(err));
   }, []);
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      router.push('/login');
+      router.refresh();
+    } catch (err) {
+      console.error(err);
+      window.location.href = '/login';
+    }
+  };
 
   return (
     <>
@@ -40,7 +53,7 @@ export function Topbar({ user }: TopbarProps) {
           </span>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           {/* Notification Bell */}
           <button
             onClick={() => setNotificationsOpen(true)}
@@ -55,6 +68,16 @@ export function Topbar({ user }: TopbarProps) {
 
           {/* Quick Role Switcher */}
           <QuickRoleSwitcher currentUserId={user.id} />
+
+          {/* Logout Button */}
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-red-50 hover:border-red-200 hover:text-red-700 text-xs font-semibold text-slate-700 transition-colors shadow-2xs"
+            title="Log out of session"
+          >
+            <LogOut className="w-3.5 h-3.5 text-slate-400" />
+            <span className="hidden sm:inline">Log Out</span>
+          </button>
         </div>
       </header>
 

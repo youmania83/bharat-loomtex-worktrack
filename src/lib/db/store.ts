@@ -529,6 +529,89 @@ class MemoryStore {
     return this.notifications.filter((n) => n.user_id === userId);
   }
 
+  checkAndNotifyOverdueAndDelayedTasks(): void {
+    const admin = this.profiles.find((p) => p.role === 'admin');
+    if (!admin) return;
+
+    const now = new Date();
+
+    for (const task of this.tasks) {
+      if (task.status === 'completed' || task.status === 'submitted') continue;
+
+      const dueDate = new Date(task.due_date);
+      const assignee = this.profiles.find((p) => p.id === task.assigned_to);
+      const assigneeName = assignee?.full_name || 'Assigned employee';
+
+      // 1. Task Overdue check
+      if (dueDate < now) {
+        if (task.status !== 'overdue') {
+          task.status = 'overdue';
+          task.updated_at = now.toISOString();
+        }
+
+        const alreadyNotified = this.notifications.some(
+          (n) => n.user_id === admin.id && n.link?.includes(task.id) && n.title.includes('Overdue')
+        );
+
+        if (!alreadyNotified) {
+          const daysOverdue = Math.max(1, Math.floor((now.getTime() - dueDate.getTime()) / (1000 * 60 * 60 * 24)));
+          this.notifications.unshift({
+            id: `notif-overdue-${task.id}-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+            user_id: admin.id,
+            title: `🚨 Task Overdue: ${task.title}`,
+            message: `Task "${task.title}" assigned to ${assigneeName} is ${daysOverdue} day(s) overdue (Deadline: ${task.due_date.split('T')[0]}). Requires immediate owner review.`,
+            type: 'deadline_approaching',
+            link: `/admin/tasks?id=${task.id}`,
+            is_read: false,
+            created_at: now.toISOString(),
+          });
+        }
+      } 
+      // 2. Impending delay risk (within 36 hours with low progress)
+      else {
+        const hoursRemaining = (dueDate.getTime() - now.getTime()) / (1000 * 60 * 60);
+        if (hoursRemaining <= 36 && (task.progress_percentage || 0) < 40) {
+          const alreadyNotified = this.notifications.some(
+            (n) => n.user_id === admin.id && n.link?.includes(task.id) && n.title.includes('Delay')
+          );
+
+          if (!alreadyNotified) {
+            this.notifications.unshift({
+              id: `notif-delay-${task.id}-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+              user_id: admin.id,
+              title: `⚠️ Task Delay Warning: ${task.title}`,
+              message: `Task "${task.title}" assigned to ${assigneeName} has only ${Math.round(hoursRemaining)} hours remaining before deadline, but progress is ${task.progress_percentage || 0}%. High risk of delay.`,
+              type: 'deadline_approaching',
+              link: `/admin/tasks?id=${task.id}`,
+              is_read: false,
+              created_at: now.toISOString(),
+            });
+          }
+        }
+      }
+
+      // 3. Flagged blockers
+      if (task.is_blocked) {
+        const alreadyNotified = this.notifications.some(
+          (n) => n.user_id === admin.id && n.link?.includes(task.id) && n.title.includes('Blocker')
+        );
+
+        if (!alreadyNotified) {
+          this.notifications.unshift({
+            id: `notif-blocker-${task.id}-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+            user_id: admin.id,
+            title: `⚠️ Active Blocker: ${task.title}`,
+            message: `Task "${task.title}" has an active blocker reported: ${task.blocker_reason || 'Work halted by ' + assigneeName}`,
+            type: 'comment_added',
+            link: `/admin/tasks?id=${task.id}`,
+            is_read: false,
+            created_at: now.toISOString(),
+          });
+        }
+      }
+    }
+  }
+
   markNotificationRead(id: string): void {
     const notif = this.notifications.find((n) => n.id === id);
     if (notif) notif.is_read = true;

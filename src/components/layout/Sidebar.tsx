@@ -13,7 +13,9 @@ import {
   History,
   Shield,
   Layers,
+  LogOut,
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils/cn';
 
 interface SidebarProps {
@@ -22,6 +24,17 @@ interface SidebarProps {
 
 export function Sidebar({ role }: SidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      router.push('/login');
+      router.refresh();
+    } catch {
+      window.location.href = '/login';
+    }
+  };
 
   const adminNav = [
     { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
@@ -96,10 +109,23 @@ export function Sidebar({ role }: SidebarProps) {
         })}
       </nav>
 
-      {/* Footer Branding */}
-      <div className="p-4 border-t border-slate-800/80 text-[11px] text-slate-400">
-        <div className="font-semibold text-slate-300">Rison AI Tech</div>
-        <div className="text-[10px] text-slate-400">Production SaaS v1.0</div>
+      {/* Footer Branding & Logout */}
+      <div className="p-4 border-t border-slate-800/80 space-y-3">
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-slate-800/70 hover:bg-red-950/40 hover:text-red-300 border border-slate-700/60 hover:border-red-800 text-xs text-slate-300 font-medium transition-colors"
+        >
+          <div className="flex items-center gap-2">
+            <LogOut className="w-3.5 h-3.5 text-slate-400 group-hover:text-red-400" />
+            <span>Sign Out Session</span>
+          </div>
+          <span className="text-[10px] text-slate-500 font-mono">Exit</span>
+        </button>
+
+        <div className="text-[11px] text-slate-400">
+          <div className="font-semibold text-slate-300">Rison AI Tech</div>
+          <div className="text-[10px] text-slate-400">Production SaaS v1.0</div>
+        </div>
       </div>
     </aside>
   );

@@ -160,7 +160,12 @@ export const db = {
 
   // Notifications
   getNotifications: async (userId: string): Promise<NotificationItem[]> => {
+    memoryDb.checkAndNotifyOverdueAndDelayedTasks();
     return memoryDb.getNotifications(userId);
+  },
+
+  checkAndNotifyOverdueAndDelayedTasks: async (): Promise<void> => {
+    memoryDb.checkAndNotifyOverdueAndDelayedTasks();
   },
 
   markNotificationRead: async (id: string): Promise<void> => {

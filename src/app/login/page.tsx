@@ -76,10 +76,15 @@ export default function LoginPage() {
     setLoading(true);
     setError(null);
     try {
-      // Find matching account or fallback to switch
-      const matched = demoAccounts.find((a) => a.email.toLowerCase() === email.toLowerCase());
-      const userId = matched ? matched.id : demoAccounts[0].id;
-      const role = matched ? matched.role : 'admin';
+      // Find matching account
+      const matched = demoAccounts.find((a) => a.email.toLowerCase() === email.trim().toLowerCase());
+      if (!matched) {
+        setError(`No account found for "${email}". Please select or enter one of the 7 registered employee emails below.`);
+        setLoading(false);
+        return;
+      }
+      const userId = matched.id;
+      const role = matched.role;
 
       await fetch('/api/auth/switch', {
         method: 'POST',
@@ -90,7 +95,7 @@ export default function LoginPage() {
       if (role === 'admin') router.push('/admin/dashboard');
       else router.push('/employee/dashboard');
     } catch (_err) {
-      setError('Login failed. Please select an account.');
+      setError('Login failed. Please select an employee account below.');
     } finally {
       setLoading(false);
     }
