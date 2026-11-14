@@ -16,12 +16,12 @@
 INSERT INTO public.profiles (id, email, full_name, role, phone, department, designation, status)
 VALUES (
     '00000000-0000-0000-0000-000000000001',
-    'admin@risonaitech.com',
-    'Yogesh Wadhwa',
+    'admin@bharayloomtex.com',
+    'Suneet Kumar',
     'admin',
     '+91 98765 43210',
     'Executive Management',
-    'Founder & Principal Architect',
+    'Owner & Managing Director',
     'active'
 ) ON CONFLICT (id) DO UPDATE SET
     full_name = EXCLUDED.full_name,
@@ -402,4 +402,4 @@ VALUES
     ('00000000-0000-0000-0000-000000000001', 'Task Awaiting Approval', 'Sneha Reddy submitted "Develop Live Timer Widget with LocalStorage Persistence" for review.', 'task_submitted', '/admin/tasks?filter=submitted'),
     ('00000000-0000-0000-0000-000000000014', 'Task Assigned', 'You have been assigned a new task: "Implement Recharts Productivity Score Visualizations"', 'task_assigned', '/employee/tasks'),
     ('00000000-0000-0000-0000-000000000015', 'Overdue Task Alert', 'Task "Automated Latency & Jitter Testing for Voice SIP Trunk" is past its deadline.', 'task_overdue', '/employee/tasks'),
-    ('00000000-0000-0000-0000-000000000017', 'Task Returned For Correction', 'Task "Clean & Normalize Horizon Auto Dealership Lead Registry" was returned by Yogesh Wadhwa.', 'task_rejected', '/employee/tasks');
+    ('00000000-0000-0000-0000-000000000017', 'Task Returned For Correction', 'Task "Clean & Normalize Horizon Auto Dealership Lead Registry" was returned by Suneet Kumar.', 'task_rejected', '/employee/tasks');

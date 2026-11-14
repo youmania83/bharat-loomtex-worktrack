@@ -3,19 +3,19 @@ import { Profile, EmployeeExtended, Project, Task, TaskComment, NotificationItem
 export const INITIAL_PROFILES: Profile[] = [
   {
     id: '00000000-0000-0000-0000-000000000001',
-    email: 'admin@risonaitech.com',
-    full_name: 'Yogesh Wadhwa',
+    email: 'admin@bharayloomtex.com',
+    full_name: 'Suneet Kumar',
     role: 'admin',
     phone: '+91 98765 43210',
     department: 'Executive Management',
-    designation: 'Founder & Principal Architect',
+    designation: 'Owner & Managing Director',
     status: 'active',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z',
   },
   {
     id: '00000000-0000-0000-0000-000000000011',
-    email: 'rahul.sharma@risonaitech.com',
+    email: 'rahul.sharma@bharayloomtex.com',
     full_name: 'Rahul Sharma',
     role: 'employee',
     phone: '+91 98111 22334',
@@ -27,7 +27,7 @@ export const INITIAL_PROFILES: Profile[] = [
   },
   {
     id: '00000000-0000-0000-0000-000000000012',
-    email: 'priya.patel@risonaitech.com',
+    email: 'priya.patel@bharayloomtex.com',
     full_name: 'Priya Patel',
     role: 'employee',
     phone: '+91 98222 33445',
@@ -39,7 +39,7 @@ export const INITIAL_PROFILES: Profile[] = [
   },
   {
     id: '00000000-0000-0000-0000-000000000013',
-    email: 'amit.verma@risonaitech.com',
+    email: 'amit.verma@bharayloomtex.com',
     full_name: 'Amit Verma',
     role: 'employee',
     phone: '+91 98333 44556',
@@ -51,7 +51,7 @@ export const INITIAL_PROFILES: Profile[] = [
   },
   {
     id: '00000000-0000-0000-0000-000000000014',
-    email: 'sneha.reddy@risonaitech.com',
+    email: 'sneha.reddy@bharayloomtex.com',
     full_name: 'Sneha Reddy',
     role: 'employee',
     phone: '+91 98444 55667',
@@ -63,7 +63,7 @@ export const INITIAL_PROFILES: Profile[] = [
   },
   {
     id: '00000000-0000-0000-0000-000000000015',
-    email: 'vikram.singh@risonaitech.com',
+    email: 'vikram.singh@bharayloomtex.com',
     full_name: 'Vikram Singh',
     role: 'employee',
     phone: '+91 98555 66778',
@@ -75,7 +75,7 @@ export const INITIAL_PROFILES: Profile[] = [
   },
   {
     id: '00000000-0000-0000-0000-000000000016',
-    email: 'ananya.deshmukh@risonaitech.com',
+    email: 'ananya.deshmukh@bharayloomtex.com',
     full_name: 'Ananya Deshmukh',
     role: 'employee',
     phone: '+91 98666 77889',
@@ -87,7 +87,7 @@ export const INITIAL_PROFILES: Profile[] = [
   },
   {
     id: '00000000-0000-0000-0000-000000000017',
-    email: 'rohit.kumar@risonaitech.com',
+    email: 'rohit.kumar@bharayloomtex.com',
     full_name: 'Rohit Kumar',
     role: 'employee',
     phone: '+91 98777 88990',
@@ -103,7 +103,7 @@ export const INITIAL_EMPLOYEES: EmployeeExtended[] = [
   {
     id: 'e-101',
     profile_id: '00000000-0000-0000-0000-000000000011',
-    employee_code: 'RAT-EMP-001',
+    employee_code: 'BLT-EMP-001',
     joining_date: '2025-01-10',
     hourly_rate: 850,
     emergency_contact: '+91 99999 11111',
@@ -115,7 +115,7 @@ export const INITIAL_EMPLOYEES: EmployeeExtended[] = [
   {
     id: 'e-102',
     profile_id: '00000000-0000-0000-0000-000000000012',
-    employee_code: 'RAT-EMP-002',
+    employee_code: 'BLT-EMP-002',
     joining_date: '2025-02-01',
     hourly_rate: 750,
     emergency_contact: '+91 99999 22222',
@@ -127,7 +127,7 @@ export const INITIAL_EMPLOYEES: EmployeeExtended[] = [
   {
     id: 'e-103',
     profile_id: '00000000-0000-0000-0000-000000000013',
-    employee_code: 'RAT-EMP-003',
+    employee_code: 'BLT-EMP-003',
     joining_date: '2025-02-15',
     hourly_rate: 800,
     emergency_contact: '+91 99999 33333',
@@ -139,7 +139,7 @@ export const INITIAL_EMPLOYEES: EmployeeExtended[] = [
   {
     id: 'e-104',
     profile_id: '00000000-0000-0000-0000-000000000014',
-    employee_code: 'RAT-EMP-004',
+    employee_code: 'BLT-EMP-004',
     joining_date: '2025-03-01',
     hourly_rate: 650,
     emergency_contact: '+91 99999 44444',
@@ -151,7 +151,7 @@ export const INITIAL_EMPLOYEES: EmployeeExtended[] = [
   {
     id: 'e-105',
     profile_id: '00000000-0000-0000-0000-000000000015',
-    employee_code: 'RAT-EMP-005',
+    employee_code: 'BLT-EMP-005',
     joining_date: '2025-03-10',
     hourly_rate: 600,
     emergency_contact: '+91 99999 55555',
@@ -163,7 +163,7 @@ export const INITIAL_EMPLOYEES: EmployeeExtended[] = [
   {
     id: 'e-106',
     profile_id: '00000000-0000-0000-0000-000000000016',
-    employee_code: 'RAT-EMP-006',
+    employee_code: 'BLT-EMP-006',
     joining_date: '2025-03-15',
     hourly_rate: 750,
     emergency_contact: '+91 99999 66666',
@@ -175,7 +175,7 @@ export const INITIAL_EMPLOYEES: EmployeeExtended[] = [
   {
     id: 'e-107',
     profile_id: '00000000-0000-0000-0000-000000000017',
-    employee_code: 'RAT-EMP-007',
+    employee_code: 'BLT-EMP-007',
     joining_date: '2025-04-01',
     hourly_rate: 550,
     emergency_contact: '+91 99999 77777',
@@ -205,8 +205,8 @@ export const INITIAL_PROJECTS: Project[] = [
   },
   {
     id: '00000000-0000-0000-0000-000000000102',
-    name: 'Rison WorkTrack Productivity SaaS v1.0',
-    client_name: 'Rison AI Tech Internal',
+    name: 'Bharay Loomtex Operations & Productivity Tracker v1.0',
+    client_name: 'Bharay Loomtex Internal',
     description: 'Flagship employee task management, live time tracking, approvals and productivity analytics platform.',
     status: 'active',
     start_date: '2026-06-01',
@@ -659,7 +659,7 @@ export const INITIAL_NOTIFICATIONS: NotificationItem[] = [
     id: 'n-005',
     user_id: '00000000-0000-0000-0000-000000000017',
     title: 'Task Returned For Correction',
-    message: 'Task "Clean & Normalize Horizon Auto Dealership Lead Registry" was returned by Yogesh Wadhwa.',
+    message: 'Task "Clean & Normalize Horizon Auto Dealership Lead Registry" was returned by Suneet Kumar.',
     type: 'task_rejected',
     link: '/employee/tasks',
     is_read: false,

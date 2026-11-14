@@ -23,11 +23,11 @@ export async function getCurrentUser(): Promise<Profile> {
   // Static fallback if DB is empty
   return {
     id: DEFAULT_ADMIN_ID,
-    email: 'admin@risonaitech.com',
-    full_name: 'Yogesh Wadhwa',
+    email: 'admin@bharayloomtex.com',
+    full_name: 'Suneet Kumar',
     role: 'admin',
     department: 'Executive Management',
-    designation: 'Founder & Principal Architect',
+    designation: 'Owner & Managing Director',
     status: 'active',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),

@@ -15,57 +15,57 @@ export default function LoginPage() {
   const demoAccounts = [
     {
       id: '00000000-0000-0000-0000-000000000001',
-      name: 'Yogesh Wadhwa (Owner / Tech Lead)',
-      email: 'admin@risonaitech.com',
+      name: 'Suneet Kumar (Owner & Managing Director)',
+      email: 'admin@bharayloomtex.com',
       role: 'admin',
       roleLabel: 'Admin / Owner',
     },
     {
       id: '00000000-0000-0000-0000-000000000011',
       name: 'Rahul Sharma',
-      email: 'rahul.sharma@risonaitech.com',
+      email: 'rahul.sharma@bharayloomtex.com',
       role: 'employee',
       roleLabel: 'Senior Fullstack',
     },
     {
       id: '00000000-0000-0000-0000-000000000012',
       name: 'Priya Patel',
-      email: 'priya.patel@risonaitech.com',
+      email: 'priya.patel@bharayloomtex.com',
       role: 'employee',
       roleLabel: 'Lead UI/UX Designer',
     },
     {
       id: '00000000-0000-0000-0000-000000000013',
       name: 'Amit Verma',
-      email: 'amit.verma@risonaitech.com',
+      email: 'amit.verma@bharayloomtex.com',
       role: 'employee',
       roleLabel: 'AI Automation Specialist',
     },
     {
       id: '00000000-0000-0000-0000-000000000014',
       name: 'Sneha Reddy',
-      email: 'sneha.reddy@risonaitech.com',
+      email: 'sneha.reddy@bharayloomtex.com',
       role: 'employee',
       roleLabel: 'Frontend Developer',
     },
     {
       id: '00000000-0000-0000-0000-000000000015',
       name: 'Vikram Singh',
-      email: 'vikram.singh@risonaitech.com',
+      email: 'vikram.singh@bharayloomtex.com',
       role: 'employee',
       roleLabel: 'QA & Test Automation',
     },
     {
       id: '00000000-0000-0000-0000-000000000016',
       name: 'Ananya Deshmukh',
-      email: 'ananya.deshmukh@risonaitech.com',
+      email: 'ananya.deshmukh@bharayloomtex.com',
       role: 'employee',
       roleLabel: 'Backend & Cloud',
     },
     {
       id: '00000000-0000-0000-0000-000000000017',
       name: 'Rohit Kumar',
-      email: 'rohit.kumar@risonaitech.com',
+      email: 'rohit.kumar@bharayloomtex.com',
       role: 'employee',
       roleLabel: 'Client Success & Analyst',
     },
@@ -76,8 +76,13 @@ export default function LoginPage() {
     setLoading(true);
     setError(null);
     try {
-      // Find matching account
-      const matched = demoAccounts.find((a) => a.email.toLowerCase() === email.trim().toLowerCase());
+      const trimmedEmail = email.trim().toLowerCase();
+      // Find matching account (support aliases like suneet@bharayloomtex.com or admin@)
+      let matched = demoAccounts.find((a) => a.email.toLowerCase() === trimmedEmail);
+      if (!matched && (trimmedEmail.includes('suneet') || trimmedEmail.includes('admin'))) {
+        matched = demoAccounts[0]; // Suneet Kumar
+      }
+
       if (!matched) {
         setError(`No account found for "${email}". Please select or enter one of the 7 registered employee emails below.`);
         setLoading(false);
@@ -125,11 +130,11 @@ export default function LoginPage() {
           <Layers className="w-6 h-6" />
         </div>
         <h2 className="text-2xl font-bold tracking-tight text-slate-900 flex items-center justify-center gap-1.5">
-          <span>RISON</span>
-          <span className="text-blue-600 font-extrabold">WORKTRACK</span>
+          <span>BHARAY</span>
+          <span className="text-blue-600 font-extrabold">LOOMTEX</span>
         </h2>
         <p className="text-xs text-slate-500 font-medium">
-          Rison AI Tech • Assign. Track. Improve.
+          Bharay Loomtex • Assign. Track. Improve.
         </p>
       </div>
 
@@ -151,7 +156,7 @@ export default function LoginPage() {
                 <input
                   type="email"
                   required
-                  placeholder="admin@risonaitech.com"
+                  placeholder="admin@bharayloomtex.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full text-xs pl-9 pr-3 py-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"

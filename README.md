@@ -1,8 +1,9 @@
-# RISON WORKTRACK
+# BHARAY LOOMTEX – WORKTRACK
 ## Complete Employee Task & Productivity Management System
 
 > **Tagline:** Assign. Track. Improve.  
-> **Company:** Rison AI Tech  
+> **Company:** Bharay Loomtex  
+> **Owner / Managing Director:** Suneet Kumar  
 > **Target Scale:** 1 Owner/Admin + 7 Core Employees (Scalable to 50–100 employees)  
 > **Tech Stack:** Next.js 16 (App Router), TypeScript, Tailwind CSS, shadcn-style UI, Lucide Icons, Recharts, Supabase / PostgreSQL.
 
@@ -10,7 +11,7 @@
 
 ## 🌟 Overview & Key Capabilities
 
-Rison WorkTrack is a production-ready enterprise task management and productivity analytics software engineered specifically for **Rison AI Tech** and its clients.
+WorkTrack is a production-ready enterprise task management and productivity analytics software engineered specifically for **Bharay Loomtex**.
 
 - **Dual-Portal Role-Based Access Control:**
   - **Admin / Owner Portal (`/admin`):** Complete employee roster management, project creation, task assignment, multi-view boards, review approval queue, productivity analytics, CSV exports, and Phase 2 AI Operational Briefings.
@@ -65,14 +66,14 @@ Quick-switch between accounts at `/login` or via the topbar switcher:
 
 | Name | Role | Email |
 | :--- | :--- | :--- |
-| **Yogesh Wadhwa** | Admin / Owner | `admin@risonaitech.com` |
-| **Rahul Sharma** | Senior Fullstack Engineer | `rahul.sharma@risonaitech.com` |
-| **Priya Patel** | Lead UI/UX Designer | `priya.patel@risonaitech.com` |
-| **Amit Verma** | AI Automation Specialist | `amit.verma@risonaitech.com` |
-| **Sneha Reddy** | Frontend Developer | `sneha.reddy@risonaitech.com` |
-| **Vikram Singh** | QA & Test Automation Lead | `vikram.singh@risonaitech.com` |
-| **Ananya Deshmukh** | Backend & Cloud Engineer | `ananya.deshmukh@risonaitech.com` |
-| **Rohit Kumar** | Client Solutions & Data Analyst | `rohit.kumar@risonaitech.com` |
+| **Suneet Kumar** | Admin / Owner | `admin@bharayloomtex.com` |
+| **Rahul Sharma** | Senior Fullstack Engineer | `rahul.sharma@bharayloomtex.com` |
+| **Priya Patel** | Lead UI/UX Designer | `priya.patel@bharayloomtex.com` |
+| **Amit Verma** | AI Automation Specialist | `amit.verma@bharayloomtex.com` |
+| **Sneha Reddy** | Frontend Developer | `sneha.reddy@bharayloomtex.com` |
+| **Vikram Singh** | QA & Test Automation Lead | `vikram.singh@bharayloomtex.com` |
+| **Ananya Deshmukh** | Backend & Cloud Engineer | `ananya.deshmukh@bharayloomtex.com` |
+| **Rohit Kumar** | Client Solutions & Data Analyst | `rohit.kumar@bharayloomtex.com` |
 
 ---
 

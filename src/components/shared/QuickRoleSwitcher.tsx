@@ -24,11 +24,11 @@ export function QuickRoleSwitcher({ currentUserId, onUserChanged }: QuickRoleSwi
           // Prepend Admin profile
           const adminProf: Profile = {
             id: '00000000-0000-0000-0000-000000000001',
-            email: 'admin@risonaitech.com',
-            full_name: 'Yogesh Wadhwa',
+            email: 'admin@bharayloomtex.com',
+            full_name: 'Suneet Kumar',
             role: 'admin',
             department: 'Executive Management',
-            designation: 'Founder & Principal Architect',
+            designation: 'Owner & Managing Director',
             status: 'active',
             created_at: '',
             updated_at: '',

@@ -28,11 +28,11 @@ export default function LogoutPage() {
           <Layers className="w-6 h-6" />
         </div>
         <h2 className="text-2xl font-bold tracking-tight text-slate-900 flex items-center justify-center gap-1.5">
-          <span>RISON</span>
-          <span className="text-blue-600 font-extrabold">WORKTRACK</span>
+          <span>BHARAY</span>
+          <span className="text-blue-600 font-extrabold">LOOMTEX</span>
         </h2>
         <p className="text-xs text-slate-500 font-medium">
-          Rison AI Tech • Assign. Track. Improve.
+          Bharay Loomtex • Assign. Track. Improve.
         </p>
       </div>
 
@@ -47,7 +47,7 @@ export default function LogoutPage() {
               Shift Logged Out Successfully
             </h3>
             <p className="text-xs text-slate-500">
-              Your working session and daily hours have been safely recorded into the Rison WorkTrack central ledger.
+              Your working session and daily hours have been safely recorded into the Bharay Loomtex central ledger.
             </p>
           </div>
 

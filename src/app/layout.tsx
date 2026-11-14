@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Rison WorkTrack – Employee Task & Productivity Management | Rison AI Tech',
+  title: 'Bharay Loomtex – Employee Task & Productivity Management',
   description:
-    'Assign. Track. Improve. Enterprise task management, live time tracking, review approvals and productivity analytics for Rison AI Tech.',
+    'Assign. Track. Improve. Enterprise task management, live time tracking, review approvals and productivity analytics for Bharay Loomtex.',
 };
 
 export default function RootLayout({

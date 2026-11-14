@@ -4,8 +4,8 @@ import { exportPerformanceToCSV } from '../src/lib/utils/csv';
 
 async function runWorkflowTestSuite() {
   console.log('================================================================');
-  console.log('🧪 RISON WORKTRACK – AUTOMATED VERIFICATION TEST SUITE');
-  console.log('Product: Rison WorkTrack | Company: Rison AI Tech');
+  console.log('🧪 BHARAY LOOMTEX WORKTRACK – AUTOMATED VERIFICATION TEST SUITE');
+  console.log('Product: WorkTrack | Company: Bharay Loomtex | Owner: Suneet Kumar');
   console.log('================================================================\n');
 
   let passed = 0;
@@ -26,8 +26,11 @@ async function runWorkflowTestSuite() {
   // -------------------------------------------------------------
   const adminProfile = await db.getProfile('00000000-0000-0000-0000-000000000001');
   assert(
-    !!adminProfile && adminProfile.role === 'admin' && adminProfile.email === 'admin@risonaitech.com',
-    'Workflow 1: Admin login & profile verification',
+    !!adminProfile &&
+      adminProfile.role === 'admin' &&
+      adminProfile.full_name === 'Suneet Kumar' &&
+      adminProfile.email === 'admin@bharayloomtex.com',
+    'Workflow 1: Admin login & profile verification (Suneet Kumar - Bharay Loomtex)',
     JSON.stringify(adminProfile)
   );
 
@@ -42,8 +45,8 @@ async function runWorkflowTestSuite() {
   );
   const empCodes = employees.map((e) => e.employee_code);
   assert(
-    empCodes.includes('RAT-EMP-001') && empCodes.includes('RAT-EMP-007'),
-    'Workflow 2b: Employee codes RAT-EMP-001 through RAT-EMP-007 verified'
+    empCodes.includes('BLT-EMP-001') && empCodes.includes('BLT-EMP-007'),
+    'Workflow 2b: Employee codes BLT-EMP-001 through BLT-EMP-007 verified'
   );
 
   // -------------------------------------------------------------
@@ -108,7 +111,7 @@ async function runWorkflowTestSuite() {
   // -------------------------------------------------------------
   const employeeProfile = await db.getProfile('00000000-0000-0000-0000-000000000014');
   assert(
-    !!employeeProfile && employeeProfile.email === 'sneha.reddy@risonaitech.com',
+    !!employeeProfile && employeeProfile.email === 'sneha.reddy@bharayloomtex.com',
     'Workflow 6: Employee login & profile identity verification (Sneha Reddy)'
   );
 
@@ -216,13 +219,13 @@ async function runWorkflowTestSuite() {
   // Test 13: Performance Reports Show Correct Calculations
   // -------------------------------------------------------------
   const perfList = await db.getEmployeePerformanceList();
-  const rahulPerf = perfList.find((p) => p.employee_code === 'RAT-EMP-001');
+  const rahulPerf = perfList.find((p) => p.employee_code === 'BLT-EMP-001');
   assert(
     !!rahulPerf &&
       typeof rahulPerf.performance_score === 'number' &&
       rahulPerf.performance_score >= 0 &&
       rahulPerf.performance_score <= 100,
-    'Workflow 13: Multi-factor performance score correctly computed for Employee RAT-EMP-001',
+    'Workflow 13: Multi-factor performance score correctly computed for Employee BLT-EMP-001',
     `Score: ${rahulPerf?.performance_score}/100, Completion: ${rahulPerf?.completion_rate}%`
   );
 
@@ -231,7 +234,7 @@ async function runWorkflowTestSuite() {
   // -------------------------------------------------------------
   const csv = exportPerformanceToCSV(perfList);
   assert(
-    csv.includes('Employee Code') && csv.includes('RAT-EMP-001') && csv.includes('Performance Score'),
+    csv.includes('Employee Code') && csv.includes('BLT-EMP-001') && csv.includes('Performance Score'),
     'Workflow 14: CSV Export generator produces compliant, structured reporting output'
   );
 

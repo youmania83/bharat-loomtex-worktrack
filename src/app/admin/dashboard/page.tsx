@@ -63,7 +63,7 @@ export default function AdminDashboardPage() {
             Operations & Productivity Command Center
           </h1>
           <p className="text-xs text-slate-500 mt-1">
-            Real-time tracking for Rison AI Tech personnel, project deliverables, and quality approvals.
+            Real-time tracking for Bharay Loomtex personnel, project deliverables, and quality approvals.
           </p>
         </div>
 
