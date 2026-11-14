@@ -15,7 +15,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-slate-950 font-sans">
+    <div className="flex h-screen w-screen overflow-hidden bg-[#F8FAFC] font-sans antialiased">
       <Sidebar role="admin" />
       <div className="flex-1 flex flex-col h-full overflow-hidden">
         <Topbar user={user} />

@@ -17,17 +17,17 @@ interface TaskListViewProps {
 export function TaskListView({ tasks, onSelectTask, showAssignee = true }: TaskListViewProps) {
   if (tasks.length === 0) {
     return (
-      <div className="text-center py-12 bg-white dark:bg-slate-900 rounded-xl border border-dashed border-slate-300 dark:border-slate-800 p-8">
-        <p className="text-sm text-slate-500 dark:text-slate-400">No tasks match your selected criteria.</p>
+      <div className="text-center py-12 bg-white rounded-xl border border-dashed border-slate-300 p-8">
+        <p className="text-sm text-slate-500">No tasks match your selected criteria.</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-xs">
+    <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xs">
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs">
-          <thead className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 font-semibold uppercase tracking-wider">
+          <thead className="bg-slate-50 border-b border-slate-200 text-slate-700 font-semibold uppercase tracking-wider">
             <tr>
               <th className="py-3 px-4">Task Details</th>
               <th className="py-3 px-4">Project</th>
@@ -40,7 +40,7 @@ export function TaskListView({ tasks, onSelectTask, showAssignee = true }: TaskL
               <th className="py-3 px-4 text-right">Action</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+          <tbody className="divide-y divide-slate-100">
             {tasks.map((task) => {
               const isOverdue =
                 task.status === 'overdue' ||
@@ -52,28 +52,28 @@ export function TaskListView({ tasks, onSelectTask, showAssignee = true }: TaskL
                 <tr
                   key={task.id}
                   onClick={() => onSelectTask(task.id)}
-                  className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 cursor-pointer transition-colors"
+                  className="hover:bg-slate-50/90 cursor-pointer transition-colors"
                 >
-                  <td className="py-3.5 px-4 font-medium text-slate-900 dark:text-white max-w-xs">
-                    <div className="truncate font-semibold">{task.title}</div>
-                    <div className="text-[11px] text-slate-400 font-normal flex items-center gap-2 mt-0.5">
+                  <td className="py-3.5 px-4 font-medium text-slate-900 max-w-xs">
+                    <div className="truncate font-semibold text-slate-900">{task.title}</div>
+                    <div className="text-[11px] text-slate-500 font-normal flex items-center gap-2 mt-0.5">
                       <span className="capitalize">{task.task_type}</span>
                       {task.is_blocked && (
-                        <span className="text-amber-600 dark:text-amber-400 flex items-center gap-0.5 font-medium">
+                        <span className="text-amber-700 flex items-center gap-0.5 font-medium">
                           <AlertTriangle className="w-3 h-3" /> Blocked
                         </span>
                       )}
                     </div>
                   </td>
-                  <td className="py-3.5 px-4 text-slate-600 dark:text-slate-400">
+                  <td className="py-3.5 px-4 text-slate-600">
                     {task.project?.name || <span className="text-slate-400">–</span>}
                   </td>
                   {showAssignee && (
                     <td className="py-3.5 px-4">
-                      <div className="font-medium text-slate-800 dark:text-slate-200">
+                      <div className="font-semibold text-slate-900">
                         {task.assignee?.full_name || 'Unassigned'}
                       </div>
-                      <div className="text-[10px] text-slate-400">
+                      <div className="text-[10px] text-slate-500">
                         {task.assignee?.department || ''}
                       </div>
                     </td>
@@ -86,10 +86,10 @@ export function TaskListView({ tasks, onSelectTask, showAssignee = true }: TaskL
                   </td>
                   <td className="py-3.5 px-4">
                     <span
-                      className={`font-medium ${
+                      className={`font-semibold ${
                         isOverdue
-                          ? 'text-red-600 dark:text-red-400 font-bold'
-                          : 'text-slate-700 dark:text-slate-300'
+                          ? 'text-red-700 font-bold'
+                          : 'text-slate-800'
                       }`}
                     >
                       {formatDate(task.due_date)}
@@ -98,20 +98,20 @@ export function TaskListView({ tasks, onSelectTask, showAssignee = true }: TaskL
                   <td className="py-3.5 px-4 w-28">
                     <div className="flex items-center gap-2">
                       <ProgressBar value={task.progress_percentage || 0} size="sm" />
-                      <span className="text-[11px] font-mono text-slate-500">
+                      <span className="text-[11px] font-mono text-slate-600 font-medium">
                         {task.progress_percentage}%
                       </span>
                     </div>
                   </td>
                   <td className="py-3.5 px-4 font-mono">
-                    <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                    <span className="text-blue-700 font-bold">
                       {formatHours(task.actual_hours)}
                     </span>{' '}
-                    <span className="text-slate-400">/ {formatHours(task.estimated_hours)}</span>
+                    <span className="text-slate-500 font-medium">/ {formatHours(task.estimated_hours)}</span>
                   </td>
                   <td className="py-3.5 px-4 text-right">
-                    <button className="text-blue-600 dark:text-blue-400 hover:text-blue-800 p-1 inline-flex items-center gap-1">
-                      <span className="text-[11px] font-medium">Open</span>
+                    <button className="text-blue-600 hover:text-blue-800 p-1 inline-flex items-center gap-1 font-semibold">
+                      <span className="text-[11px]">Open</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </td>

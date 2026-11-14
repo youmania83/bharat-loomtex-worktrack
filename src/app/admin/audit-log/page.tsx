@@ -45,7 +45,7 @@ export default function AdminAuditLogPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-slate-900 dark:text-white">
+          <h1 className="text-xl font-bold text-slate-900">
             System & Workflow Audit Trail
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
@@ -60,15 +60,15 @@ export default function AdminAuditLogPage() {
             placeholder="Search action or actor..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full text-xs pl-9 pr-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+            className="w-full text-xs pl-9 pr-3 py-2 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
       </div>
 
-      <Card className="p-0 overflow-hidden">
+      <Card className="p-0 overflow-hidden bg-white border border-slate-200">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 font-semibold uppercase tracking-wider">
+            <thead className="bg-slate-50 border-b border-slate-200 text-slate-700 font-semibold uppercase tracking-wider">
               <tr>
                 <th className="py-3 px-4">Timestamp</th>
                 <th className="py-3 px-4">Actor</th>
@@ -76,7 +76,7 @@ export default function AdminAuditLogPage() {
                 <th className="py-3 px-4">Audit Details</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+            <tbody className="divide-y divide-slate-100">
               {loading ? (
                 <tr>
                   <td colSpan={4} className="text-center py-10">
@@ -91,17 +91,17 @@ export default function AdminAuditLogPage() {
                 </tr>
               ) : (
                 filtered.map((log) => (
-                  <tr key={log.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                  <tr key={log.id} className="hover:bg-slate-50">
                     <td className="py-3 px-4 font-mono text-slate-500 text-[11px]">
                       {formatDateTime(log.created_at)}
                     </td>
-                    <td className="py-3 px-4 font-semibold text-slate-900 dark:text-white">
+                    <td className="py-3 px-4 font-bold text-slate-900">
                       {log.actor?.full_name || 'System / Admin'}
                     </td>
                     <td className="py-3 px-4">
                       <Badge variant="purple">{log.action}</Badge>
                     </td>
-                    <td className="py-3 px-4 text-slate-700 dark:text-slate-300 font-medium">
+                    <td className="py-3 px-4 text-slate-800 font-medium">
                       {log.details || 'Task state updated.'}
                     </td>
                   </tr>

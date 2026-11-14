@@ -86,7 +86,7 @@ export default function AdminEmployeesPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-slate-900 dark:text-white">
+          <h1 className="text-xl font-bold text-slate-900">
             Employee Directory & Roster
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
@@ -94,7 +94,7 @@ export default function AdminEmployeesPage() {
           </p>
         </div>
 
-        <Button variant="primary" size="sm" onClick={() => setCreateModalOpen(true)}>
+        <Button variant="primary" size="sm" onClick={() => setCreateModalOpen(true)} className="bg-blue-600 hover:bg-blue-700 font-semibold shadow-sm">
           <Plus className="w-4 h-4" /> Add New Employee
         </Button>
       </div>
@@ -109,17 +109,17 @@ export default function AdminEmployeesPage() {
             const perf = performanceList.find((p) => p.employee_id === emp.profile_id);
 
             return (
-              <Card key={emp.id} className="p-5 flex flex-col justify-between hover:shadow-md transition-shadow">
+              <Card key={emp.id} className="p-5 flex flex-col justify-between hover:shadow-md transition-shadow bg-white border border-slate-200">
                 <div>
                   <div className="flex items-start justify-between">
                     <div>
-                      <span className="font-mono text-[10px] font-bold bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded text-slate-600 dark:text-slate-300">
+                      <span className="font-mono text-[10px] font-bold bg-slate-100 px-2 py-0.5 rounded text-slate-700 border border-slate-200">
                         {emp.employee_code}
                       </span>
-                      <h3 className="text-base font-bold text-slate-900 dark:text-white mt-1.5">
+                      <h3 className="text-base font-bold text-slate-900 mt-1.5">
                         {emp.profile?.full_name}
                       </h3>
-                      <p className="text-xs text-blue-600 dark:text-blue-400 font-medium">
+                      <p className="text-xs text-blue-700 font-semibold">
                         {emp.profile?.designation}
                       </p>
                     </div>
@@ -128,7 +128,7 @@ export default function AdminEmployeesPage() {
                     </Badge>
                   </div>
 
-                  <div className="mt-4 space-y-2 text-xs text-slate-500">
+                  <div className="mt-4 space-y-2 text-xs text-slate-600 font-medium">
                     <div className="flex items-center gap-2">
                       <Mail className="w-3.5 h-3.5 text-slate-400" />
                       <span className="truncate">{emp.profile?.email}</span>
@@ -144,22 +144,22 @@ export default function AdminEmployeesPage() {
                   </div>
                 </div>
 
-                <div className="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800 grid grid-cols-3 gap-2 text-center text-xs">
-                  <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-                    <div className="text-[10px] text-slate-400 uppercase font-medium">Assigned</div>
-                    <div className="font-mono font-bold text-slate-900 dark:text-white">
+                <div className="mt-5 pt-3 border-t border-slate-100 grid grid-cols-3 gap-2 text-center text-xs">
+                  <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
+                    <div className="text-[10px] text-slate-500 uppercase font-semibold">Assigned</div>
+                    <div className="font-mono font-bold text-slate-900">
                       {perf?.assigned_count || 0}
                     </div>
                   </div>
-                  <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-                    <div className="text-[10px] text-slate-400 uppercase font-medium">Completed</div>
-                    <div className="font-mono font-bold text-emerald-600 dark:text-emerald-400">
+                  <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
+                    <div className="text-[10px] text-slate-500 uppercase font-semibold">Completed</div>
+                    <div className="font-mono font-bold text-emerald-700">
                       {perf?.completed_count || 0}
                     </div>
                   </div>
-                  <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-                    <div className="text-[10px] text-slate-400 uppercase font-medium">Score</div>
-                    <div className="font-mono font-bold text-blue-600 dark:text-blue-400">
+                  <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
+                    <div className="text-[10px] text-slate-500 uppercase font-semibold">Score</div>
+                    <div className="font-mono font-bold text-blue-700">
                       {perf?.performance_score || 0}%
                     </div>
                   </div>
@@ -179,7 +179,7 @@ export default function AdminEmployeesPage() {
       >
         <form onSubmit={handleCreateEmployee} className="space-y-4">
           <div>
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+            <label className="text-xs font-semibold text-slate-700 block mb-1">
               Full Name *
             </label>
             <input
@@ -188,13 +188,13 @@ export default function AdminEmployeesPage() {
               placeholder="e.g. Meera Nair"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              className="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+              className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+              <label className="text-xs font-semibold text-slate-700 block mb-1">
                 Email Address *
               </label>
               <input
@@ -203,11 +203,11 @@ export default function AdminEmployeesPage() {
                 placeholder="meera@risonaitech.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+              <label className="text-xs font-semibold text-slate-700 block mb-1">
                 Phone Number
               </label>
               <input
@@ -215,20 +215,20 @@ export default function AdminEmployeesPage() {
                 placeholder="+91 98123 45678"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+              <label className="text-xs font-semibold text-slate-700 block mb-1">
                 Department
               </label>
               <select
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
-                className="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="Engineering">Engineering</option>
                 <option value="Product & Design">Product & Design</option>
@@ -239,7 +239,7 @@ export default function AdminEmployeesPage() {
               </select>
             </div>
             <div>
-              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+              <label className="text-xs font-semibold text-slate-700 block mb-1">
                 Designation
               </label>
               <input
@@ -247,14 +247,14 @@ export default function AdminEmployeesPage() {
                 placeholder="e.g. AI Prompt Engineer"
                 value={designation}
                 onChange={(e) => setDesignation(e.target.value)}
-                className="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+              <label className="text-xs font-semibold text-slate-700 block mb-1">
                 Employee Code
               </label>
               <input
@@ -262,11 +262,11 @@ export default function AdminEmployeesPage() {
                 placeholder="e.g. RAT-EMP-008"
                 value={employeeCode}
                 onChange={(e) => setEmployeeCode(e.target.value)}
-                className="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+              <label className="text-xs font-semibold text-slate-700 block mb-1">
                 Hourly Rate (₹)
               </label>
               <input
@@ -274,16 +274,16 @@ export default function AdminEmployeesPage() {
                 min={0}
                 value={hourlyRate}
                 onChange={(e) => setHourlyRate(Number(e.target.value))}
-                className="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
           </div>
 
-          <div className="flex justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+          <div className="flex justify-end gap-2 pt-3 border-t border-slate-100">
             <Button type="button" variant="ghost" size="sm" onClick={() => setCreateModalOpen(false)}>
               Cancel
             </Button>
-            <Button type="submit" variant="primary" size="sm" isLoading={submitting}>
+            <Button type="submit" variant="primary" size="sm" isLoading={submitting} className="bg-blue-600 hover:bg-blue-700 font-semibold shadow-sm">
               Add Employee
             </Button>
           </div>

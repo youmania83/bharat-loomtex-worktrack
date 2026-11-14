@@ -76,14 +76,14 @@ export function NotificationsDrawer({ isOpen, onClose, currentUserId: _currentUs
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
-      <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-2xs" onClick={onClose} />
+      <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs" onClick={onClose} />
       <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-sm bg-white dark:bg-slate-900 shadow-2xl flex flex-col border-l border-slate-200 dark:border-slate-800 animate-in slide-in-from-right duration-200">
+        <div className="w-screen max-w-sm bg-white shadow-2xl flex flex-col border-l border-slate-200">
           {/* Header */}
-          <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <div className="p-4 border-b border-slate-200 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Bell className="w-4 h-4 text-blue-600" />
-              <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+              <h3 className="text-sm font-bold text-slate-900">
                 Notifications
               </h3>
             </div>
@@ -97,7 +97,7 @@ export function NotificationsDrawer({ isOpen, onClose, currentUserId: _currentUs
               </button>
               <button
                 onClick={onClose}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-600"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -121,20 +121,20 @@ export function NotificationsDrawer({ isOpen, onClose, currentUserId: _currentUs
                   onClick={() => handleNotificationClick(n)}
                   className={`p-3 rounded-xl border text-xs cursor-pointer transition-all ${
                     n.is_read
-                      ? 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-500'
-                      : 'bg-blue-50/50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900 text-slate-900 dark:text-white shadow-2xs'
+                      ? 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                      : 'bg-blue-50/70 border-blue-200 text-slate-900 shadow-xs hover:bg-blue-50'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-1 mb-1">
-                    <span className="font-bold flex items-center gap-1.5">
+                    <span className="font-bold flex items-center gap-1.5 text-slate-900">
                       {!n.is_read && <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />}
                       {n.title}
                     </span>
-                    <span className="text-[10px] text-slate-400">
+                    <span className="text-[10px] text-slate-500">
                       {formatDateTime(n.created_at)}
                     </span>
                   </div>
-                  <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
+                  <p className="text-slate-600 text-[11px] leading-relaxed">
                     {n.message}
                   </p>
                 </div>

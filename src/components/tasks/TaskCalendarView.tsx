@@ -44,12 +44,12 @@ export function TaskCalendarView({ tasks, onSelectTask }: TaskCalendarViewProps)
   }
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 shadow-xs space-y-4">
+    <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs space-y-4">
       {/* Calendar Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+      <div className="flex items-center justify-between pb-3 border-b border-slate-200">
         <div className="flex items-center gap-2">
           <CalendarIcon className="w-5 h-5 text-blue-600" />
-          <h3 className="text-base font-bold text-slate-900 dark:text-white">
+          <h3 className="text-base font-bold text-slate-900">
             {currentMonthName}
           </h3>
         </div>
@@ -61,7 +61,7 @@ export function TaskCalendarView({ tasks, onSelectTask }: TaskCalendarViewProps)
             variant="outline"
             size="sm"
             onClick={() => setCurrentDate(new Date())}
-            className="text-xs"
+            className="text-xs font-semibold"
           >
             Today
           </Button>
@@ -72,7 +72,7 @@ export function TaskCalendarView({ tasks, onSelectTask }: TaskCalendarViewProps)
       </div>
 
       {/* Weekday Row */}
-      <div className="grid grid-cols-7 gap-1 text-center font-semibold text-xs text-slate-500 uppercase pb-1">
+      <div className="grid grid-cols-7 gap-1 text-center font-bold text-xs text-slate-500 uppercase pb-1">
         <div>Sun</div>
         <div>Mon</div>
         <div>Tue</div>
@@ -89,7 +89,7 @@ export function TaskCalendarView({ tasks, onSelectTask }: TaskCalendarViewProps)
             return (
               <div
                 key={`empty-${idx}`}
-                className="h-28 bg-slate-50/40 dark:bg-slate-800/20 rounded-lg border border-dashed border-slate-100 dark:border-slate-800/40"
+                className="h-28 bg-slate-50 rounded-lg border border-dashed border-slate-200"
               />
             );
           }
@@ -105,8 +105,8 @@ export function TaskCalendarView({ tasks, onSelectTask }: TaskCalendarViewProps)
               key={`day-${day}`}
               className={`h-28 p-1.5 rounded-lg border overflow-y-auto transition-colors flex flex-col justify-between ${
                 isToday
-                  ? 'border-blue-500 bg-blue-50/20 dark:bg-blue-950/20'
-                  : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-300'
+                  ? 'border-blue-500 bg-blue-50/30'
+                  : 'border-slate-200 bg-white hover:border-slate-300'
               }`}
             >
               <div className="flex justify-between items-center mb-1">
@@ -114,13 +114,13 @@ export function TaskCalendarView({ tasks, onSelectTask }: TaskCalendarViewProps)
                   className={`text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full ${
                     isToday
                       ? 'bg-blue-600 text-white'
-                      : 'text-slate-700 dark:text-slate-300'
+                      : 'text-slate-700'
                   }`}
                 >
                   {day}
                 </span>
                 {dayTasks.length > 0 && (
-                  <span className="text-[10px] font-mono font-bold text-slate-400">
+                  <span className="text-[10px] font-mono font-bold text-slate-500">
                     {dayTasks.length} due
                   </span>
                 )}
@@ -131,7 +131,7 @@ export function TaskCalendarView({ tasks, onSelectTask }: TaskCalendarViewProps)
                   <div
                     key={t.id}
                     onClick={() => onSelectTask(t.id)}
-                    className="p-1 rounded text-[10px] font-medium truncate cursor-pointer bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors border-l-2 border-blue-600"
+                    className="p-1 rounded text-[10px] font-semibold truncate cursor-pointer bg-slate-100 text-slate-800 hover:bg-blue-100 transition-colors border-l-2 border-blue-600"
                     title={t.title}
                   >
                     {t.title}

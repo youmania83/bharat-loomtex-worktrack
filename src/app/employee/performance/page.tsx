@@ -32,7 +32,7 @@ export default function EmployeePerformancePage() {
   return (
     <div className="space-y-6 max-w-4xl">
       <div>
-        <h1 className="text-xl font-bold text-slate-900 dark:text-white">
+        <h1 className="text-xl font-bold text-slate-900">
           My Performance & Productivity Scorecard
         </h1>
         <p className="text-xs text-slate-500 mt-0.5">
@@ -86,55 +86,55 @@ export default function EmployeePerformancePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card className="p-5 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                <span className="text-xs font-bold text-slate-800">
                   Task Completion Rate (30% weight)
                 </span>
-                <span className="font-mono font-bold text-blue-600 text-sm">
+                <span className="font-mono font-bold text-blue-700 text-sm">
                   {performance.completion_rate}%
                 </span>
               </div>
               <ProgressBar value={performance.completion_rate} size="md" />
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-slate-500 font-medium">
                 {performance.completed_count} out of {performance.assigned_count} assigned tasks completed.
               </p>
             </Card>
 
             <Card className="p-5 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                <span className="text-xs font-bold text-slate-800">
                   On-Time Delivery Rate (30% weight)
                 </span>
-                <span className="font-mono font-bold text-emerald-600 text-sm">
+                <span className="font-mono font-bold text-emerald-700 text-sm">
                   {performance.on_time_rate}%
                 </span>
               </div>
               <ProgressBar value={performance.on_time_rate} size="md" />
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-slate-500 font-medium">
                 Tasks delivered before target deadlines.
               </p>
             </Card>
 
             <Card className="p-5 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                <span className="text-xs font-bold text-slate-800">
                   Quality & Approval Rate (25% weight)
                 </span>
-                <span className="font-mono font-bold text-purple-600 text-sm">
+                <span className="font-mono font-bold text-purple-700 text-sm">
                   {performance.quality_approval_rate}%
                 </span>
               </div>
               <ProgressBar value={performance.quality_approval_rate} size="md" />
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-slate-500 font-medium">
                 Submissions approved by Admin without requiring revision.
               </p>
             </Card>
 
             <Card className="p-5 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                <span className="text-xs font-bold text-slate-800">
                   Average Turnaround Time
                 </span>
-                <span className="font-mono font-bold text-amber-600 text-sm">
+                <span className="font-mono font-bold text-amber-700 text-sm">
                   {performance.avg_completion_time_hours} hrs
                 </span>
               </div>

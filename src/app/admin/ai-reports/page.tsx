@@ -50,10 +50,10 @@ export default function AdminAiReportsPage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-blue-600 text-white">
+            <div className="p-1.5 rounded-lg bg-blue-600 text-white shadow-xs">
               <Sparkles className="w-4 h-4" />
             </div>
-            <h1 className="text-xl font-bold text-slate-900 dark:text-white">
+            <h1 className="text-xl font-bold text-slate-900">
               AI Operational & Executive Synthesis
             </h1>
           </div>
@@ -64,13 +64,13 @@ export default function AdminAiReportsPage() {
 
         {/* Report Period Toggle */}
         <div className="flex items-center gap-2">
-          <div className="inline-flex bg-slate-200 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold">
+          <div className="inline-flex bg-slate-200/80 p-1 rounded-xl text-xs font-semibold">
             <button
               onClick={() => setReportType('daily')}
               className={`px-3 py-1.5 rounded-lg transition-all ${
                 reportType === 'daily'
-                  ? 'bg-white dark:bg-slate-900 text-blue-600 shadow-xs'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
+                  ? 'bg-white text-blue-700 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Daily Operational Brief
@@ -79,18 +79,18 @@ export default function AdminAiReportsPage() {
               onClick={() => setReportType('weekly')}
               className={`px-3 py-1.5 rounded-lg transition-all ${
                 reportType === 'weekly'
-                  ? 'bg-white dark:bg-slate-900 text-blue-600 shadow-xs'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
+                  ? 'bg-white text-blue-700 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Weekly Performance Review
             </button>
           </div>
 
-          <Button variant="outline" size="sm" onClick={handleCopyBrief} disabled={loading}>
+          <Button variant="outline" size="sm" onClick={handleCopyBrief} disabled={loading} className="font-semibold">
             {copied ? (
               <>
-                <Check className="w-3.5 h-3.5 text-emerald-500" /> Copied
+                <Check className="w-3.5 h-3.5 text-emerald-600" /> Copied
               </>
             ) : (
               <>
@@ -123,39 +123,39 @@ export default function AdminAiReportsPage() {
 
           {/* Operational Numbers */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            <Card className="p-4 text-center">
-              <div className="text-[10px] text-slate-400 uppercase font-semibold">Total Assigned</div>
-              <div className="text-2xl font-bold font-mono text-slate-900 dark:text-white mt-1">
+            <Card className="p-4 text-center bg-white border border-slate-200">
+              <div className="text-[10px] text-slate-500 uppercase font-semibold">Total Assigned</div>
+              <div className="text-2xl font-bold font-mono text-slate-900 mt-1">
                 {dailyReport.summary.totalAssigned}
               </div>
             </Card>
-            <Card className="p-4 text-center">
-              <div className="text-[10px] text-slate-400 uppercase font-semibold">Delivered / Done</div>
-              <div className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400 mt-1">
+            <Card className="p-4 text-center bg-white border border-slate-200">
+              <div className="text-[10px] text-slate-500 uppercase font-semibold">Delivered / Done</div>
+              <div className="text-2xl font-bold font-mono text-emerald-700 mt-1">
                 {dailyReport.summary.completedTodayOrRecent}
               </div>
             </Card>
-            <Card className="p-4 text-center">
-              <div className="text-[10px] text-slate-400 uppercase font-semibold">In Progress</div>
-              <div className="text-2xl font-bold font-mono text-blue-600 dark:text-blue-400 mt-1">
+            <Card className="p-4 text-center bg-white border border-slate-200">
+              <div className="text-[10px] text-slate-500 uppercase font-semibold">In Progress</div>
+              <div className="text-2xl font-bold font-mono text-blue-700 mt-1">
                 {dailyReport.summary.pendingCount}
               </div>
             </Card>
-            <Card className="p-4 text-center">
-              <div className="text-[10px] text-slate-400 uppercase font-semibold">Review Queue</div>
-              <div className="text-2xl font-bold font-mono text-purple-600 dark:text-purple-400 mt-1">
+            <Card className="p-4 text-center bg-white border border-slate-200">
+              <div className="text-[10px] text-slate-500 uppercase font-semibold">Review Queue</div>
+              <div className="text-2xl font-bold font-mono text-purple-700 mt-1">
                 {dailyReport.summary.awaitingApprovalCount}
               </div>
             </Card>
-            <Card className="p-4 text-center">
-              <div className="text-[10px] text-slate-400 uppercase font-semibold">Overdue</div>
-              <div className="text-2xl font-bold font-mono text-red-600 dark:text-red-400 mt-1">
+            <Card className="p-4 text-center bg-white border border-slate-200">
+              <div className="text-[10px] text-slate-500 uppercase font-semibold">Overdue</div>
+              <div className="text-2xl font-bold font-mono text-red-700 mt-1">
                 {dailyReport.summary.overdueCount}
               </div>
             </Card>
-            <Card className="p-4 text-center">
-              <div className="text-[10px] text-slate-400 uppercase font-semibold">Active Blockers</div>
-              <div className="text-2xl font-bold font-mono text-amber-600 dark:text-amber-400 mt-1">
+            <Card className="p-4 text-center bg-white border border-slate-200">
+              <div className="text-[10px] text-slate-500 uppercase font-semibold">Active Blockers</div>
+              <div className="text-2xl font-bold font-mono text-amber-700 mt-1">
                 {dailyReport.summary.blockedCount}
               </div>
             </Card>
@@ -164,8 +164,8 @@ export default function AdminAiReportsPage() {
           {/* Critical Sections */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Overdue Tasks Drilldown */}
-            <Card className="p-5">
-              <CardTitle className="text-sm font-bold flex items-center gap-2 mb-3 text-red-600">
+            <Card className="p-5 bg-white border border-slate-200">
+              <CardTitle className="text-sm font-bold flex items-center gap-2 mb-3 text-red-700">
                 <AlertTriangle className="w-4 h-4" /> Overdue Tasks Requiring Intervention
               </CardTitle>
               {dailyReport.overdueTasks.length === 0 ? (
@@ -175,11 +175,11 @@ export default function AdminAiReportsPage() {
                   {dailyReport.overdueTasks.map((t, idx) => (
                     <div
                       key={idx}
-                      className="p-3 rounded-lg bg-red-50/50 dark:bg-red-950/20 border border-red-200 dark:border-red-900 text-xs flex justify-between items-center"
+                      className="p-3 rounded-lg bg-red-50 border border-red-200 text-xs flex justify-between items-center"
                     >
                       <div>
-                        <div className="font-bold text-slate-900 dark:text-white">{t.title}</div>
-                        <div className="text-[11px] text-slate-500 mt-0.5">
+                        <div className="font-bold text-slate-900">{t.title}</div>
+                        <div className="text-[11px] text-slate-600 mt-0.5">
                           Assignee: {t.assigneeName} • Priority: {t.priority}
                         </div>
                       </div>
@@ -191,8 +191,8 @@ export default function AdminAiReportsPage() {
             </Card>
 
             {/* Personnel Requiring Attention */}
-            <Card className="p-5">
-              <CardTitle className="text-sm font-bold flex items-center gap-2 mb-3 text-amber-600">
+            <Card className="p-5 bg-white border border-slate-200">
+              <CardTitle className="text-sm font-bold flex items-center gap-2 mb-3 text-amber-700">
                 <Users className="w-4 h-4" /> Employees Requiring Management Attention
               </CardTitle>
               {dailyReport.employeesRequiringAttention.length === 0 ? (
@@ -202,17 +202,17 @@ export default function AdminAiReportsPage() {
                   {dailyReport.employeesRequiringAttention.map((e, idx) => (
                     <div
                       key={idx}
-                      className="p-3 rounded-lg bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 text-xs flex justify-between items-center"
+                      className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-xs flex justify-between items-center"
                     >
                       <div>
-                        <div className="font-bold text-slate-900 dark:text-white">
+                        <div className="font-bold text-slate-900">
                           {e.employeeName}
                         </div>
-                        <div className="text-[11px] text-amber-800 dark:text-amber-300 mt-0.5">
+                        <div className="text-[11px] text-amber-800 mt-0.5 font-medium">
                           {e.reason}
                         </div>
                       </div>
-                      <span className="text-[11px] font-mono font-bold text-amber-600">
+                      <span className="text-[11px] font-mono font-bold text-amber-700">
                         {e.overdueCount + e.blockedCount} Flags
                       </span>
                     </div>

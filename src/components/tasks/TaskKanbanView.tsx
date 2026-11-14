@@ -39,22 +39,22 @@ export function TaskKanbanView({ tasks, onSelectTask, showAssignee = true }: Tas
         return (
           <div
             key={col.id}
-            className="bg-slate-50/70 dark:bg-slate-900/40 rounded-xl p-3 border border-slate-200 dark:border-slate-800 flex flex-col min-w-[260px]"
+            className="bg-slate-100/70 rounded-xl p-3 border border-slate-200 flex flex-col min-w-[260px]"
           >
             {/* Column Header */}
-            <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-200 dark:border-slate-800">
+            <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-200">
               <div className="flex items-center gap-2">
                 <span className={`w-2.5 h-2.5 rounded-full ${
-                  col.id === 'completed' ? 'bg-emerald-500' :
-                  col.id === 'submitted' ? 'bg-purple-500' :
-                  col.id === 'on_hold' ? 'bg-amber-500' :
-                  col.id === 'in_progress' ? 'bg-blue-500' : 'bg-slate-400'
+                  col.id === 'completed' ? 'bg-emerald-600' :
+                  col.id === 'submitted' ? 'bg-purple-600' :
+                  col.id === 'on_hold' ? 'bg-amber-600' :
+                  col.id === 'in_progress' ? 'bg-blue-600' : 'bg-slate-400'
                 }`} />
-                <h3 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
+                <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
                   {col.label}
                 </h3>
               </div>
-              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-200 text-slate-700">
                 {colTasks.length}
               </span>
             </div>
@@ -75,52 +75,52 @@ export function TaskKanbanView({ tasks, onSelectTask, showAssignee = true }: Tas
                     <div
                       key={task.id}
                       onClick={() => onSelectTask(task.id)}
-                      className="bg-white dark:bg-slate-800/90 rounded-xl p-3.5 border border-slate-200 dark:border-slate-700/80 shadow-xs hover:shadow-md hover:border-blue-400 dark:hover:border-blue-500 cursor-pointer transition-all space-y-2.5"
+                      className="bg-white rounded-xl p-3.5 border border-slate-200 shadow-xs hover:shadow-md hover:border-blue-500 cursor-pointer transition-all space-y-2.5"
                     >
                       <div className="flex items-start justify-between gap-2">
                         <TaskPriorityBadge priority={task.priority} />
-                        <span className="text-[10px] font-mono text-slate-400 uppercase">
+                        <span className="text-[10px] font-mono text-slate-500 uppercase font-semibold">
                           {task.task_type}
                         </span>
                       </div>
 
-                      <h4 className="text-xs font-bold text-slate-900 dark:text-white line-clamp-2">
+                      <h4 className="text-xs font-bold text-slate-900 line-clamp-2">
                         {task.title}
                       </h4>
 
                       {task.project && (
-                        <div className="text-[11px] text-blue-600 dark:text-blue-400 font-medium truncate">
+                        <div className="text-[11px] text-blue-700 font-medium truncate">
                           📁 {task.project.name}
                         </div>
                       )}
 
                       {task.is_blocked && (
-                        <div className="text-[11px] text-amber-600 dark:text-amber-400 flex items-center gap-1 font-semibold">
+                        <div className="text-[11px] text-amber-700 flex items-center gap-1 font-semibold">
                           <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
                           <span className="truncate">Blocker: {task.blocker_reason || 'Flagged'}</span>
                         </div>
                       )}
 
                       <div className="pt-1">
-                        <div className="flex justify-between text-[10px] text-slate-400 mb-1">
+                        <div className="flex justify-between text-[10px] text-slate-500 mb-1">
                           <span>Progress</span>
                           <span className="font-mono font-medium">{task.progress_percentage}%</span>
                         </div>
                         <ProgressBar value={task.progress_percentage} size="sm" />
                       </div>
 
-                      <div className="pt-2 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between text-[11px] text-slate-500">
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-600">
                         <div className="flex items-center gap-1 font-mono">
                           <Clock className="w-3 h-3 text-slate-400" />
                           <span>{formatHours(task.actual_hours)}</span>
                         </div>
-                        <span className={isOverdue ? 'text-red-600 font-bold' : ''}>
+                        <span className={isOverdue ? 'text-red-700 font-bold' : ''}>
                           {formatDate(task.due_date)}
                         </span>
                       </div>
 
                       {showAssignee && task.assignee && (
-                        <div className="pt-1 text-[11px] font-medium text-slate-700 dark:text-slate-300 truncate">
+                        <div className="pt-1 text-[11px] font-medium text-slate-800 truncate">
                           👤 {task.assignee.full_name}
                         </div>
                       )}

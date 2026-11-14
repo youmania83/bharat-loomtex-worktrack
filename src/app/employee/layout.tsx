@@ -9,7 +9,7 @@ export default async function EmployeeLayout({ children }: { children: React.Rea
   const user = await getCurrentUser();
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-slate-950 font-sans">
+    <div className="flex h-screen w-screen overflow-hidden bg-[#F8FAFC] font-sans antialiased">
       <Sidebar role="employee" />
       <div className="flex-1 flex flex-col h-full overflow-hidden">
         <Topbar user={user} />

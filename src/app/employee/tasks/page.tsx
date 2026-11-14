@@ -54,7 +54,7 @@ export default function EmployeeTasksPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-slate-900 dark:text-white">
+          <h1 className="text-xl font-bold text-slate-900">
             My Assigned Tasks
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
@@ -63,13 +63,13 @@ export default function EmployeeTasksPage() {
         </div>
 
         {/* View Switcher */}
-        <div className="inline-flex bg-slate-200 dark:bg-slate-800 p-1 rounded-xl">
+        <div className="inline-flex bg-slate-200/80 p-1 rounded-xl">
           <button
             onClick={() => setCurrentView('list')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               currentView === 'list'
-                ? 'bg-white dark:bg-slate-900 text-blue-600 shadow-xs'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
+                ? 'bg-white text-blue-700 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             <List className="w-3.5 h-3.5" /> List
@@ -78,8 +78,8 @@ export default function EmployeeTasksPage() {
             onClick={() => setCurrentView('kanban')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               currentView === 'kanban'
-                ? 'bg-white dark:bg-slate-900 text-blue-600 shadow-xs'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
+                ? 'bg-white text-blue-700 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             <Kanban className="w-3.5 h-3.5" /> Kanban
@@ -88,8 +88,8 @@ export default function EmployeeTasksPage() {
             onClick={() => setCurrentView('calendar')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               currentView === 'calendar'
-                ? 'bg-white dark:bg-slate-900 text-blue-600 shadow-xs'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
+                ? 'bg-white text-blue-700 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             <CalendarIcon className="w-3.5 h-3.5" /> Calendar
@@ -98,54 +98,54 @@ export default function EmployeeTasksPage() {
       </div>
 
       {/* Filter Ribbon */}
-      <div className="bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shadow-xs">
+      <div className="bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between gap-3 shadow-xs">
         <div className="flex items-center gap-1.5 flex-wrap">
           <button
             onClick={() => setStatusFilter('all')}
-            className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
               statusFilter === 'all'
                 ? 'bg-blue-600 text-white font-bold'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
           >
             All My Tasks ({tasks.length})
           </button>
           <button
             onClick={() => setStatusFilter('in_progress')}
-            className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
               statusFilter === 'in_progress'
                 ? 'bg-blue-600 text-white font-bold'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
           >
             In Progress
           </button>
           <button
             onClick={() => setStatusFilter('submitted')}
-            className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
               statusFilter === 'submitted'
                 ? 'bg-purple-600 text-white font-bold'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
           >
             Awaiting Approval
           </button>
           <button
             onClick={() => setStatusFilter('completed')}
-            className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
               statusFilter === 'completed'
                 ? 'bg-emerald-600 text-white font-bold'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
           >
             Completed
           </button>
           <button
             onClick={() => setStatusFilter('overdue')}
-            className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
               statusFilter === 'overdue'
                 ? 'bg-red-600 text-white font-bold'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
           >
             Overdue

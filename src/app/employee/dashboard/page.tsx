@@ -61,7 +61,7 @@ export default function EmployeeDashboardPage() {
       {/* Welcome Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-slate-900 dark:text-white">
+          <h1 className="text-xl font-bold text-slate-900">
             Welcome back, {currentUser?.full_name || 'Team Member'}
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
@@ -69,7 +69,7 @@ export default function EmployeeDashboardPage() {
           </p>
         </div>
 
-        <Button variant="primary" size="sm" onClick={() => router.push('/employee/tasks')}>
+        <Button variant="primary" size="sm" onClick={() => router.push('/employee/tasks')} className="bg-blue-600 hover:bg-blue-700 font-semibold shadow-sm">
           <CheckSquare className="w-4 h-4" /> View All My Tasks ({tasks.length})
         </Button>
       </div>
@@ -109,13 +109,13 @@ export default function EmployeeDashboardPage() {
 
       {/* Active Focus / Quick Timer Widget */}
       {currentRunningTask && (
-        <Card className="p-5 border-blue-200 dark:border-blue-900/60 bg-blue-50/20 dark:bg-blue-950/20">
+        <Card className="p-5 border-blue-200 bg-blue-50/30">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
+              <span className="text-[10px] font-bold text-blue-700 uppercase tracking-wider">
                 CURRENT ACTIVE SPRINT FOCUS
               </span>
-              <h2 className="text-base font-bold text-slate-900 dark:text-white">
+              <h2 className="text-base font-bold text-slate-900">
                 {currentRunningTask.title}
               </h2>
               <p className="text-xs text-slate-500">
@@ -134,7 +134,7 @@ export default function EmployeeDashboardPage() {
       {/* Today's Tasks */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-bold text-slate-900 dark:text-white">
+          <h2 className="text-base font-bold text-slate-900">
             My Active Priority Deliverables
           </h2>
           <Button variant="ghost" size="sm" onClick={() => router.push('/employee/tasks')}>

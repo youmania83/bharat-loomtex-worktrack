@@ -92,9 +92,9 @@ export function TaskTimerWidget({
 
   if (compact) {
     return (
-      <div className="inline-flex items-center gap-2 bg-slate-50 dark:bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700">
-        <Clock className={`w-3.5 h-3.5 ${isRunning ? 'text-emerald-500 animate-pulse' : 'text-slate-400'}`} />
-        <span className="font-mono text-xs font-semibold text-slate-800 dark:text-slate-200">
+      <div className="inline-flex items-center gap-2 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">
+        <Clock className={`w-3.5 h-3.5 ${isRunning ? 'text-emerald-600 animate-pulse' : 'text-slate-400'}`} />
+        <span className="font-mono text-xs font-bold text-slate-800">
           {formatDuration(elapsed)}
         </span>
         <Button
@@ -112,22 +112,22 @@ export function TaskTimerWidget({
   }
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between p-3.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700/80 gap-3">
+    <div className="flex flex-col sm:flex-row items-center justify-between p-3.5 bg-slate-50 rounded-xl border border-slate-200 gap-3">
       <div className="flex items-center gap-3 w-full sm:w-auto">
         <div
           className={`w-10 h-10 rounded-xl flex items-center justify-center ${
             isRunning
-              ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-950/80 dark:text-emerald-400 ring-2 ring-emerald-500/30'
-              : 'bg-slate-200 text-slate-600 dark:bg-slate-700 dark:text-slate-300'
+              ? 'bg-emerald-100 text-emerald-700 ring-2 ring-emerald-500/30'
+              : 'bg-slate-200 text-slate-700'
           }`}
         >
           <Clock className={`w-5 h-5 ${isRunning ? 'animate-spin' : ''}`} style={{ animationDuration: '4s' }} />
         </div>
         <div>
-          <div className="text-xs font-medium text-slate-500 dark:text-slate-400">
+          <div className="text-xs font-semibold text-slate-500">
             {isRunning ? 'Currently Tracking Work' : 'Task Work Timer'}
           </div>
-          <div className="font-mono text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+          <div className="font-mono text-xl font-bold tracking-tight text-slate-900">
             {formatDuration(elapsed)}
           </div>
         </div>
@@ -139,6 +139,7 @@ export function TaskTimerWidget({
           size="sm"
           onClick={handleToggleTimer}
           isLoading={loading}
+          className={isRunning ? '' : 'bg-blue-600 hover:bg-blue-700 font-semibold shadow-sm'}
         >
           {isRunning ? (
             <>

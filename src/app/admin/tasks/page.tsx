@@ -87,7 +87,7 @@ function AdminTasksContent() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-slate-900 dark:text-white">
+          <h1 className="text-xl font-bold text-slate-900">
             Task Orchestration & Workflows
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
@@ -97,13 +97,13 @@ function AdminTasksContent() {
 
         <div className="flex items-center gap-2">
           {/* View Switcher */}
-          <div className="inline-flex bg-slate-200 dark:bg-slate-800 p-1 rounded-xl">
+          <div className="inline-flex bg-slate-200/80 p-1 rounded-xl">
             <button
               onClick={() => setCurrentView('list')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 currentView === 'list'
-                  ? 'bg-white dark:bg-slate-900 text-blue-600 shadow-xs'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
+                  ? 'bg-white text-blue-700 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               <List className="w-3.5 h-3.5" /> List
@@ -112,8 +112,8 @@ function AdminTasksContent() {
               onClick={() => setCurrentView('kanban')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 currentView === 'kanban'
-                  ? 'bg-white dark:bg-slate-900 text-blue-600 shadow-xs'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
+                  ? 'bg-white text-blue-700 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               <Kanban className="w-3.5 h-3.5" /> Kanban
@@ -122,31 +122,31 @@ function AdminTasksContent() {
               onClick={() => setCurrentView('calendar')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 currentView === 'calendar'
-                  ? 'bg-white dark:bg-slate-900 text-blue-600 shadow-xs'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
+                  ? 'bg-white text-blue-700 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               <CalendarIcon className="w-3.5 h-3.5" /> Calendar
             </button>
           </div>
 
-          <Button variant="primary" size="sm" onClick={() => setCreateModalOpen(true)}>
+          <Button variant="primary" size="sm" onClick={() => setCreateModalOpen(true)} className="bg-blue-600 hover:bg-blue-700 font-semibold shadow-sm">
             <Plus className="w-4 h-4" /> Create Task
           </Button>
         </div>
       </div>
 
       {/* Filter Ribbon */}
-      <div className="bg-white dark:bg-slate-900 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 shadow-xs">
+      <div className="bg-white p-3.5 rounded-xl border border-slate-200 flex flex-wrap items-center justify-between gap-3 shadow-xs">
         <div className="flex flex-wrap items-center gap-3">
           {/* Status Quick Filters */}
-          <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800/80 p-1 rounded-lg">
+          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-lg border border-slate-200">
             <button
               onClick={() => setStatusFilter('all')}
               className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
                 statusFilter === 'all'
-                  ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs'
-                  : 'text-slate-500 hover:text-slate-700'
+                  ? 'bg-white text-slate-900 font-bold shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               All ({tasks.length})
@@ -155,8 +155,8 @@ function AdminTasksContent() {
               onClick={() => setStatusFilter('submitted')}
               className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors flex items-center gap-1 ${
                 statusFilter === 'submitted'
-                  ? 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300 font-bold'
-                  : 'text-slate-500 hover:text-slate-700'
+                  ? 'bg-purple-100 text-purple-800 font-bold'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               <Inbox className="w-3 h-3" /> Review Queue
@@ -165,8 +165,8 @@ function AdminTasksContent() {
               onClick={() => setStatusFilter('in_progress')}
               className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
                 statusFilter === 'in_progress'
-                  ? 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 font-bold'
-                  : 'text-slate-500 hover:text-slate-700'
+                  ? 'bg-blue-100 text-blue-800 font-bold'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               In Progress
@@ -175,8 +175,8 @@ function AdminTasksContent() {
               onClick={() => setStatusFilter('completed')}
               className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
                 statusFilter === 'completed'
-                  ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 font-bold'
-                  : 'text-slate-500 hover:text-slate-700'
+                  ? 'bg-emerald-100 text-emerald-800 font-bold'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Completed
@@ -187,7 +187,7 @@ function AdminTasksContent() {
           <select
             value={projectFilter}
             onChange={(e) => setProjectFilter(e.target.value)}
-            className="text-xs p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200"
+            className="text-xs p-2 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="all">All Projects</option>
             {projects.map((p) => (
@@ -201,7 +201,7 @@ function AdminTasksContent() {
           <select
             value={employeeFilter}
             onChange={(e) => setEmployeeFilter(e.target.value)}
-            className="text-xs p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200"
+            className="text-xs p-2 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="all">All Employees</option>
             {employees.map((emp) => (
@@ -213,7 +213,7 @@ function AdminTasksContent() {
         </div>
 
         <div className="text-xs text-slate-500 font-medium">
-          Showing <span className="font-bold text-slate-900 dark:text-white">{tasks.length}</span> items
+          Showing <span className="font-bold text-slate-900">{tasks.length}</span> items
         </div>
       </div>
 

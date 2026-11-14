@@ -56,9 +56,9 @@ export function EmployeePerformanceTable({
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-xs space-y-4">
+    <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xs space-y-4">
       {/* Table Controls */}
-      <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row gap-3 items-center justify-between">
+      <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row gap-3 items-center justify-between">
         <div className="flex items-center gap-3 w-full sm:w-auto">
           {/* Search */}
           <div className="relative w-full sm:w-64">
@@ -68,7 +68,7 @@ export function EmployeePerformanceTable({
               placeholder="Filter employee or code..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full text-xs pl-9 pr-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-blue-500"
+              className="w-full text-xs pl-9 pr-3 py-2 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
@@ -76,7 +76,7 @@ export function EmployeePerformanceTable({
           <select
             value={departmentFilter}
             onChange={(e) => setDepartmentFilter(e.target.value)}
-            className="text-xs p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-blue-500"
+            className="text-xs p-2 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="all">All Departments</option>
             {departments.map((d) => (
@@ -88,7 +88,7 @@ export function EmployeePerformanceTable({
         </div>
 
         {/* CSV Export Button */}
-        <Button variant="outline" size="sm" onClick={handleDownloadCSV} className="w-full sm:w-auto">
+        <Button variant="outline" size="sm" onClick={handleDownloadCSV} className="w-full sm:w-auto font-medium">
           <Download className="w-3.5 h-3.5" /> Export to CSV
         </Button>
       </div>
@@ -96,7 +96,7 @@ export function EmployeePerformanceTable({
       {/* Table Container */}
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs">
-          <thead className="bg-slate-50 dark:bg-slate-800/60 border-y border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 font-semibold uppercase tracking-wider">
+          <thead className="bg-slate-50 border-y border-slate-200 text-slate-700 font-semibold uppercase tracking-wider">
             <tr>
               <th className="py-3 px-4">Employee</th>
               <th className="py-3 px-4">Assigned</th>
@@ -140,7 +140,7 @@ export function EmployeePerformanceTable({
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+          <tbody className="divide-y divide-slate-100">
             {filtered.length === 0 ? (
               <tr>
                 <td colSpan={8} className="text-center py-8 text-slate-400 italic">
@@ -152,29 +152,29 @@ export function EmployeePerformanceTable({
                 <tr
                   key={emp.employee_id}
                   onClick={() => onSelectEmployee && onSelectEmployee(emp.employee_id)}
-                  className="hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-colors"
+                  className="hover:bg-slate-50 cursor-pointer transition-colors"
                 >
                   <td className="py-3.5 px-4">
-                    <div className="font-bold text-slate-900 dark:text-white">{emp.full_name}</div>
-                    <div className="text-[11px] text-slate-400 flex items-center gap-1.5 mt-0.5">
-                      <span className="font-mono bg-slate-100 dark:bg-slate-800 px-1 rounded text-slate-600 dark:text-slate-300">
+                    <div className="font-bold text-slate-900">{emp.full_name}</div>
+                    <div className="text-[11px] text-slate-500 flex items-center gap-1.5 mt-0.5">
+                      <span className="font-mono bg-slate-100 px-1 py-0.2 rounded border border-slate-200 text-slate-700">
                         {emp.employee_code}
                       </span>
                       <span>• {emp.designation}</span>
                     </div>
                   </td>
-                  <td className="py-3.5 px-4 font-mono font-semibold text-slate-800 dark:text-slate-200">
+                  <td className="py-3.5 px-4 font-mono font-semibold text-slate-800">
                     {emp.assigned_count}
                   </td>
-                  <td className="py-3.5 px-4 font-mono font-semibold text-emerald-600 dark:text-emerald-400">
+                  <td className="py-3.5 px-4 font-mono font-semibold text-emerald-700">
                     {emp.completed_count}
                   </td>
-                  <td className="py-3.5 px-4 font-mono text-blue-600 dark:text-blue-400">
+                  <td className="py-3.5 px-4 font-mono text-blue-700">
                     {emp.pending_count}
                   </td>
                   <td className="py-3.5 px-4">
                     {emp.overdue_count > 0 ? (
-                      <span className="font-mono font-bold text-red-600 bg-red-50 dark:bg-red-950/40 px-2 py-0.5 rounded-full border border-red-200">
+                      <span className="font-mono font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded-full border border-red-200">
                         {emp.overdue_count}
                       </span>
                     ) : (
@@ -184,30 +184,30 @@ export function EmployeePerformanceTable({
                   <td className="py-3.5 px-4 w-36">
                     <div className="flex items-center gap-2">
                       <ProgressBar value={emp.completion_rate} size="sm" />
-                      <span className="font-mono font-bold text-slate-700 dark:text-slate-300">
+                      <span className="font-mono font-bold text-slate-800">
                         {emp.completion_rate}%
                       </span>
                     </div>
                   </td>
-                  <td className="py-3.5 px-4 font-mono text-slate-700 dark:text-slate-300">
+                  <td className="py-3.5 px-4 font-mono text-slate-700">
                     {formatHours(emp.total_logged_hours)}
                   </td>
                   <td className="py-3.5 px-4 text-right">
                     <div className="inline-flex items-center gap-2">
                       <span
-                        className={`text-sm font-bold font-mono px-2 py-0.5 rounded-md ${
+                        className={`text-xs font-bold font-mono px-2.5 py-1 rounded-md border ${
                           emp.performance_score >= 80
-                            ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-300'
+                            ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
                             : emp.performance_score >= 60
-                            ? 'bg-blue-100 text-blue-700 dark:bg-blue-950/80 dark:text-blue-300'
-                            : 'bg-amber-100 text-amber-700 dark:bg-amber-950/80 dark:text-amber-300'
+                            ? 'bg-blue-50 text-blue-800 border-blue-200'
+                            : 'bg-amber-50 text-amber-800 border-amber-200'
                         }`}
                       >
                         {emp.performance_score} / 100
                       </span>
-                      {emp.trend === 'up' && <TrendingUp className="w-3.5 h-3.5 text-emerald-500" />}
-                      {emp.trend === 'stable' && <Minus className="w-3.5 h-3.5 text-blue-500" />}
-                      {emp.trend === 'down' && <TrendingDown className="w-3.5 h-3.5 text-red-500" />}
+                      {emp.trend === 'up' && <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />}
+                      {emp.trend === 'stable' && <Minus className="w-3.5 h-3.5 text-blue-600" />}
+                      {emp.trend === 'down' && <TrendingDown className="w-3.5 h-3.5 text-red-600" />}
                     </div>
                   </td>
                 </tr>

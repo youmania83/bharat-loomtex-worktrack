@@ -72,18 +72,18 @@ export function QuickRoleSwitcher({ currentUserId, onUserChanged }: QuickRoleSwi
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-medium text-slate-800 dark:text-slate-200 transition-colors shadow-2xs"
+        className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-800 transition-colors shadow-xs"
       >
         <span
           className={`w-2 h-2 rounded-full ${
-            currentProfile?.role === 'admin' ? 'bg-purple-500' : 'bg-emerald-500'
+            currentProfile?.role === 'admin' ? 'bg-purple-600' : 'bg-emerald-600'
           }`}
         />
         <div className="flex items-center gap-1.5 text-left">
-          <span className="font-semibold text-slate-900 dark:text-white">
+          <span className="font-semibold text-slate-900">
             {currentProfile?.full_name || 'Quick Switcher'}
           </span>
-          <span className="text-[10px] uppercase font-mono px-1 py-0.2 rounded bg-slate-100 dark:bg-slate-800 text-slate-500">
+          <span className="text-[10px] uppercase font-mono px-1 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">
             {currentProfile?.role === 'admin' ? 'Admin' : 'Employee'}
           </span>
         </div>
@@ -93,8 +93,8 @@ export function QuickRoleSwitcher({ currentUserId, onUserChanged }: QuickRoleSwi
       {isOpen && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-          <div className="absolute right-0 mt-2 w-72 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl z-50 p-2 space-y-1 animate-in fade-in zoom-in-95">
-            <div className="px-3 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 dark:border-slate-800 mb-1">
+          <div className="absolute right-0 mt-2 w-72 bg-white border border-slate-200 rounded-xl shadow-xl z-50 p-2 space-y-1">
+            <div className="px-3 py-1.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-100 mb-1">
               Switch Active Role & Account
             </div>
 
@@ -107,8 +107,8 @@ export function QuickRoleSwitcher({ currentUserId, onUserChanged }: QuickRoleSwi
                   onClick={() => handleSelectUser(p.id, p.role)}
                   className={`w-full flex items-center justify-between p-2 rounded-lg text-left text-xs transition-colors ${
                     isSelected
-                      ? 'bg-blue-50 dark:bg-blue-950/50 text-blue-900 dark:text-blue-200 font-semibold'
-                      : 'hover:bg-slate-50 dark:hover:bg-slate-800/80 text-slate-700 dark:text-slate-300'
+                      ? 'bg-blue-50 text-blue-900 font-semibold'
+                      : 'hover:bg-slate-50 text-slate-700'
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -118,8 +118,8 @@ export function QuickRoleSwitcher({ currentUserId, onUserChanged }: QuickRoleSwi
                       <User className="w-4 h-4 text-emerald-600 shrink-0" />
                     )}
                     <div>
-                      <div className="font-bold">{p.full_name}</div>
-                      <div className="text-[10px] text-slate-400 leading-tight">
+                      <div className="font-bold text-slate-900">{p.full_name}</div>
+                      <div className="text-[10px] text-slate-500 leading-tight">
                         {p.designation}
                       </div>
                     </div>

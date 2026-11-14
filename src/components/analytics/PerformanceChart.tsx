@@ -44,10 +44,10 @@ export function PerformanceChart({ performanceData }: PerformanceChartProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Employee-wise task completion bar chart */}
-      <div className="lg:col-span-2 bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-xs">
+      <div className="lg:col-span-2 bg-white p-5 rounded-xl border border-slate-200/90 shadow-xs">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+            <h3 className="text-sm font-bold text-slate-900">
               Employee-Wise Task Distribution
             </h3>
             <p className="text-xs text-slate-500">
@@ -58,9 +58,9 @@ export function PerformanceChart({ performanceData }: PerformanceChartProps) {
         <div className="h-64 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={barData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" opacity={0.6} />
-              <XAxis dataKey="name" tick={{ fontSize: 11 }} stroke="#64748B" />
-              <YAxis tick={{ fontSize: 11 }} stroke="#64748B" />
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" opacity={0.8} />
+              <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#475569' }} stroke="#CBD5E1" />
+              <YAxis tick={{ fontSize: 11, fill: '#475569' }} stroke="#CBD5E1" />
               <Tooltip
                 contentStyle={{
                   backgroundColor: '#0F172A',
@@ -80,9 +80,9 @@ export function PerformanceChart({ performanceData }: PerformanceChartProps) {
       </div>
 
       {/* Task status breakdown pie chart */}
-      <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col justify-between">
+      <div className="bg-white p-5 rounded-xl border border-slate-200/90 shadow-xs flex flex-col justify-between">
         <div>
-          <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+          <h3 className="text-sm font-bold text-slate-900">
             Overall Completion Ratio
           </h3>
           <p className="text-xs text-slate-500">
@@ -115,11 +115,11 @@ export function PerformanceChart({ performanceData }: PerformanceChartProps) {
             </PieChart>
           </ResponsiveContainer>
         </div>
-        <div className="flex justify-center gap-4 text-xs font-medium">
+        <div className="flex justify-center gap-4 text-xs font-semibold">
           {pieData.map((item) => (
             <div key={item.name} className="flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }} />
-              <span className="text-slate-600 dark:text-slate-400">{item.name}: {item.value}</span>
+              <span className="text-slate-700">{item.name}: {item.value}</span>
             </div>
           ))}
         </div>

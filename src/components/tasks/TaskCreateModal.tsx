@@ -121,13 +121,13 @@ export function TaskCreateModal({ isOpen, onClose, onTaskCreated }: TaskCreateMo
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && (
-          <div className="p-3 bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-300 text-xs rounded-lg border border-red-200">
+          <div className="p-3 bg-red-50 text-red-700 text-xs rounded-lg border border-red-200 font-medium">
             {error}
           </div>
         )}
 
         <div>
-          <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+          <label className="text-xs font-semibold text-slate-700 block mb-1">
             Task Title *
           </label>
           <input
@@ -136,19 +136,19 @@ export function TaskCreateModal({ isOpen, onClose, onTaskCreated }: TaskCreateMo
             placeholder="e.g. Implement WebSocket Audio Pipeline"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-blue-500"
+            className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+            <label className="text-xs font-semibold text-slate-700 block mb-1">
               Task Type
             </label>
             <select
               value={taskType}
               onChange={(e) => setTaskType(e.target.value as 'daily' | 'project')}
-              className="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-blue-500"
+              className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="project">Project Task</option>
               <option value="daily">Daily Task</option>
@@ -156,13 +156,13 @@ export function TaskCreateModal({ isOpen, onClose, onTaskCreated }: TaskCreateMo
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+            <label className="text-xs font-semibold text-slate-700 block mb-1">
               Priority
             </label>
             <select
               value={priority}
               onChange={(e) => setPriority(e.target.value as any)}
-              className="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-blue-500"
+              className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="low">Low</option>
               <option value="medium">Medium</option>
@@ -174,13 +174,13 @@ export function TaskCreateModal({ isOpen, onClose, onTaskCreated }: TaskCreateMo
 
         {taskType === 'project' && (
           <div>
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+            <label className="text-xs font-semibold text-slate-700 block mb-1">
               Project *
             </label>
             <select
               value={projectId}
               onChange={(e) => setProjectId(e.target.value)}
-              className="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-blue-500"
+              className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               {projects.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -192,13 +192,13 @@ export function TaskCreateModal({ isOpen, onClose, onTaskCreated }: TaskCreateMo
         )}
 
         <div>
-          <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+          <label className="text-xs font-semibold text-slate-700 block mb-1">
             Assign To Employee *
           </label>
           <select
             value={assignedTo}
             onChange={(e) => setAssignedTo(e.target.value)}
-            className="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-blue-500"
+            className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             {employees.map((emp) => (
               <option key={emp.profile_id} value={emp.profile_id}>
@@ -210,7 +210,7 @@ export function TaskCreateModal({ isOpen, onClose, onTaskCreated }: TaskCreateMo
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+            <label className="text-xs font-semibold text-slate-700 block mb-1">
               Deadline / Due Date *
             </label>
             <input
@@ -218,12 +218,12 @@ export function TaskCreateModal({ isOpen, onClose, onTaskCreated }: TaskCreateMo
               required
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
-              className="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-blue-500"
+              className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+            <label className="text-xs font-semibold text-slate-700 block mb-1">
               Estimated Hours
             </label>
             <input
@@ -232,13 +232,13 @@ export function TaskCreateModal({ isOpen, onClose, onTaskCreated }: TaskCreateMo
               step={0.5}
               value={estimatedHours}
               onChange={(e) => setEstimatedHours(Number(e.target.value))}
-              className="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-blue-500"
+              className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
         </div>
 
         <div>
-          <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+          <label className="text-xs font-semibold text-slate-700 block mb-1">
             Detailed Description & Instructions
           </label>
           <textarea
@@ -246,15 +246,15 @@ export function TaskCreateModal({ isOpen, onClose, onTaskCreated }: TaskCreateMo
             placeholder="Detail scope, acceptance criteria, APIs, or files to inspect..."
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-blue-500"
+            className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
-        <div className="flex justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+        <div className="flex justify-end gap-2 pt-3 border-t border-slate-100">
           <Button type="button" variant="ghost" size="sm" onClick={onClose}>
             Cancel
           </Button>
-          <Button type="submit" variant="primary" size="sm" isLoading={loading}>
+          <Button type="submit" variant="primary" size="sm" isLoading={loading} className="bg-blue-600 hover:bg-blue-700 font-semibold shadow-sm">
             Create & Assign Task
           </Button>
         </div>
