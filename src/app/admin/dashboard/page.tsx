@@ -14,6 +14,8 @@ import {
 import { MetricCard } from '@/components/analytics/MetricCard';
 import { PerformanceChart } from '@/components/analytics/PerformanceChart';
 import { EmployeePerformanceTable } from '@/components/analytics/EmployeePerformanceTable';
+import { OverdueAlertBanner } from '@/components/dashboard/OverdueAlertBanner';
+import { AttendanceHoursTable } from '@/components/dashboard/AttendanceHoursTable';
 import { TaskDetailsDrawer } from '@/components/tasks/TaskDetailsDrawer';
 import { TaskCreateModal } from '@/components/tasks/TaskCreateModal';
 import { Button } from '@/components/ui/Button';
@@ -74,6 +76,9 @@ export default function AdminDashboardPage() {
           </Button>
         </div>
       </div>
+
+      {/* Critical Overdue & Delay Risk Alert Banner */}
+      <OverdueAlertBanner onOpenTask={(taskId) => setSelectedTaskId(taskId)} />
 
       {/* KPI Metrics Cards */}
       {loading ? (
@@ -163,6 +168,9 @@ export default function AdminDashboardPage() {
           onSelectEmployee={(empId) => router.push(`/admin/tasks?employeeId=${empId}`)}
         />
       </div>
+
+      {/* Employee Shift & Attendance Work Hours Table */}
+      <AttendanceHoursTable />
 
       {/* Modals & Drawers */}
       <TaskCreateModal

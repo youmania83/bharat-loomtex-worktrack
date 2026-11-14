@@ -187,6 +187,32 @@ export interface EmployeePerformance {
   trend: 'up' | 'stable' | 'down';
 }
 
+export interface WorkSession {
+  id: string;
+  user_id: string;
+  login_at: string;
+  logout_at?: string;
+  duration_seconds: number;
+  is_active: boolean;
+  notes?: string;
+  user?: Profile;
+}
+
+export interface EmployeeAttendanceToday {
+  employee_id: string;
+  employee_code: string;
+  full_name: string;
+  email: string;
+  department: string;
+  designation: string;
+  is_online: boolean;
+  first_login_at?: string;
+  last_logout_at?: string;
+  today_shift_hours: number;
+  today_task_hours: number;
+  active_tasks_count: number;
+}
+
 export interface DashboardMetrics {
   total_employees: number;
   active_projects: number;

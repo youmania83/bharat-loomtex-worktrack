@@ -14,7 +14,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'Profile not found' }, { status: 404 });
     }
 
-    const res = NextResponse.json({ success: true, user: profile });
+    // Automatically clock in the employee session
+    const session = await db.clockIn(userId);
+
+    const res = NextResponse.json({ success: true, user: profile, session });
     res.cookies.set(AUTH_COOKIE_NAME, userId, {
       path: '/',
       httpOnly: false, // Accessible to client so components can react

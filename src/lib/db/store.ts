@@ -7,6 +7,8 @@ import {
   NotificationItem,
   TaskTimeLog,
   TaskActivityLog,
+  WorkSession,
+  EmployeeAttendanceToday,
 } from '../types';
 import {
   INITIAL_PROFILES,
@@ -16,6 +18,7 @@ import {
   INITIAL_COMMENTS,
   INITIAL_TIME_LOGS,
   INITIAL_NOTIFICATIONS,
+  INITIAL_WORK_SESSIONS,
 } from './mockData';
 
 // Global singleton in memory so changes persist across requests during the server lifecycle
@@ -28,6 +31,7 @@ class MemoryStore {
   timeLogs: TaskTimeLog[] = [...INITIAL_TIME_LOGS];
   activityLogs: TaskActivityLog[] = [];
   notifications: NotificationItem[] = [...INITIAL_NOTIFICATIONS];
+  workSessions: WorkSession[] = [...INITIAL_WORK_SESSIONS];
 
   constructor() {
     this.refreshProjectMetrics();
@@ -467,6 +471,139 @@ class MemoryStore {
       this.tasks[tIdx].actual_hours = hours;
       this.tasks[tIdx].updated_at = new Date().toISOString();
     }
+  }
+
+  // --- EMPLOYEE SHIFT & ATTENDANCE SESSIONS ---
+  clockIn(userId: string): WorkSession {
+    const now = new Date();
+    // Check if there is already an active session
+    const existing = this.workSessions.find((s) => s.user_id === userId && s.is_active);
+    if (existing) {
+      return {
+        ...existing,
+        user: this.profiles.find((p) => p.id === userId),
+      };
+    }
+
+    const session: WorkSession = {
+      id: `ws-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+      user_id: userId,
+      login_at: now.toISOString(),
+      duration_seconds: 0,
+      is_active: true,
+      notes: 'Shift started on login',
+    };
+    this.workSessions.unshift(session);
+    return {
+      ...session,
+      user: this.profiles.find((p) => p.id === userId),
+    };
+  }
+
+  clockOut(userId: string, notes?: string): WorkSession | null {
+    const now = new Date();
+    // Also pause any active task timer for this employee cleanly
+    const activeTimer = this.timeLogs.find((tl) => tl.employee_id === userId && tl.is_running);
+    if (activeTimer) {
+      this.pauseTaskTimer(activeTimer.task_id, userId);
+    }
+
+    const sessionIndex = this.workSessions.findIndex((s) => s.user_id === userId && s.is_active);
+    if (sessionIndex === -1) {
+      // If no active session found, return the most recent session for this user
+      const lastSession = this.workSessions.find((s) => s.user_id === userId);
+      return lastSession
+        ? { ...lastSession, user: this.profiles.find((p) => p.id === userId) }
+        : null;
+    }
+
+    const session = this.workSessions[sessionIndex];
+    const loginTime = new Date(session.login_at).getTime();
+    const durationSec = Math.max(0, Math.floor((now.getTime() - loginTime) / 1000));
+
+    session.is_active = false;
+    session.logout_at = now.toISOString();
+    session.duration_seconds = durationSec;
+    if (notes) session.notes = notes;
+
+    return {
+      ...session,
+      user: this.profiles.find((p) => p.id === userId),
+    };
+  }
+
+  getWorkSessions(userId?: string): WorkSession[] {
+    const sessions = userId
+      ? this.workSessions.filter((s) => s.user_id === userId)
+      : this.workSessions;
+    return sessions.map((s) => ({
+      ...s,
+      user: this.profiles.find((p) => p.id === s.user_id),
+    }));
+  }
+
+  getTodayAttendanceSummary(): EmployeeAttendanceToday[] {
+    const todayStr = new Date().toISOString().split('T')[0];
+    const now = Date.now();
+
+    return this.employees.map((emp) => {
+      const profile = this.profiles.find((p) => p.id === emp.profile_id);
+      const userSessions = this.workSessions.filter(
+        (s) => s.user_id === emp.profile_id && s.login_at.startsWith(todayStr)
+      );
+
+      const activeSession = this.workSessions.find(
+        (s) => s.user_id === emp.profile_id && s.is_active
+      );
+
+      const isOnline = !!activeSession;
+
+      // Calculate total shift seconds today
+      let totalShiftSeconds = 0;
+      userSessions.forEach((s) => {
+        if (s.is_active) {
+          totalShiftSeconds += Math.max(0, Math.floor((now - new Date(s.login_at).getTime()) / 1000));
+        } else {
+          totalShiftSeconds += s.duration_seconds || 0;
+        }
+      });
+
+      // Calculate total active task seconds today
+      const todayLogs = this.timeLogs.filter(
+        (tl) => tl.employee_id === emp.profile_id && tl.created_at.startsWith(todayStr)
+      );
+      const totalTaskSeconds = todayLogs.reduce((acc, l) => acc + (l.duration_seconds || 0), 0);
+
+      // Earliest login and latest logout
+      const sortedLogins = [...userSessions].sort(
+        (a, b) => new Date(a.login_at).getTime() - new Date(b.login_at).getTime()
+      );
+      const firstLogin = sortedLogins[0]?.login_at;
+
+      const sortedLogouts = [...userSessions]
+        .filter((s) => s.logout_at)
+        .sort((a, b) => new Date(b.logout_at!).getTime() - new Date(a.logout_at!).getTime());
+      const lastLogout = sortedLogouts[0]?.logout_at;
+
+      const activeTasksCount = this.tasks.filter(
+        (t) => t.assigned_to === emp.profile_id && (t.status === 'in_progress' || t.status === 'not_started')
+      ).length;
+
+      return {
+        employee_id: emp.id,
+        employee_code: emp.employee_code,
+        full_name: profile?.full_name || 'Staff Member',
+        email: profile?.email || '',
+        department: profile?.department || '',
+        designation: profile?.designation || '',
+        is_online: isOnline,
+        first_login_at: firstLogin,
+        last_logout_at: lastLogout,
+        today_shift_hours: Number((totalShiftSeconds / 3600).toFixed(1)),
+        today_task_hours: Number((totalTaskSeconds / 3600).toFixed(1)),
+        active_tasks_count: activeTasksCount,
+      };
+    });
   }
 
   // --- COMMENTS & COLLABORATION ---

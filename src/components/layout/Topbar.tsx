@@ -31,12 +31,16 @@ export function Topbar({ user }: TopbarProps) {
 
   const handleLogout = async () => {
     try {
-      await fetch('/api/auth/logout', { method: 'POST' });
-      router.push('/login');
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: user.id }),
+      });
+      router.push('/logout');
       router.refresh();
     } catch (err) {
       console.error(err);
-      window.location.href = '/login';
+      window.location.href = '/logout';
     }
   };
 

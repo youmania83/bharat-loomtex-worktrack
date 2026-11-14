@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { CheckSquare, CheckCircle2, Clock, ShieldCheck, ArrowRight } from 'lucide-react';
+import { CheckSquare, CheckCircle2, Clock, ShieldCheck, ArrowRight, LogOut } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { MetricCard } from '@/components/analytics/MetricCard';
@@ -69,13 +69,34 @@ export default function EmployeeDashboardPage() {
           </p>
         </div>
 
-        <Button variant="primary" size="sm" onClick={() => router.push('/employee/tasks')} className="bg-blue-600 hover:bg-blue-700 font-semibold shadow-sm">
-          <CheckSquare className="w-4 h-4" /> View All My Tasks ({tasks.length})
-        </Button>
+        <div className="flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-700">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Shift Active</span>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={async () => {
+              await fetch('/api/auth/logout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId: currentUser?.id }),
+              });
+              router.push('/logout');
+            }}
+            className="text-xs hover:bg-red-50 hover:text-red-700 hover:border-red-300 border-slate-300"
+          >
+            <LogOut className="w-3.5 h-3.5" /> Clock Out & Exit
+          </Button>
+          <Button variant="primary" size="sm" onClick={() => router.push('/employee/tasks')} className="bg-blue-600 hover:bg-blue-700 font-semibold shadow-sm">
+            <CheckSquare className="w-4 h-4" /> View Tasks ({tasks.length})
+          </Button>
+        </div>
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
         <MetricCard
           title="Assigned Tasks"
           value={tasks.length}
@@ -86,7 +107,7 @@ export default function EmployeeDashboardPage() {
         <MetricCard
           title="Completed"
           value={completed}
-          subtitle={`${performance?.completion_rate || 0}% completion`}
+          subtitle={`${performance?.completion_rate || 0}% rate`}
           icon={CheckCircle2}
           variant="success"
         />
@@ -96,6 +117,13 @@ export default function EmployeeDashboardPage() {
           subtitle="Active items"
           icon={Clock}
           variant="info"
+        />
+        <MetricCard
+          title="Total Hours Logged"
+          value={`${performance?.total_logged_hours || 0}h`}
+          subtitle="All tasks logged"
+          icon={Clock}
+          variant="default"
         />
         <MetricCard
           title="Productivity Score"

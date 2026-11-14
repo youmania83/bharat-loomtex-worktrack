@@ -264,6 +264,32 @@ async function runWorkflowTestSuite() {
     `Workflow 17: Accurately calculated total hours work done across team (${totalHoursWorkedAllEmployees.toFixed(1)} verified hours)`
   );
 
+  // -------------------------------------------------------------
+  // Test 18: Shift Clock-In & Clock-Out Session Tracking
+  // -------------------------------------------------------------
+  const testEmpId = employees[0].profile_id;
+  const clockedInSession = await db.clockIn(testEmpId);
+  assert(
+    clockedInSession && clockedInSession.is_active === true,
+    'Workflow 18a: Employee Clock In on Login successfully creates active shift session'
+  );
+
+  const clockedOutSession = await db.clockOut(testEmpId, 'Completed daily shift');
+  assert(
+    clockedOutSession !== null && clockedOutSession.is_active === false && !!clockedOutSession.logout_at,
+    'Workflow 18b: Employee Clock Out on Logout closes shift and calculates total working duration'
+  );
+
+  // -------------------------------------------------------------
+  // Test 19: Attendance Summary & Total Team Shift Hours
+  // -------------------------------------------------------------
+  const attendanceSummary = await db.getTodayAttendanceSummary();
+  const totalTeamShiftHours = attendanceSummary.reduce((acc, a) => acc + a.today_shift_hours, 0);
+  assert(
+    attendanceSummary.length === 7 && totalTeamShiftHours > 0,
+    `Workflow 19: Attendance summary tracks all 7 employees with ${totalTeamShiftHours.toFixed(1)} total team shift hours`
+  );
+
   console.log('\n================================================================');
   console.log(`TEST SUMMARY: ${passed} PASSED, ${failed} FAILED`);
   console.log('================================================================');

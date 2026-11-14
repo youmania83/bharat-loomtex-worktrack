@@ -10,6 +10,8 @@ import {
   TaskActivityLog,
   EmployeePerformance,
   DashboardMetrics,
+  WorkSession,
+  EmployeeAttendanceToday,
 } from '../types';
 import { calculateEmployeePerformance, calculateDashboardMetrics } from '../utils/analytics';
 
@@ -156,6 +158,23 @@ export const db = {
     isBlocker?: boolean
   ): Promise<TaskComment> => {
     return memoryDb.addComment(taskId, authorId, content, isBlocker);
+  },
+
+  // Shift & Attendance Work Sessions
+  clockIn: async (userId: string): Promise<WorkSession> => {
+    return memoryDb.clockIn(userId);
+  },
+
+  clockOut: async (userId: string, notes?: string): Promise<WorkSession | null> => {
+    return memoryDb.clockOut(userId, notes);
+  },
+
+  getWorkSessions: async (userId?: string): Promise<WorkSession[]> => {
+    return memoryDb.getWorkSessions(userId);
+  },
+
+  getTodayAttendanceSummary: async (): Promise<EmployeeAttendanceToday[]> => {
+    return memoryDb.getTodayAttendanceSummary();
   },
 
   // Notifications

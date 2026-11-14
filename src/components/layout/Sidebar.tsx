@@ -29,10 +29,10 @@ export function Sidebar({ role }: SidebarProps) {
   const handleLogout = async () => {
     try {
       await fetch('/api/auth/logout', { method: 'POST' });
-      router.push('/login');
+      router.push('/logout');
       router.refresh();
     } catch {
-      window.location.href = '/login';
+      window.location.href = '/logout';
     }
   };
 

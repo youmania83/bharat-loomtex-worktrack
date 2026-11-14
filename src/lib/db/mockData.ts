@@ -666,3 +666,64 @@ export const INITIAL_NOTIFICATIONS: NotificationItem[] = [
     created_at: daysAgo(1),
   },
 ];
+
+export const INITIAL_WORK_SESSIONS: any[] = [
+  {
+    id: 'ws-001',
+    user_id: '00000000-0000-0000-0000-000000000011', // Rahul Sharma
+    login_at: new Date(Date.now() - 6.5 * 3600 * 1000).toISOString(),
+    duration_seconds: 23400,
+    is_active: true,
+    notes: 'Morning fullstack sprint',
+  },
+  {
+    id: 'ws-002',
+    user_id: '00000000-0000-0000-0000-000000000012', // Priya Patel
+    login_at: new Date(Date.now() - 8.5 * 3600 * 1000).toISOString(),
+    logout_at: new Date(Date.now() - 0.5 * 3600 * 1000).toISOString(),
+    duration_seconds: 28800, // 8 hrs
+    is_active: false,
+    notes: 'UI/UX design review & delivery',
+  },
+  {
+    id: 'ws-003',
+    user_id: '00000000-0000-0000-0000-000000000013', // Amit Verma
+    login_at: new Date(Date.now() - 5.5 * 3600 * 1000).toISOString(),
+    duration_seconds: 19800,
+    is_active: true,
+    notes: 'AI prompt engineering pipeline',
+  },
+  {
+    id: 'ws-004',
+    user_id: '00000000-0000-0000-0000-000000000014', // Sneha Reddy
+    login_at: new Date(Date.now() - 7.2 * 3600 * 1000).toISOString(),
+    duration_seconds: 25920,
+    is_active: true,
+    notes: 'Frontend live timer integration',
+  },
+  {
+    id: 'ws-005',
+    user_id: '00000000-0000-0000-0000-000000000015', // Vikram Singh
+    login_at: new Date(Date.now() - 8.2 * 3600 * 1000).toISOString(),
+    logout_at: new Date(Date.now() - 0.2 * 3600 * 1000).toISOString(),
+    duration_seconds: 28800,
+    is_active: false,
+    notes: 'End-to-end regression suites',
+  },
+  {
+    id: 'ws-006',
+    user_id: '00000000-0000-0000-0000-000000000016', // Ananya Deshmukh
+    login_at: new Date(Date.now() - 5.8 * 3600 * 1000).toISOString(),
+    duration_seconds: 20880,
+    is_active: true,
+    notes: 'Database connection pool optimization',
+  },
+  {
+    id: 'ws-007',
+    user_id: '00000000-0000-0000-0000-000000000017', // Rohit Kumar
+    login_at: new Date(Date.now() - 6.2 * 3600 * 1000).toISOString(),
+    duration_seconds: 22320,
+    is_active: true,
+    notes: 'Client analytics dataset preparation',
+  },
+];
