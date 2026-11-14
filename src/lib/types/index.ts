@@ -1,6 +1,6 @@
 // ==============================================================================
 // RISON WORKTRACK – TypeScript Types & Interfaces
-// Product: WorkTrack | Company: Bharay Loomtex
+// Product: WorkTrack | Company: Bharat Loomtex
 // ==============================================================================
 
 export type UserRole = 'admin' | 'employee';

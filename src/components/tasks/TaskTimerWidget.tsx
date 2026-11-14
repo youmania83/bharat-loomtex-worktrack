@@ -93,7 +93,7 @@ export function TaskTimerWidget({
   if (compact) {
     return (
       <div className="inline-flex items-center gap-2 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">
-        <Clock className={`w-3.5 h-3.5 ${isRunning ? 'text-emerald-600 animate-pulse' : 'text-slate-400'}`} />
+        <Clock className={`w-3.5 h-3.5 ${isRunning ? 'text-emerald-600' : 'text-slate-400'}`} />
         <span className="font-mono text-xs font-bold text-slate-800">
           {formatDuration(elapsed)}
         </span>

@@ -525,7 +525,7 @@ CREATE POLICY "Notifications insert"
 INSERT INTO public.profiles (id, email, full_name, role, phone, department, designation, status)
 VALUES (
     '00000000-0000-0000-0000-000000000001',
-    'admin@bharayloomtex.com',
+    'admin@bharatloomtex.com',
     'Suneet Kumar',
     'admin',
     '+91 98765 43210',

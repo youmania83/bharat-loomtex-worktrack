@@ -123,7 +123,7 @@ export function Sidebar({ role }: SidebarProps) {
         </button>
 
         <div className="text-[11px] text-slate-400">
-          <div className="font-semibold text-slate-300">Bharay Loomtex</div>
+          <div className="font-semibold text-slate-300">Bharat Loomtex</div>
           <div className="text-[10px] text-slate-400">Production SaaS v1.0</div>
         </div>
       </div>

@@ -31,7 +31,7 @@ export default async function HomePage() {
       {/* Top Enterprise Banner */}
       <div className="bg-slate-900 text-slate-300 px-6 py-2 text-xs font-medium border-b border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-emerald-400/30" />
           <span className="text-white font-semibold">RISON AI TECH</span>
           <span className="text-slate-500">•</span>
           <span>Enterprise Employee Productivity & Task Orchestration</span>
@@ -85,7 +85,7 @@ export default async function HomePage() {
         <div className="max-w-5xl mx-auto text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold">
             <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-            <span>Bharay Loomtex Internal Enterprise System</span>
+            <span>Bharat Loomtex Internal Enterprise System</span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight leading-tight">
@@ -93,7 +93,7 @@ export default async function HomePage() {
           </h1>
 
           <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Transparent workload assignment, live work timer audits, review approval workflows, and mathematical productivity scoring for Bharay Loomtex.
+            Transparent workload assignment, live work timer audits, review approval workflows, and mathematical productivity scoring for Bharat Loomtex.
           </p>
 
           {/* Real Live Metrics Strip */}
@@ -227,7 +227,7 @@ export default async function HomePage() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
             <div>
               <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <span>Bharay Loomtex Team Roster</span>
+                <span>Bharat Loomtex Team Roster</span>
                 <span className="text-xs font-mono font-normal text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">
                   1 Admin + 7 Employees
                 </span>
@@ -347,7 +347,7 @@ export default async function HomePage() {
 
       {/* Footer */}
       <footer className="bg-white border-t border-slate-200 py-6 px-6 text-center text-xs text-slate-500">
-        <p>© 2026 Bharay Loomtex. WorkTrack — Production SaaS Application.</p>
+        <p>© 2026 Bharat Loomtex. WorkTrack — Production SaaS Application.</p>
       </footer>
     </div>
   );

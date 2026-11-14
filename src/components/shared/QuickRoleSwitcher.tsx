@@ -24,7 +24,7 @@ export function QuickRoleSwitcher({ currentUserId, onUserChanged }: QuickRoleSwi
           // Prepend Admin profile
           const adminProf: Profile = {
             id: '00000000-0000-0000-0000-000000000001',
-            email: 'admin@bharayloomtex.com',
+            email: 'admin@bharatloomtex.com',
             full_name: 'Suneet Kumar',
             role: 'admin',
             department: 'Executive Management',

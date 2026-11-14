@@ -4,8 +4,8 @@ import { exportPerformanceToCSV } from '../src/lib/utils/csv';
 
 async function runWorkflowTestSuite() {
   console.log('================================================================');
-  console.log('🧪 BHARAY LOOMTEX WORKTRACK – AUTOMATED VERIFICATION TEST SUITE');
-  console.log('Product: WorkTrack | Company: Bharay Loomtex | Owner: Suneet Kumar');
+  console.log('🧪 BHARAT LOOMTEX WORKTRACK – AUTOMATED VERIFICATION TEST SUITE');
+  console.log('Product: WorkTrack | Company: Bharat Loomtex | Owner: Suneet Kumar');
   console.log('================================================================\n');
 
   let passed = 0;
@@ -29,8 +29,8 @@ async function runWorkflowTestSuite() {
     !!adminProfile &&
       adminProfile.role === 'admin' &&
       adminProfile.full_name === 'Suneet Kumar' &&
-      adminProfile.email === 'admin@bharayloomtex.com',
-    'Workflow 1: Admin login & profile verification (Suneet Kumar - Bharay Loomtex)',
+      adminProfile.email === 'admin@bharatloomtex.com',
+    'Workflow 1: Admin login & profile verification (Suneet Kumar - Bharat Loomtex)',
     JSON.stringify(adminProfile)
   );
 
@@ -111,7 +111,7 @@ async function runWorkflowTestSuite() {
   // -------------------------------------------------------------
   const employeeProfile = await db.getProfile('00000000-0000-0000-0000-000000000014');
   assert(
-    !!employeeProfile && employeeProfile.email === 'sneha.reddy@bharayloomtex.com',
+    !!employeeProfile && employeeProfile.email === 'sneha.reddy@bharatloomtex.com',
     'Workflow 6: Employee login & profile identity verification (Sneha Reddy)'
   );
 

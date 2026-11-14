@@ -23,7 +23,7 @@ export async function getCurrentUser(): Promise<Profile> {
   // Static fallback if DB is empty
   return {
     id: DEFAULT_ADMIN_ID,
-    email: 'admin@bharayloomtex.com',
+    email: 'admin@bharatloomtex.com',
     full_name: 'Suneet Kumar',
     role: 'admin',
     department: 'Executive Management',

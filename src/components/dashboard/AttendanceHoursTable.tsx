@@ -73,7 +73,7 @@ export function AttendanceHoursTable() {
           <div className="px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-right">
             <span className="text-[10px] text-slate-500 font-semibold uppercase block">Staff Online</span>
             <span className="text-sm font-bold text-emerald-600 flex items-center gap-1 justify-end">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
               {onlineCount} / {attendance.length}
             </span>
           </div>
@@ -168,7 +168,7 @@ export function AttendanceHoursTable() {
                     <td className="py-3 px-3">
                       {emp.is_online ? (
                         <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                           Online
                         </span>
                       ) : (

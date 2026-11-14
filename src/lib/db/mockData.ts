@@ -3,7 +3,7 @@ import { Profile, EmployeeExtended, Project, Task, TaskComment, NotificationItem
 export const INITIAL_PROFILES: Profile[] = [
   {
     id: '00000000-0000-0000-0000-000000000001',
-    email: 'admin@bharayloomtex.com',
+    email: 'admin@bharatloomtex.com',
     full_name: 'Suneet Kumar',
     role: 'admin',
     phone: '+91 98765 43210',
@@ -15,7 +15,7 @@ export const INITIAL_PROFILES: Profile[] = [
   },
   {
     id: '00000000-0000-0000-0000-000000000011',
-    email: 'rahul.sharma@bharayloomtex.com',
+    email: 'rahul.sharma@bharatloomtex.com',
     full_name: 'Rahul Sharma',
     role: 'employee',
     phone: '+91 98111 22334',
@@ -27,7 +27,7 @@ export const INITIAL_PROFILES: Profile[] = [
   },
   {
     id: '00000000-0000-0000-0000-000000000012',
-    email: 'priya.patel@bharayloomtex.com',
+    email: 'priya.patel@bharatloomtex.com',
     full_name: 'Priya Patel',
     role: 'employee',
     phone: '+91 98222 33445',
@@ -39,7 +39,7 @@ export const INITIAL_PROFILES: Profile[] = [
   },
   {
     id: '00000000-0000-0000-0000-000000000013',
-    email: 'amit.verma@bharayloomtex.com',
+    email: 'amit.verma@bharatloomtex.com',
     full_name: 'Amit Verma',
     role: 'employee',
     phone: '+91 98333 44556',
@@ -51,7 +51,7 @@ export const INITIAL_PROFILES: Profile[] = [
   },
   {
     id: '00000000-0000-0000-0000-000000000014',
-    email: 'sneha.reddy@bharayloomtex.com',
+    email: 'sneha.reddy@bharatloomtex.com',
     full_name: 'Sneha Reddy',
     role: 'employee',
     phone: '+91 98444 55667',
@@ -63,7 +63,7 @@ export const INITIAL_PROFILES: Profile[] = [
   },
   {
     id: '00000000-0000-0000-0000-000000000015',
-    email: 'vikram.singh@bharayloomtex.com',
+    email: 'vikram.singh@bharatloomtex.com',
     full_name: 'Vikram Singh',
     role: 'employee',
     phone: '+91 98555 66778',
@@ -75,7 +75,7 @@ export const INITIAL_PROFILES: Profile[] = [
   },
   {
     id: '00000000-0000-0000-0000-000000000016',
-    email: 'ananya.deshmukh@bharayloomtex.com',
+    email: 'ananya.deshmukh@bharatloomtex.com',
     full_name: 'Ananya Deshmukh',
     role: 'employee',
     phone: '+91 98666 77889',
@@ -87,7 +87,7 @@ export const INITIAL_PROFILES: Profile[] = [
   },
   {
     id: '00000000-0000-0000-0000-000000000017',
-    email: 'rohit.kumar@bharayloomtex.com',
+    email: 'rohit.kumar@bharatloomtex.com',
     full_name: 'Rohit Kumar',
     role: 'employee',
     phone: '+91 98777 88990',
@@ -205,8 +205,8 @@ export const INITIAL_PROJECTS: Project[] = [
   },
   {
     id: '00000000-0000-0000-0000-000000000102',
-    name: 'Bharay Loomtex Operations & Productivity Tracker v1.0',
-    client_name: 'Bharay Loomtex Internal',
+    name: 'Bharat Loomtex Operations & Productivity Tracker v1.0',
+    client_name: 'Bharat Loomtex Internal',
     description: 'Flagship employee task management, live time tracking, approvals and productivity analytics platform.',
     status: 'active',
     start_date: '2026-06-01',

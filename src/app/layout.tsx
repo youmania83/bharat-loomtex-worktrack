@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Bharay Loomtex – Employee Task & Productivity Management',
+  title: 'Bharat Loomtex – Employee Task & Productivity Management',
   description:
-    'Assign. Track. Improve. Enterprise task management, live time tracking, review approvals and productivity analytics for Bharay Loomtex.',
+    'Assign. Track. Improve. Enterprise task management, live time tracking, review approvals and productivity analytics for Bharat Loomtex.',
 };
 
 export default function RootLayout({

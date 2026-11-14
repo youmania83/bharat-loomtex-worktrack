@@ -16,56 +16,56 @@ export default function LoginPage() {
     {
       id: '00000000-0000-0000-0000-000000000001',
       name: 'Suneet Kumar (Owner & Managing Director)',
-      email: 'admin@bharayloomtex.com',
+      email: 'admin@bharatloomtex.com',
       role: 'admin',
       roleLabel: 'Admin / Owner',
     },
     {
       id: '00000000-0000-0000-0000-000000000011',
       name: 'Rahul Sharma',
-      email: 'rahul.sharma@bharayloomtex.com',
+      email: 'rahul.sharma@bharatloomtex.com',
       role: 'employee',
       roleLabel: 'Senior Fullstack',
     },
     {
       id: '00000000-0000-0000-0000-000000000012',
       name: 'Priya Patel',
-      email: 'priya.patel@bharayloomtex.com',
+      email: 'priya.patel@bharatloomtex.com',
       role: 'employee',
       roleLabel: 'Lead UI/UX Designer',
     },
     {
       id: '00000000-0000-0000-0000-000000000013',
       name: 'Amit Verma',
-      email: 'amit.verma@bharayloomtex.com',
+      email: 'amit.verma@bharatloomtex.com',
       role: 'employee',
       roleLabel: 'AI Automation Specialist',
     },
     {
       id: '00000000-0000-0000-0000-000000000014',
       name: 'Sneha Reddy',
-      email: 'sneha.reddy@bharayloomtex.com',
+      email: 'sneha.reddy@bharatloomtex.com',
       role: 'employee',
       roleLabel: 'Frontend Developer',
     },
     {
       id: '00000000-0000-0000-0000-000000000015',
       name: 'Vikram Singh',
-      email: 'vikram.singh@bharayloomtex.com',
+      email: 'vikram.singh@bharatloomtex.com',
       role: 'employee',
       roleLabel: 'QA & Test Automation',
     },
     {
       id: '00000000-0000-0000-0000-000000000016',
       name: 'Ananya Deshmukh',
-      email: 'ananya.deshmukh@bharayloomtex.com',
+      email: 'ananya.deshmukh@bharatloomtex.com',
       role: 'employee',
       roleLabel: 'Backend & Cloud',
     },
     {
       id: '00000000-0000-0000-0000-000000000017',
       name: 'Rohit Kumar',
-      email: 'rohit.kumar@bharayloomtex.com',
+      email: 'rohit.kumar@bharatloomtex.com',
       role: 'employee',
       roleLabel: 'Client Success & Analyst',
     },
@@ -77,7 +77,7 @@ export default function LoginPage() {
     setError(null);
     try {
       const trimmedEmail = email.trim().toLowerCase();
-      // Find matching account (support aliases like suneet@bharayloomtex.com or admin@)
+      // Find matching account (support aliases like suneet@bharatloomtex.com or admin@)
       let matched = demoAccounts.find((a) => a.email.toLowerCase() === trimmedEmail);
       if (!matched && (trimmedEmail.includes('suneet') || trimmedEmail.includes('admin'))) {
         matched = demoAccounts[0]; // Suneet Kumar
@@ -134,7 +134,7 @@ export default function LoginPage() {
           <span className="text-blue-600 font-extrabold">LOOMTEX</span>
         </h2>
         <p className="text-xs text-slate-500 font-medium">
-          Bharay Loomtex • Assign. Track. Improve.
+          Bharat Loomtex • Assign. Track. Improve.
         </p>
       </div>
 
@@ -156,7 +156,7 @@ export default function LoginPage() {
                 <input
                   type="email"
                   required
-                  placeholder="admin@bharayloomtex.com"
+                  placeholder="admin@bharatloomtex.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full text-xs pl-9 pr-3 py-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"

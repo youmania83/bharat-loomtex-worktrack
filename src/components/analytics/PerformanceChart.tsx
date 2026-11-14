@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BarChart,
   Bar,
@@ -21,6 +21,12 @@ interface PerformanceChartProps {
 }
 
 export function PerformanceChart({ performanceData }: PerformanceChartProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // 1. Employee comparison data
   const barData = performanceData.map((p) => ({
     name: p.full_name.split(' ')[0], // First name for clean axis
@@ -40,6 +46,29 @@ export function PerformanceChart({ performanceData }: PerformanceChartProps) {
     { name: 'In Progress', value: totalPending || 1, color: '#2563EB' },
     { name: 'Overdue', value: totalOverdue || 0, color: '#DC2626' },
   ].filter((d) => d.value > 0);
+
+  if (!mounted) {
+    return (
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2 bg-white p-5 rounded-xl border border-slate-200/90 shadow-xs h-80 flex flex-col justify-between">
+          <div className="space-y-1">
+            <div className="h-4 w-48 bg-slate-100 rounded" />
+            <div className="h-3 w-64 bg-slate-50 rounded" />
+          </div>
+          <div className="h-56 bg-slate-50/60 rounded-lg flex items-center justify-center text-xs text-slate-400">
+            Loading performance analytics...
+          </div>
+        </div>
+        <div className="bg-white p-5 rounded-xl border border-slate-200/90 shadow-xs h-80 flex flex-col justify-between">
+          <div className="space-y-1">
+            <div className="h-4 w-36 bg-slate-100 rounded" />
+            <div className="h-3 w-48 bg-slate-50 rounded" />
+          </div>
+          <div className="h-48 bg-slate-50/60 rounded-full w-48 mx-auto" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -71,9 +100,9 @@ export function PerformanceChart({ performanceData }: PerformanceChartProps) {
                 }}
               />
               <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
-              <Bar dataKey="Completed" fill="#16A34A" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="Pending" fill="#2563EB" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="Overdue" fill="#DC2626" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="Completed" fill="#16A34A" radius={[4, 4, 0, 0]} isAnimationActive={false} />
+              <Bar dataKey="Pending" fill="#2563EB" radius={[4, 4, 0, 0]} isAnimationActive={false} />
+              <Bar dataKey="Overdue" fill="#DC2626" radius={[4, 4, 0, 0]} isAnimationActive={false} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -98,6 +127,7 @@ export function PerformanceChart({ performanceData }: PerformanceChartProps) {
                 outerRadius={75}
                 paddingAngle={4}
                 dataKey="value"
+                isAnimationActive={false}
               >
                 {pieData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />

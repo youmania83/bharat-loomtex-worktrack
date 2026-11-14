@@ -7,62 +7,71 @@ import { Task } from '@/lib/types';
 
 interface OverdueAlertBannerProps {
   onOpenTask?: (taskId: string) => void;
+  tasks?: Task[];
 }
 
-export function OverdueAlertBanner({ onOpenTask }: OverdueAlertBannerProps) {
+export function OverdueAlertBanner({ onOpenTask, tasks: propTasks }: OverdueAlertBannerProps) {
   const [overdueTasks, setOverdueTasks] = useState<Task[]>([]);
   const [delayedTasks, setDelayedTasks] = useState<Task[]>([]);
   const [blockedTasks, setBlockedTasks] = useState<Task[]>([]);
   const [dismissed, setDismissed] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!propTasks);
+
+  const processTasks = (allTasks: Task[]) => {
+    const now = new Date();
+    // 1. Overdue
+    const overdue = allTasks.filter(
+      (t) =>
+        t.status !== 'completed' &&
+        t.status !== 'submitted' &&
+        (t.status === 'overdue' || new Date(t.due_date) < now)
+    );
+    setOverdueTasks(overdue);
+
+    // 2. Delayed Risk (due in <= 36h with progress < 40%)
+    const delayed = allTasks.filter((t) => {
+      if (t.status === 'completed' || t.status === 'submitted' || t.status === 'overdue') return false;
+      const diffHours = (new Date(t.due_date).getTime() - now.getTime()) / (1000 * 3600);
+      return diffHours > 0 && diffHours <= 36 && (t.progress_percentage || 0) < 40;
+    });
+    setDelayedTasks(delayed);
+
+    // 3. Blocked
+    const blocked = allTasks.filter((t) => t.is_blocked && t.status !== 'completed');
+    setBlockedTasks(blocked);
+  };
 
   useEffect(() => {
+    if (propTasks && propTasks.length > 0) {
+      processTasks(propTasks);
+      setLoading(false);
+      return;
+    }
+
     fetch('/api/tasks')
       .then((res) => res.json())
       .then((data) => {
         if (data.success && Array.isArray(data.tasks)) {
-          const now = new Date();
-          const allTasks: Task[] = data.tasks;
-
-          // 1. Overdue
-          const overdue = allTasks.filter(
-            (t) =>
-              t.status !== 'completed' &&
-              t.status !== 'submitted' &&
-              (t.status === 'overdue' || new Date(t.due_date) < now)
-          );
-          setOverdueTasks(overdue);
-
-          // 2. Delayed Risk (due in <= 36h with progress < 40%)
-          const delayed = allTasks.filter((t) => {
-            if (t.status === 'completed' || t.status === 'submitted' || t.status === 'overdue') return false;
-            const diffHours = (new Date(t.due_date).getTime() - now.getTime()) / (1000 * 3600);
-            return diffHours > 0 && diffHours <= 36 && (t.progress_percentage || 0) < 40;
-          });
-          setDelayedTasks(delayed);
-
-          // 3. Blocked
-          const blocked = allTasks.filter((t) => t.is_blocked && t.status !== 'completed');
-          setBlockedTasks(blocked);
+          processTasks(data.tasks);
         }
       })
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
-  }, []);
+  }, [propTasks]);
 
   if (dismissed || loading) return null;
   const totalAlerts = overdueTasks.length + delayedTasks.length + blockedTasks.length;
   if (totalAlerts === 0) return null;
 
   return (
-    <div className="rounded-2xl border border-red-200/90 bg-gradient-to-r from-red-50/90 via-amber-50/70 to-red-50/90 p-4 shadow-sm relative overflow-hidden transition-all">
+    <div className="rounded-2xl border border-red-200/90 bg-gradient-to-r from-red-50/90 via-amber-50/70 to-red-50/90 p-4 shadow-xs relative overflow-hidden transition-all">
       {/* Accent strip */}
       <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-red-600" />
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div className="flex items-start gap-3">
-          <div className="w-9 h-9 rounded-xl bg-red-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-red-500/20">
-            <AlertTriangle className="w-5 h-5 animate-pulse" />
+          <div className="w-9 h-9 rounded-xl bg-red-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+            <AlertTriangle className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center gap-2">

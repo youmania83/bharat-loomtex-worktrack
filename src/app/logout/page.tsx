@@ -32,7 +32,7 @@ export default function LogoutPage() {
           <span className="text-blue-600 font-extrabold">LOOMTEX</span>
         </h2>
         <p className="text-xs text-slate-500 font-medium">
-          Bharay Loomtex • Assign. Track. Improve.
+          Bharat Loomtex • Assign. Track. Improve.
         </p>
       </div>
 
@@ -47,7 +47,7 @@ export default function LogoutPage() {
               Shift Logged Out Successfully
             </h3>
             <p className="text-xs text-slate-500">
-              Your working session and daily hours have been safely recorded into the Bharay Loomtex central ledger.
+              Your working session and daily hours have been safely recorded into the Bharat Loomtex central ledger.
             </p>
           </div>
 

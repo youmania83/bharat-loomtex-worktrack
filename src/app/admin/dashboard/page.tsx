@@ -25,6 +25,7 @@ import { useRouter } from 'next/navigation';
 export default function AdminDashboardPage() {
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
   const [performanceData, setPerformanceData] = useState<EmployeePerformance[]>([]);
+  const [tasks, setTasks] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
@@ -36,17 +37,19 @@ export default function AdminDashboardPage() {
   }, []);
 
   const loadDashboardData = async () => {
-    setLoading(true);
     try {
-      const [mRes, pRes] = await Promise.all([
+      const [mRes, pRes, tRes] = await Promise.all([
         fetch('/api/analytics/metrics'),
         fetch('/api/analytics/performance'),
+        fetch('/api/tasks'),
       ]);
       const mData = await mRes.json();
       const pData = await pRes.json();
+      const tData = await tRes.json();
 
       if (mData.success) setMetrics(mData.metrics);
       if (pData.success) setPerformanceData(pData.performance);
+      if (tData.success && Array.isArray(tData.tasks)) setTasks(tData.tasks);
     } catch (err) {
       console.error(err);
     } finally {
@@ -63,7 +66,7 @@ export default function AdminDashboardPage() {
             Operations & Productivity Command Center
           </h1>
           <p className="text-xs text-slate-500 mt-1">
-            Real-time tracking for Bharay Loomtex personnel, project deliverables, and quality approvals.
+            Real-time tracking for Bharat Loomtex personnel, project deliverables, and quality approvals.
           </p>
         </div>
 
@@ -78,12 +81,18 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Critical Overdue & Delay Risk Alert Banner */}
-      <OverdueAlertBanner onOpenTask={(taskId) => setSelectedTaskId(taskId)} />
+      <OverdueAlertBanner tasks={tasks} onOpenTask={(taskId) => setSelectedTaskId(taskId)} />
 
       {/* KPI Metrics Cards */}
       {loading ? (
-        <div className="flex justify-center py-12">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+          {[...Array(7)].map((_, i) => (
+            <div key={i} className="bg-white rounded-xl p-4 border border-slate-200/90 shadow-2xs space-y-2 h-24 animate-pulse">
+              <div className="h-3 w-16 bg-slate-100 rounded" />
+              <div className="h-6 w-12 bg-slate-200 rounded" />
+              <div className="h-2.5 w-20 bg-slate-100 rounded" />
+            </div>
+          ))}
         </div>
       ) : metrics && (
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
