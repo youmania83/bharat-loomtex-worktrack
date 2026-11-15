@@ -355,14 +355,14 @@ export class MemoryStore {
     this.tasks[idx].completion_notes = notes;
     this.tasks[idx].updated_at = new Date().toISOString();
 
-    // Notify both the assigner (e.g. Director) AND Admin (MD)
+    // Notify assigner (e.g. Director) AND all executives (MD / Directors)
     const assignerId = this.tasks[idx].assigned_by;
-    const admin = this.profiles.find((p) => p.role === 'admin');
+    const managers = this.profiles.filter((p) => p.role === 'admin' || p.role === 'manager');
     const emp = this.profiles.find((p) => p.id === employeeId);
 
     const recipientIds = new Set<string>();
     if (assignerId) recipientIds.add(assignerId);
-    if (admin) recipientIds.add(admin.id);
+    managers.forEach((m) => recipientIds.add(m.id));
 
     recipientIds.forEach((uid) => {
       this.notifications.unshift({
