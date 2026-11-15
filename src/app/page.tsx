@@ -32,12 +32,12 @@ export default async function HomePage() {
       <div className="bg-slate-900 text-slate-300 px-6 py-2 text-xs font-medium border-b border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-emerald-400/30" />
-          <span className="text-white font-semibold">RISON AI TECH</span>
+          <span className="text-white font-semibold">BHARAT LOOMTEX</span>
           <span className="text-slate-500">•</span>
-          <span>Enterprise Employee Productivity & Task Orchestration</span>
+          <span>Task Management & Productivity Analytics System</span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-slate-400 hidden sm:inline">Active Staff: <strong>7 Core Personnel</strong></span>
+          <span className="text-slate-400 hidden sm:inline">Personnel: <strong>5 Core Staff</strong></span>
           <span className="text-slate-400 hidden sm:inline">•</span>
           <span className="text-emerald-400 font-mono font-semibold">System Operational</span>
         </div>
@@ -51,11 +51,11 @@ export default async function HomePage() {
           </div>
           <div>
             <div className="font-bold tracking-tight text-slate-900 flex items-center gap-1 text-base">
-              <span>RISON</span>
-              <span className="text-blue-600 font-extrabold">WORKTRACK</span>
+              <span>BHARAT</span>
+              <span className="text-blue-600 font-extrabold">LOOMTEX</span>
             </div>
             <div className="text-[10px] text-slate-500 font-medium -mt-0.5">
-              Assign. Track. Improve.
+              WorkTrack Operations
             </div>
           </div>
         </div>
@@ -71,10 +71,10 @@ export default async function HomePage() {
             Switch Account
           </Link>
           <Link
-            href={user.role === 'admin' ? '/admin/dashboard' : '/employee/dashboard'}
+            href={user.role === 'admin' || user.role === 'manager' ? '/admin/dashboard' : '/employee/dashboard'}
             className="text-xs font-semibold px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-all shadow-sm flex items-center gap-1.5"
           >
-            <span>Open {user.role === 'admin' ? 'Admin Console' : 'My Workspace'}</span>
+            <span>Open {user.role === 'admin' || user.role === 'manager' ? 'Management Console' : 'My Workspace'}</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
@@ -161,7 +161,7 @@ export default async function HomePage() {
                   Management & Operations Console
                 </h2>
                 <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                  Assign daily and project tasks, monitor live progress across the 7 employees, review submissions in the approval queue, and access multi-factor productivity reports.
+                  Assign daily and project tasks, monitor live progress across departments, review submissions in the approval queue, and access multi-factor productivity reports.
                 </p>
               </div>
 
@@ -178,7 +178,7 @@ export default async function HomePage() {
               href="/admin/dashboard"
               className="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors shadow-xs"
             >
-              <span>Launch Admin Dashboard</span>
+              <span>Launch Management Console</span>
               <ArrowRight className="w-4 h-4 text-blue-400" />
             </Link>
           </div>
@@ -196,7 +196,7 @@ export default async function HomePage() {
               </div>
               <div>
                 <h2 className="text-xl font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
-                  Employee Personal Workspace
+                  Department Head & Employee Workspace
                 </h2>
                 <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
                   Access your personal assigned tasks, start and pause your live work timer with concurrency safety lock, update progress, flag blockers, and submit tasks for review.
@@ -227,9 +227,9 @@ export default async function HomePage() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
             <div>
               <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <span>Bharat Loomtex Team Roster</span>
+                <span>Bharat Loomtex Personnel</span>
                 <span className="text-xs font-mono font-normal text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">
-                  1 Admin + 7 Employees
+                  MD + Director + 3 Department Heads
                 </span>
               </h2>
               <p className="text-xs text-slate-500 mt-0.5">
@@ -245,7 +245,7 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
             {/* Admin Profile */}
             <Link
               href="/login"
@@ -254,18 +254,18 @@ export default async function HomePage() {
               <div>
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-bold font-mono px-1.5 py-0.5 rounded bg-purple-200 text-purple-900">
-                    OWNER / ADMIN
+                    MD / ALL RIGHTS
                   </span>
                   <Shield className="w-4 h-4 text-purple-600" />
                 </div>
                 <div className="font-bold text-sm text-slate-900 mt-1.5 group-hover:text-purple-700">
-                  Suneet Kumar
+                  Mr. Sumeet Khungar
                 </div>
-                <div className="text-[11px] text-purple-700 font-medium">Owner & Managing Director</div>
-                <div className="text-[10px] text-slate-500 mt-0.5">Executive Management</div>
+                <div className="text-[11px] text-purple-700 font-medium">Managing Director (MD)</div>
+                <div className="text-[10px] text-slate-500 mt-0.5">Can assign tasks to everyone</div>
               </div>
               <div className="text-[11px] font-semibold text-purple-700 flex items-center gap-1 pt-1">
-                <span>Access Admin View</span>
+                <span>Access MD Console</span>
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
               </div>
             </Link>

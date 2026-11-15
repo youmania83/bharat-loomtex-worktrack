@@ -15,59 +15,38 @@ export default function LoginPage() {
   const demoAccounts = [
     {
       id: '00000000-0000-0000-0000-000000000001',
-      name: 'Suneet Kumar (Owner & Managing Director)',
+      name: 'Mr. Sumeet Khungar',
       email: 'admin@bharatloomtex.com',
       role: 'admin',
-      roleLabel: 'Admin / Owner',
+      roleLabel: 'Managing Director (MD) • Assigns to Everyone',
+    },
+    {
+      id: '00000000-0000-0000-0000-000000000002',
+      name: 'Meenakshi Khungar',
+      email: 'meenakshi.khungar@bharatloomtex.com',
+      role: 'manager',
+      roleLabel: 'Director • Assigns to 3 Dept Heads',
     },
     {
       id: '00000000-0000-0000-0000-000000000011',
-      name: 'Rahul Sharma',
-      email: 'rahul.sharma@bharatloomtex.com',
+      name: 'Chandan Goswani',
+      email: 'chandan.goswani@bharatloomtex.com',
       role: 'employee',
-      roleLabel: 'Senior Fullstack',
+      roleLabel: 'Production, HR & Design Head',
     },
     {
       id: '00000000-0000-0000-0000-000000000012',
-      name: 'Priya Patel',
-      email: 'priya.patel@bharatloomtex.com',
+      name: 'Marketing Head',
+      email: 'marketing.head@bharatloomtex.com',
       role: 'employee',
-      roleLabel: 'Lead UI/UX Designer',
+      roleLabel: 'Marketing & Sales (Position Unfulfilled)',
     },
     {
       id: '00000000-0000-0000-0000-000000000013',
-      name: 'Amit Verma',
-      email: 'amit.verma@bharatloomtex.com',
+      name: 'Accounts Head',
+      email: 'accounts.head@bharatloomtex.com',
       role: 'employee',
-      roleLabel: 'AI Automation Specialist',
-    },
-    {
-      id: '00000000-0000-0000-0000-000000000014',
-      name: 'Sneha Reddy',
-      email: 'sneha.reddy@bharatloomtex.com',
-      role: 'employee',
-      roleLabel: 'Frontend Developer',
-    },
-    {
-      id: '00000000-0000-0000-0000-000000000015',
-      name: 'Vikram Singh',
-      email: 'vikram.singh@bharatloomtex.com',
-      role: 'employee',
-      roleLabel: 'QA & Test Automation',
-    },
-    {
-      id: '00000000-0000-0000-0000-000000000016',
-      name: 'Ananya Deshmukh',
-      email: 'ananya.deshmukh@bharatloomtex.com',
-      role: 'employee',
-      roleLabel: 'Backend & Cloud',
-    },
-    {
-      id: '00000000-0000-0000-0000-000000000017',
-      name: 'Rohit Kumar',
-      email: 'rohit.kumar@bharatloomtex.com',
-      role: 'employee',
-      roleLabel: 'Client Success & Analyst',
+      roleLabel: 'Accounts & Finance Head',
     },
   ];
 
@@ -77,14 +56,22 @@ export default function LoginPage() {
     setError(null);
     try {
       const trimmedEmail = email.trim().toLowerCase();
-      // Find matching account (support aliases like suneet@bharatloomtex.com or admin@)
+      // Find matching account (support aliases like sumeet@bharatloomtex.com or admin@)
       let matched = demoAccounts.find((a) => a.email.toLowerCase() === trimmedEmail);
-      if (!matched && (trimmedEmail.includes('suneet') || trimmedEmail.includes('admin'))) {
-        matched = demoAccounts[0]; // Suneet Kumar
+      if (!matched && (trimmedEmail.includes('sumeet') || trimmedEmail.includes('admin') || trimmedEmail.includes('khungar'))) {
+        matched = demoAccounts[0]; // Mr. Sumeet Khungar
+      } else if (!matched && trimmedEmail.includes('meenakshi')) {
+        matched = demoAccounts[1]; // Meenakshi Khungar
+      } else if (!matched && (trimmedEmail.includes('chandan') || trimmedEmail.includes('goswani') || trimmedEmail.includes('goswami'))) {
+        matched = demoAccounts[2]; // Chandan Goswani
+      } else if (!matched && trimmedEmail.includes('marketing')) {
+        matched = demoAccounts[3]; // Marketing Head
+      } else if (!matched && trimmedEmail.includes('account')) {
+        matched = demoAccounts[4]; // Accounts Head
       }
 
       if (!matched) {
-        setError(`No account found for "${email}". Please select or enter one of the 7 registered employee emails below.`);
+        setError(`No account found for "${email}". Please select or enter one of the registered staff emails below.`);
         setLoading(false);
         return;
       }
@@ -97,10 +84,10 @@ export default function LoginPage() {
         body: JSON.stringify({ userId }),
       });
 
-      if (role === 'admin') router.push('/admin/dashboard');
+      if (role === 'admin' || role === 'manager') router.push('/admin/dashboard');
       else router.push('/employee/dashboard');
     } catch (_err) {
-      setError('Login failed. Please select an employee account below.');
+      setError('Login failed. Please select a registered staff account below.');
     } finally {
       setLoading(false);
     }
@@ -114,7 +101,7 @@ export default function LoginPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: account.id }),
       });
-      if (account.role === 'admin') router.push('/admin/dashboard');
+      if (account.role === 'admin' || account.role === 'manager') router.push('/admin/dashboard');
       else router.push('/employee/dashboard');
     } catch (err) {
       console.error(err);
@@ -130,11 +117,11 @@ export default function LoginPage() {
           <Layers className="w-6 h-6" />
         </div>
         <h2 className="text-2xl font-bold tracking-tight text-slate-900 flex items-center justify-center gap-1.5">
-          <span>BHARAY</span>
+          <span>BHARAT</span>
           <span className="text-blue-600 font-extrabold">LOOMTEX</span>
         </h2>
         <p className="text-xs text-slate-500 font-medium">
-          Bharat Loomtex • Assign. Track. Improve.
+          Bharat Loomtex • Task Management & Operations
         </p>
       </div>
 

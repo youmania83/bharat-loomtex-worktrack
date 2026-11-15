@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { getCurrentUser } from '@/lib/auth/session';
+import { validateTaskAssignmentRights } from '@/lib/auth/permissions';
 import { z } from 'zod';
 
 const createTaskSchema = z.object({
@@ -22,13 +23,13 @@ export async function GET(req: NextRequest) {
     const status = searchParams.get('status') || undefined;
     const employeeId = searchParams.get('employeeId') || undefined;
 
-    // Strict role check: if user is employee, force filter to only their tasks
+    // Scoped role check
     const tasks = await db.getTasks({
       role: user.role,
       userId: user.id,
       projectId,
       status,
-      employeeId: user.role === 'admin' ? employeeId : user.id,
+      employeeId: user.role === 'admin' || user.role === 'manager' ? employeeId : user.id,
     });
 
     return NextResponse.json({ success: true, tasks });
@@ -40,19 +41,21 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const user = await getCurrentUser();
-    if (user.role !== 'admin') {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized: Only Admins can create tasks.' },
-        { status: 403 }
-      );
-    }
-
     const body = await req.json();
     const parsed = createTaskSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json(
         { success: false, error: parsed.error.issues[0].message },
         { status: 400 }
+      );
+    }
+
+    // Enforce Bharat Loomtex Task Assignment Rights Policy
+    const permission = validateTaskAssignmentRights(user, parsed.data.assigned_to);
+    if (!permission.allowed) {
+      return NextResponse.json(
+        { success: false, error: permission.reason || 'Unauthorized task assignment.' },
+        { status: 403 }
       );
     }
 

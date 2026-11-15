@@ -11,7 +11,7 @@ export async function GET() {
       status: 200,
       headers: {
         'Content-Type': 'text/csv; charset=utf-8',
-        'Content-Disposition': `attachment; filename="rison-worktrack-performance-${new Date().toISOString().split('T')[0]}.csv"`,
+        'Content-Disposition': `attachment; filename="bharat-loomtex-performance-${new Date().toISOString().split('T')[0]}.csv"`,
       },
     });
   } catch (error) {

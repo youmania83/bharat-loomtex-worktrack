@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { getCurrentUser } from '@/lib/auth/session';
+import { getAuthorizedAssigneeIds } from '@/lib/auth/permissions';
 import { z } from 'zod';
 
 const createEmployeeSchema = z.object({
@@ -14,9 +15,20 @@ const createEmployeeSchema = z.object({
   joining_date: z.string().optional(),
 });
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    const employees = await db.getEmployees();
+    const user = await getCurrentUser();
+    const assignableOnly = req.nextUrl.searchParams.get('assignableOnly') === 'true';
+
+    let employees = await db.getEmployees();
+
+    if (assignableOnly) {
+      const authorizedIds = getAuthorizedAssigneeIds(user);
+      if (authorizedIds !== 'all') {
+        employees = employees.filter((e) => authorizedIds.includes(e.profile_id));
+      }
+    }
+
     return NextResponse.json({ success: true, employees });
   } catch (error) {
     return NextResponse.json({ success: false, error: String(error) }, { status: 500 });

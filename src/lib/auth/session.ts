@@ -24,10 +24,10 @@ export async function getCurrentUser(): Promise<Profile> {
   return {
     id: DEFAULT_ADMIN_ID,
     email: 'admin@bharatloomtex.com',
-    full_name: 'Suneet Kumar',
+    full_name: 'Mr. Sumeet Khungar',
     role: 'admin',
-    department: 'Executive Management',
-    designation: 'Owner & Managing Director',
+    department: 'Executive Leadership',
+    designation: 'Managing Director (MD)',
     status: 'active',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),

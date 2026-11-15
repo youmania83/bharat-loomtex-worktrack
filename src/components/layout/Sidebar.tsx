@@ -19,7 +19,7 @@ import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils/cn';
 
 interface SidebarProps {
-  role: 'admin' | 'employee';
+  role: 'admin' | 'employee' | 'manager';
 }
 
 export function Sidebar({ role }: SidebarProps) {
@@ -52,7 +52,7 @@ export function Sidebar({ role }: SidebarProps) {
     { name: 'Performance Score', href: '/employee/performance', icon: BarChart3 },
   ];
 
-  const navItems = role === 'admin' ? adminNav : employeeNav;
+  const navItems = (role === 'admin' || role === 'manager') ? adminNav : employeeNav;
 
   return (
     <aside className="w-64 bg-slate-900 text-slate-300 flex flex-col shrink-0 border-r border-slate-800">
@@ -64,17 +64,17 @@ export function Sidebar({ role }: SidebarProps) {
           </div>
           <div>
             <div className="font-bold text-sm tracking-tight text-white flex items-center gap-1.5">
-              <span>RISON</span>
-              <span className="text-blue-400 font-extrabold">WORKTRACK</span>
+              <span>BHARAT</span>
+              <span className="text-blue-400 font-extrabold">LOOMTEX</span>
             </div>
             <div className="text-[10px] text-slate-400 font-medium tracking-wide">
-              Assign. Track. Improve.
+              WorkTrack Operations
             </div>
           </div>
         </div>
         <div className="mt-3 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-slate-800 text-[10px] font-mono text-slate-300 border border-slate-700/60">
           <Shield className="w-3 h-3 text-blue-400" />
-          <span>PORTAL: {role.toUpperCase()}</span>
+          <span>PORTAL: {role === 'manager' ? 'DIRECTOR' : role.toUpperCase()}</span>
         </div>
       </div>
 

@@ -10,6 +10,7 @@ import {
   WorkSession,
   EmployeeAttendanceToday,
 } from '../types';
+import { MEENAKSHI_ASSIGNABLE_IDS } from '../auth/permissions';
 import {
   INITIAL_PROFILES,
   INITIAL_EMPLOYEES,
@@ -167,7 +168,7 @@ class MemoryStore {
 
   // --- Tasks ---
   getTasks(filters?: {
-    role?: 'admin' | 'employee';
+    role?: 'admin' | 'manager' | 'employee';
     userId?: string;
     projectId?: string;
     status?: string;
@@ -175,9 +176,22 @@ class MemoryStore {
   }): Task[] {
     let result = [...this.tasks];
 
-    // Enforce role isolation: if role is employee, strictly show ONLY their assigned tasks
+    // Role-based scoping & isolation:
     if (filters?.role === 'employee' && filters.userId) {
+      // Employee strictly sees only tasks assigned to them
       result = result.filter((t) => t.assigned_to === filters.userId);
+    } else if (filters?.role === 'manager' && filters.userId) {
+      // Manager (Meenakshi Khungar) sees tasks assigned by her, tasks assigned to her, or tasks in her 3 departments
+      if (filters?.employeeId) {
+        result = result.filter((t) => t.assigned_to === filters.employeeId);
+      } else {
+        result = result.filter(
+          (t) =>
+            t.assigned_by === filters.userId ||
+            t.assigned_to === filters.userId ||
+            MEENAKSHI_ASSIGNABLE_IDS.includes(t.assigned_to)
+        );
+      }
     } else if (filters?.employeeId) {
       result = result.filter((t) => t.assigned_to === filters.employeeId);
     }

@@ -14,6 +14,7 @@ interface TaskCreateModalProps {
 export function TaskCreateModal({ isOpen, onClose, onTaskCreated }: TaskCreateModalProps) {
   const [employees, setEmployees] = useState<EmployeeExtended[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
+  const [currentUser, setCurrentUser] = useState<any>(null);
   const [loading, setLoading] = useState(false);
 
   // Form State
@@ -39,16 +40,21 @@ export function TaskCreateModal({ isOpen, onClose, onTaskCreated }: TaskCreateMo
 
   const loadFormData = async () => {
     try {
-      const [empRes, projRes] = await Promise.all([
-        fetch('/api/employees'),
+      const [empRes, projRes, meRes] = await Promise.all([
+        fetch('/api/employees?assignableOnly=true'),
         fetch('/api/projects'),
+        fetch('/api/auth/me'),
       ]);
       const empData = await empRes.json();
       const projData = await projRes.json();
+      const meData = await meRes.json();
 
+      if (meData.success) {
+        setCurrentUser(meData.user);
+      }
       if (empData.success) {
         setEmployees(empData.employees);
-        if (empData.employees.length > 0 && !assignedTo) {
+        if (empData.employees.length > 0) {
           setAssignedTo(empData.employees[0].profile_id);
         }
       }
@@ -120,6 +126,27 @@ export function TaskCreateModal({ isOpen, onClose, onTaskCreated }: TaskCreateMo
       maxWidth="lg"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
+        {currentUser && (
+          <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between text-xs">
+            <div className="flex items-center gap-2">
+              <span
+                className={`w-2 h-2 rounded-full ${
+                  currentUser.role === 'admin' ? 'bg-purple-600' : 'bg-blue-600'
+                }`}
+              />
+              <span className="text-slate-500">Assigning as:</span>
+              <span className="font-semibold text-slate-900">{currentUser.full_name}</span>
+            </div>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-200 text-slate-800 font-semibold uppercase">
+              {currentUser.role === 'admin'
+                ? 'MD / Assign To All'
+                : currentUser.role === 'manager'
+                ? 'Director / 3 Dept Heads'
+                : 'Restricted'}
+            </span>
+          </div>
+        )}
+
         {error && (
           <div className="p-3 bg-red-50 text-red-700 text-xs rounded-lg border border-red-200 font-medium">
             {error}
@@ -198,14 +225,23 @@ export function TaskCreateModal({ isOpen, onClose, onTaskCreated }: TaskCreateMo
           <select
             value={assignedTo}
             onChange={(e) => setAssignedTo(e.target.value)}
-            className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            disabled={employees.length === 0}
+            className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50"
           >
+            {employees.length === 0 && (
+              <option value="">No authorized assignees available</option>
+            )}
             {employees.map((emp) => (
               <option key={emp.profile_id} value={emp.profile_id}>
                 {emp.profile?.full_name} ({emp.employee_code} - {emp.profile?.designation})
               </option>
             ))}
           </select>
+          {currentUser?.role === 'manager' && (
+            <p className="text-[11px] text-slate-500 mt-1">
+              Director assignment scope: Chandan Goswani, Marketing Head, and Accounts Head.
+            </p>
+          )}
         </div>
 
         <div className="grid grid-cols-2 gap-3">

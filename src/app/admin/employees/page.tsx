@@ -52,7 +52,7 @@ export default function AdminEmployeesPage() {
     if (!fullName.trim() || !email.trim()) return;
     setSubmitting(true);
     try {
-      const code = employeeCode.trim() || `RAT-EMP-${String(employees.length + 1).padStart(3, '0')}`;
+      const code = employeeCode.trim() || `BLT-EMP-${String(employees.length + 1).padStart(3, '0')}`;
       const res = await fetch('/api/employees', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -90,7 +90,7 @@ export default function AdminEmployeesPage() {
             Employee Directory & Roster
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            Initial setup for 7 core employees, scalable to 50–100 employees as operations expand.
+            Bharat Loomtex personnel directory and organizational structure.
           </p>
         </div>
 
@@ -200,7 +200,7 @@ export default function AdminEmployeesPage() {
               <input
                 type="email"
                 required
-                placeholder="meera@risonaitech.com"
+                placeholder="head@bharatloomtex.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"

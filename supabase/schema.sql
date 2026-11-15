@@ -521,46 +521,46 @@ CREATE POLICY "Notifications insert"
 -- Note: In Supabase, if auth.users already exists, foreign key connects to it.
 -- This script safely inserts mock/demo profiles with matching IDs for development.
 
--- ADMIN PROFILE
+-- ==============================================================================
+-- BHARAT LOOMTEX SEED DATA: EXECUTIVE LEADERSHIP & DEPARTMENT HEADS
+-- ==============================================================================
+
+-- 1. MANAGING DIRECTOR (MD)
 INSERT INTO public.profiles (id, email, full_name, role, phone, department, designation, status)
 VALUES (
     '00000000-0000-0000-0000-000000000001',
     'admin@bharatloomtex.com',
-    'Suneet Kumar',
+    'Mr. Sumeet Khungar',
     'admin',
     '+91 98765 43210',
-    'Executive Management',
-    'Owner & Managing Director',
+    'Executive Leadership',
+    'Managing Director (MD)',
     'active'
 ) ON CONFLICT (id) DO UPDATE SET
     full_name = EXCLUDED.full_name,
+    designation = EXCLUDED.designation,
     role = EXCLUDED.role;
 
--- 7 EMPLOYEES PROFILES
+-- 2. DIRECTOR & DEPARTMENT HEADS
 INSERT INTO public.profiles (id, email, full_name, role, phone, department, designation, status)
 VALUES
-    ('00000000-0000-0000-0000-000000000011', 'rahul.sharma@risonaitech.com', 'Rahul Sharma', 'employee', '+91 98111 22334', 'Engineering', 'Senior Fullstack Engineer', 'active'),
-    ('00000000-0000-0000-0000-000000000012', 'priya.patel@risonaitech.com', 'Priya Patel', 'employee', '+91 98222 33445', 'Product & Design', 'Lead UI/UX Designer', 'active'),
-    ('00000000-0000-0000-0000-000000000013', 'amit.verma@risonaitech.com', 'Amit Verma', 'employee', '+91 98333 44556', 'AI Solutions', 'AI Automation Specialist', 'active'),
-    ('00000000-0000-0000-0000-000000000014', 'sneha.reddy@risonaitech.com', 'Sneha Reddy', 'employee', '+91 98444 55667', 'Engineering', 'Frontend Developer', 'active'),
-    ('00000000-0000-0000-0000-000000000015', 'vikram.singh@risonaitech.com', 'Vikram Singh', 'employee', '+91 98555 66778', 'Quality Assurance', 'QA & Test Automation Lead', 'active'),
-    ('00000000-0000-0000-0000-000000000016', 'ananya.deshmukh@risonaitech.com', 'Ananya Deshmukh', 'employee', '+91 98666 77889', 'DevOps & Cloud', 'Backend & Cloud Engineer', 'active'),
-    ('00000000-0000-0000-0000-000000000017', 'rohit.kumar@risonaitech.com', 'Rohit Kumar', 'employee', '+91 98777 88990', 'Client Success', 'Solutions & Data Analyst', 'active')
+    ('00000000-0000-0000-0000-000000000002', 'meenakshi.khungar@bharatloomtex.com', 'Meenakshi Khungar', 'manager', '+91 98765 43211', 'Executive Management', 'Director', 'active'),
+    ('00000000-0000-0000-0000-000000000011', 'chandan.goswani@bharatloomtex.com', 'Chandan Goswani', 'employee', '+91 98111 22334', 'Production, HR & Design', 'Production, HR & Design Head', 'active'),
+    ('00000000-0000-0000-0000-000000000012', 'marketing.head@bharatloomtex.com', 'Marketing Head (Position Unfulfilled)', 'employee', '+91 98222 33445', 'Marketing & Sales', 'Marketing Head', 'active'),
+    ('00000000-0000-0000-0000-000000000013', 'accounts.head@bharatloomtex.com', 'Accounts Head', 'employee', '+91 98333 44556', 'Accounts & Finance', 'Accounts Head', 'active')
 ON CONFLICT (id) DO UPDATE SET
     full_name = EXCLUDED.full_name,
     designation = EXCLUDED.designation,
-    department = EXCLUDED.department;
+    department = EXCLUDED.department,
+    role = EXCLUDED.role;
 
 -- EMPLOYEES EXTENDED RECORDS
 INSERT INTO public.employees (profile_id, employee_code, joining_date, hourly_rate, notes)
 VALUES
-    ('00000000-0000-0000-0000-000000000011', 'RAT-EMP-001', '2025-01-10', 850.00, 'Core fullstack & architecture specialist'),
-    ('00000000-0000-0000-0000-000000000012', 'RAT-EMP-002', '2025-02-01', 750.00, 'Design system and user interaction owner'),
-    ('00000000-0000-0000-0000-000000000013', 'RAT-EMP-003', '2025-02-15', 800.00, 'LLM workflows, agents, and RAG pipelines'),
-    ('00000000-0000-0000-0000-000000000014', 'RAT-EMP-004', '2025-03-01', 650.00, 'React, Next.js, and mobile responsive execution'),
-    ('00000000-0000-0000-0000-000000000015', 'RAT-EMP-005', '2025-03-10', 600.00, 'E2E testing, security validation & CI/CD gates'),
-    ('00000000-0000-0000-0000-000000000016', 'RAT-EMP-006', '2025-03-15', 750.00, 'PostgreSQL, Docker, Supabase, and cloud infra'),
-    ('00000000-0000-0000-0000-000000000017', 'RAT-EMP-007', '2025-04-01', 550.00, 'Client metrics, outreach analytics, and reports')
+    ('00000000-0000-0000-0000-000000000002', 'BLT-EXEC-001', '2025-01-05', 1200.00, 'Director: authorized to assign tasks to Chandan Goswani, Marketing Head, and Accounts Head.'),
+    ('00000000-0000-0000-0000-000000000011', 'BLT-HEAD-001', '2025-01-10', 850.00, 'Head of Production, HR & Design departments across plant operations.'),
+    ('00000000-0000-0000-0000-000000000012', 'BLT-HEAD-002', '2025-02-01', 750.00, 'Position unfulfilled. Managed for department task queue and planning.'),
+    ('00000000-0000-0000-0000-000000000013', 'BLT-HEAD-003', '2025-02-15', 800.00, 'Head of Accounts & Finance, tax compliance, vendor ledger, and payroll.')
 ON CONFLICT (profile_id) DO NOTHING;
 
 -- PROJECTS

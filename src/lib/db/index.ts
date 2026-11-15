@@ -70,7 +70,7 @@ export const db = {
 
   // Tasks
   getTasks: async (filters?: {
-    role?: 'admin' | 'employee';
+    role?: 'admin' | 'manager' | 'employee';
     userId?: string;
     projectId?: string;
     status?: string;

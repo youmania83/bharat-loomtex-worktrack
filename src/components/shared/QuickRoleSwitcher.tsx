@@ -25,10 +25,10 @@ export function QuickRoleSwitcher({ currentUserId, onUserChanged }: QuickRoleSwi
           const adminProf: Profile = {
             id: '00000000-0000-0000-0000-000000000001',
             email: 'admin@bharatloomtex.com',
-            full_name: 'Suneet Kumar',
+            full_name: 'Mr. Sumeet Khungar',
             role: 'admin',
-            department: 'Executive Management',
-            designation: 'Owner & Managing Director',
+            department: 'Executive Leadership',
+            designation: 'Managing Director (MD)',
             status: 'active',
             created_at: '',
             updated_at: '',
@@ -54,7 +54,7 @@ export function QuickRoleSwitcher({ currentUserId, onUserChanged }: QuickRoleSwi
       if (data.success) {
         setIsOpen(false);
         if (onUserChanged) onUserChanged();
-        if (role === 'admin') {
+        if (role === 'admin' || role === 'manager') {
           router.push('/admin/dashboard');
         } else {
           router.push('/employee/dashboard');
@@ -76,7 +76,11 @@ export function QuickRoleSwitcher({ currentUserId, onUserChanged }: QuickRoleSwi
       >
         <span
           className={`w-2 h-2 rounded-full ${
-            currentProfile?.role === 'admin' ? 'bg-purple-600' : 'bg-emerald-600'
+            currentProfile?.role === 'admin'
+              ? 'bg-purple-600'
+              : currentProfile?.role === 'manager'
+              ? 'bg-blue-600'
+              : 'bg-emerald-600'
           }`}
         />
         <div className="flex items-center gap-1.5 text-left">
@@ -84,7 +88,11 @@ export function QuickRoleSwitcher({ currentUserId, onUserChanged }: QuickRoleSwi
             {currentProfile?.full_name || 'Quick Switcher'}
           </span>
           <span className="text-[10px] uppercase font-mono px-1 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">
-            {currentProfile?.role === 'admin' ? 'Admin' : 'Employee'}
+            {currentProfile?.role === 'admin'
+              ? 'MD'
+              : currentProfile?.role === 'manager'
+              ? 'Director'
+              : 'Head'}
           </span>
         </div>
         <ChevronDown className="w-3.5 h-3.5 text-slate-400" />

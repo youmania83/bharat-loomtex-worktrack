@@ -1,9 +1,9 @@
 // ==============================================================================
-// RISON WORKTRACK – TypeScript Types & Interfaces
+// BHARAT LOOMTEX WORKTRACK – TypeScript Types & Interfaces
 // Product: WorkTrack | Company: Bharat Loomtex
 // ==============================================================================
 
-export type UserRole = 'admin' | 'employee';
+export type UserRole = 'admin' | 'manager' | 'employee';
 export type UserStatus = 'active' | 'inactive';
 export type ProjectStatus = 'planning' | 'active' | 'on_hold' | 'completed' | 'cancelled';
 export type TaskType = 'daily' | 'project';
