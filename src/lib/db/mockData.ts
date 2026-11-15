@@ -129,8 +129,8 @@ export const INITIAL_PROJECTS: Project[] = [
     created_at: '2026-05-01T00:00:00Z',
     updated_at: '2026-05-01T00:00:00Z',
     members_count: 3,
-    completed_tasks_count: 2,
-    total_tasks_count: 5,
+    completed_tasks_count: 0,
+    total_tasks_count: 0,
   },
   {
     id: 'proj-002',
@@ -145,8 +145,8 @@ export const INITIAL_PROJECTS: Project[] = [
     created_at: '2026-06-01T00:00:00Z',
     updated_at: '2026-06-01T00:00:00Z',
     members_count: 2,
-    completed_tasks_count: 1,
-    total_tasks_count: 3,
+    completed_tasks_count: 0,
+    total_tasks_count: 0,
   },
   {
     id: 'proj-003',
@@ -162,7 +162,7 @@ export const INITIAL_PROJECTS: Project[] = [
     updated_at: '2026-06-15T00:00:00Z',
     members_count: 2,
     completed_tasks_count: 0,
-    total_tasks_count: 2,
+    total_tasks_count: 0,
   },
   {
     id: 'proj-004',
@@ -177,323 +177,14 @@ export const INITIAL_PROJECTS: Project[] = [
     created_at: '2026-06-01T00:00:00Z',
     updated_at: '2026-06-01T00:00:00Z',
     members_count: 2,
-    completed_tasks_count: 1,
-    total_tasks_count: 2,
+    completed_tasks_count: 0,
+    total_tasks_count: 0,
   },
 ];
 
-const now = new Date();
-const iso = (d: Date) => d.toISOString();
-const daysAgo = (n: number) => {
-  const d = new Date(now);
-  d.setDate(d.getDate() - n);
-  return iso(d);
-};
-const daysFromNow = (n: number) => {
-  const d = new Date(now);
-  d.setDate(d.getDate() + n);
-  return iso(d);
-};
-
-export const INITIAL_TASKS: Task[] = [
-  // --- Tasks assigned by Mr. Sumeet Khungar (MD) ---
-  {
-    id: 'task-001',
-    title: 'Executive Operations & Factory Machinery Maintenance Review',
-    description: 'Audit production downtime across looms, review yarn inventory levels, and schedule mechanical overhaul.',
-    task_type: 'project',
-    project_id: 'proj-001',
-    assigned_by: CORE_USER_IDS.SUMEET_KHUNGAR, // MD Sumeet Khungar
-    assigned_to: CORE_USER_IDS.MEENAKSHI_KHUNGAR, // Meenakshi Khungar
-    priority: 'urgent',
-    status: 'in_progress',
-    start_date: daysAgo(3),
-    due_date: daysFromNow(2),
-    estimated_hours: 10,
-    actual_hours: 6.5,
-    progress_percentage: 65,
-    is_blocked: false,
-    created_at: daysAgo(3),
-    updated_at: daysAgo(0),
-  },
-  {
-    id: 'task-002',
-    title: 'Approve Warp & Weft Yarn Specifications for Autumn Jacquard Run',
-    description: 'Verify GSM, tensile strength, and dyeing colorfastness for the incoming 40-count cotton yarn lot.',
-    task_type: 'project',
-    project_id: 'proj-001',
-    assigned_by: CORE_USER_IDS.SUMEET_KHUNGAR, // MD Sumeet Khungar
-    assigned_to: CORE_USER_IDS.CHANDAN_GOSWAMI, // Chandan Goswani
-    priority: 'high',
-    status: 'completed',
-    start_date: daysAgo(5),
-    due_date: daysAgo(1),
-    estimated_hours: 8,
-    actual_hours: 7.5,
-    progress_percentage: 100,
-    completion_notes: 'All yarn sample lots tested for tensile strength and colorfastness. Quality lab certification signed.',
-    approved_by: CORE_USER_IDS.SUMEET_KHUNGAR,
-    approved_at: daysAgo(1),
-    completed_at: daysAgo(1),
-    is_blocked: false,
-    created_at: daysAgo(5),
-    updated_at: daysAgo(1),
-  },
-  {
-    id: 'task-003',
-    title: 'Prepare Pan-India Textile Wholesalers Contact Directory',
-    description: 'Compile updated list of 250+ authorized textile distributors across Surat, Ahmedabad, Ludhiana and Delhi.',
-    task_type: 'project',
-    project_id: 'proj-003',
-    assigned_by: CORE_USER_IDS.SUMEET_KHUNGAR, // MD Sumeet Khungar
-    assigned_to: CORE_USER_IDS.MARKETING_HEAD, // Marketing Head
-    priority: 'medium',
-    status: 'in_progress',
-    start_date: daysAgo(2),
-    due_date: daysFromNow(4),
-    estimated_hours: 12,
-    actual_hours: 4.5,
-    progress_percentage: 40,
-    is_blocked: false,
-    created_at: daysAgo(2),
-    updated_at: daysAgo(0),
-  },
-  {
-    id: 'task-004',
-    title: 'Consolidate Q3 Loomtex Raw Material Purchase Ledger',
-    description: 'Reconcile yarn vendor invoices, GST e-way bills, and physical stock arrival vouchers for July-September.',
-    task_type: 'daily',
-    project_id: 'proj-004',
-    assigned_by: CORE_USER_IDS.SUMEET_KHUNGAR, // MD Sumeet Khungar
-    assigned_to: CORE_USER_IDS.ACCOUNTS_HEAD, // Accounts Head
-    priority: 'high',
-    status: 'submitted',
-    start_date: daysAgo(2),
-    due_date: daysAgo(0),
-    estimated_hours: 8,
-    actual_hours: 8,
-    progress_percentage: 100,
-    completion_notes: 'Purchase ledger balanced against bank statements and warehouse GRNs. Ready for final MD approval.',
-    is_blocked: false,
-    created_at: daysAgo(2),
-    updated_at: daysAgo(0),
-  },
-
-  // --- Tasks assigned by Meenakshi Khungar ---
-  // (Authorized per policy to assign to Chandan Goswani, Marketing Head, and Accounts Head)
-  {
-    id: 'task-005',
-    title: 'Design New Jacquard Textile Patterns & Fabric CAD Samples',
-    description: 'Create 6 new contemporary floral and geometric weave patterns for the upcoming festive collection.',
-    task_type: 'project',
-    project_id: 'proj-001',
-    assigned_by: CORE_USER_IDS.MEENAKSHI_KHUNGAR, // Meenakshi Khungar
-    assigned_to: CORE_USER_IDS.CHANDAN_GOSWAMI, // Chandan Goswani
-    priority: 'urgent',
-    status: 'in_progress',
-    start_date: daysAgo(3),
-    due_date: daysFromNow(1),
-    estimated_hours: 14,
-    actual_hours: 9,
-    progress_percentage: 70,
-    is_blocked: false,
-    created_at: daysAgo(3),
-    updated_at: daysAgo(0),
-  },
-  {
-    id: 'task-006',
-    title: 'Factory Machine Operators Shift Roster & Safety Audit',
-    description: 'Assign 3-shift rotation for 45 loom operators and conduct monthly safety checks on fire extinguishers and emergency power.',
-    task_type: 'project',
-    project_id: 'proj-002',
-    assigned_by: CORE_USER_IDS.MEENAKSHI_KHUNGAR, // Meenakshi Khungar
-    assigned_to: CORE_USER_IDS.CHANDAN_GOSWAMI, // Chandan Goswani
-    priority: 'high',
-    status: 'overdue',
-    start_date: daysAgo(4),
-    due_date: daysAgo(1), // 1 day overdue
-    estimated_hours: 8,
-    actual_hours: 5,
-    progress_percentage: 60,
-    is_blocked: false,
-    created_at: daysAgo(4),
-    updated_at: daysAgo(0),
-  },
-  {
-    id: 'task-007',
-    title: 'Draft Trade Expo Stall Presentation & Loomtex Product Brochure',
-    description: 'Prepare high-res product swatch book and banner designs for the National Textile Expo.',
-    task_type: 'project',
-    project_id: 'proj-003',
-    assigned_by: CORE_USER_IDS.MEENAKSHI_KHUNGAR, // Meenakshi Khungar
-    assigned_to: CORE_USER_IDS.MARKETING_HEAD, // Marketing Head
-    priority: 'high',
-    status: 'in_progress',
-    start_date: daysAgo(2),
-    due_date: daysFromNow(2),
-    estimated_hours: 10,
-    actual_hours: 3,
-    progress_percentage: 30, // Delay warning (<40% with <= 36h)
-    is_blocked: false,
-    created_at: daysAgo(2),
-    updated_at: daysAgo(0),
-  },
-  {
-    id: 'task-008',
-    title: 'Audit Weekly Dyeing & Weaving Labor Wages Disbursement',
-    description: 'Verify biometric attendance logs and calculate overtime wages for Panipat loom operators.',
-    task_type: 'daily',
-    project_id: 'proj-004',
-    assigned_by: CORE_USER_IDS.MEENAKSHI_KHUNGAR, // Meenakshi Khungar
-    assigned_to: CORE_USER_IDS.ACCOUNTS_HEAD, // Accounts Head
-    priority: 'urgent',
-    status: 'completed',
-    start_date: daysAgo(3),
-    due_date: daysAgo(1),
-    estimated_hours: 6,
-    actual_hours: 5.5,
-    progress_percentage: 100,
-    completion_notes: 'All wages verified against shift logs and credited via NEFT batch transfer.',
-    approved_by: CORE_USER_IDS.MEENAKSHI_KHUNGAR,
-    approved_at: daysAgo(1),
-    completed_at: daysAgo(1),
-    is_blocked: false,
-    created_at: daysAgo(3),
-    updated_at: daysAgo(1),
-  },
-];
-
-export const INITIAL_COMMENTS: TaskComment[] = [
-  {
-    id: 'c-001',
-    task_id: 'task-005',
-    author_id: CORE_USER_IDS.CHANDAN_GOSWAMI,
-    content: 'Initial CAD drawings for 4 jacquard border samples have been created. Running trial sample on Loom #4.',
-    is_blocker: false,
-    created_at: daysAgo(1),
-    updated_at: daysAgo(1),
-  },
-  {
-    id: 'c-002',
-    task_id: 'task-005',
-    author_id: CORE_USER_IDS.MEENAKSHI_KHUNGAR,
-    content: 'Please ensure color fastness test passes before committing the 5000-meter production weave.',
-    is_blocker: false,
-    created_at: daysAgo(0),
-    updated_at: daysAgo(0),
-  },
-  {
-    id: 'c-003',
-    task_id: 'task-006',
-    author_id: CORE_USER_IDS.CHANDAN_GOSWAMI,
-    content: 'Pending safety sign-off from electrical contractor for sub-station generator backup.',
-    is_blocker: true,
-    created_at: daysAgo(1),
-    updated_at: daysAgo(1),
-  },
-];
-
-export const INITIAL_TIME_LOGS: TaskTimeLog[] = [
-  {
-    id: 'tl-001',
-    task_id: 'task-001',
-    employee_id: CORE_USER_IDS.MEENAKSHI_KHUNGAR,
-    started_at: daysAgo(1),
-    stopped_at: daysAgo(1),
-    duration_seconds: 23400, // 6.5 hrs
-    is_running: false,
-    note: 'Loom overhaul review and inventory cross-checking',
-    created_at: daysAgo(1),
-  },
-  {
-    id: 'tl-002',
-    task_id: 'task-005',
-    employee_id: CORE_USER_IDS.CHANDAN_GOSWAMI,
-    started_at: daysAgo(1),
-    stopped_at: daysAgo(1),
-    duration_seconds: 18000, // 5 hrs
-    is_running: false,
-    note: 'CAD pattern drafting and trial run',
-    created_at: daysAgo(1),
-  },
-  {
-    id: 'tl-003',
-    task_id: 'task-004',
-    employee_id: CORE_USER_IDS.ACCOUNTS_HEAD,
-    started_at: daysAgo(1),
-    stopped_at: daysAgo(1),
-    duration_seconds: 28800, // 8 hrs
-    is_running: false,
-    note: 'Purchase ledger reconciliation',
-    created_at: daysAgo(1),
-  },
-];
-
-export const INITIAL_NOTIFICATIONS: NotificationItem[] = [
-  {
-    id: 'n-001',
-    user_id: CORE_USER_IDS.SUMEET_KHUNGAR,
-    title: 'Task Awaiting Approval',
-    message: 'Accounts Head submitted "Consolidate Q3 Loomtex Raw Material Purchase Ledger" for review.',
-    type: 'task_submitted',
-    link: '/admin/tasks?filter=submitted',
-    is_read: false,
-    created_at: daysAgo(0),
-  },
-  {
-    id: 'n-002',
-    user_id: CORE_USER_IDS.MEENAKSHI_KHUNGAR,
-    title: 'Task Overdue Alert',
-    message: 'Task "Factory Machine Operators Shift Roster & Safety Audit" assigned to Chandan Goswani is past deadline.',
-    type: 'task_overdue',
-    link: '/admin/tasks',
-    is_read: false,
-    created_at: daysAgo(0),
-  },
-  {
-    id: 'n-003',
-    user_id: CORE_USER_IDS.CHANDAN_GOSWAMI,
-    title: 'Task Assigned by Meenakshi Khungar',
-    message: 'You have been assigned: "Design New Jacquard Textile Patterns & Fabric CAD Samples"',
-    type: 'task_assigned',
-    link: '/employee/tasks',
-    is_read: false,
-    created_at: daysAgo(3),
-  },
-];
-
-export const INITIAL_WORK_SESSIONS: any[] = [
-  {
-    id: 'ws-001',
-    user_id: CORE_USER_IDS.MEENAKSHI_KHUNGAR,
-    login_at: new Date(Date.now() - 6.5 * 3600 * 1000).toISOString(),
-    duration_seconds: 23400,
-    is_active: true,
-    notes: 'Executive plant coordination',
-  },
-  {
-    id: 'ws-002',
-    user_id: CORE_USER_IDS.CHANDAN_GOSWAMI,
-    login_at: new Date(Date.now() - 7.5 * 3600 * 1000).toISOString(),
-    duration_seconds: 27000,
-    is_active: true,
-    notes: 'Production floor management and weaver allocation',
-  },
-  {
-    id: 'ws-003',
-    user_id: CORE_USER_IDS.ACCOUNTS_HEAD,
-    login_at: new Date(Date.now() - 8.0 * 3600 * 1000).toISOString(),
-    logout_at: new Date(Date.now() - 0.5 * 3600 * 1000).toISOString(),
-    duration_seconds: 27000,
-    is_active: false,
-    notes: 'GST invoice reconciliation',
-  },
-  {
-    id: 'ws-004',
-    user_id: CORE_USER_IDS.MARKETING_HEAD,
-    login_at: new Date(Date.now() - 4.5 * 3600 * 1000).toISOString(),
-    duration_seconds: 16200,
-    is_active: true,
-    notes: 'Wholesale distributor outreach',
-  },
-];
+// Clean slate: all mock tasks, comments, time logs and notifications cleared for production use
+export const INITIAL_TASKS: Task[] = [];
+export const INITIAL_COMMENTS: TaskComment[] = [];
+export const INITIAL_TIME_LOGS: TaskTimeLog[] = [];
+export const INITIAL_NOTIFICATIONS: NotificationItem[] = [];
+export const INITIAL_WORK_SESSIONS: any[] = [];
