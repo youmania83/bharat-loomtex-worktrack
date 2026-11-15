@@ -28,7 +28,7 @@ export default function LogoutPage() {
           <Layers className="w-6 h-6" />
         </div>
         <h2 className="text-2xl font-bold tracking-tight text-slate-900 flex items-center justify-center gap-1.5">
-          <span>BHARAY</span>
+          <span>BHARAT</span>
           <span className="text-blue-600 font-extrabold">LOOMTEX</span>
         </h2>
         <p className="text-xs text-slate-500 font-medium">

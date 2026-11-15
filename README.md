@@ -1,4 +1,4 @@
-# BHARAY LOOMTEX – WORKTRACK
+# BHARAT LOOMTEX – WORKTRACK
 ## Complete Employee Task & Productivity Management System
 
 > **Tagline:** Assign. Track. Improve.  
