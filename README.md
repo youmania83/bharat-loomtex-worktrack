@@ -3,9 +3,10 @@
 
 > **Tagline:** Assign. Track. Improve.  
 > **Company:** Bharat Loomtex  
-> **Owner / Managing Director:** Suneet Kumar  
-> **Target Scale:** 1 Owner/Admin + 7 Core Employees (Scalable to 50–100 employees)  
-> **Tech Stack:** Next.js 16 (App Router), TypeScript, Tailwind CSS, shadcn-style UI, Lucide Icons, Recharts, Supabase / PostgreSQL.
+> **Owner / Managing Director:** Mr. Sumeet Khungar  
+> **Live Production Portal:** [https://bharatloomtex.risonaitech.com](https://bharatloomtex.risonaitech.com)  
+> **Target Scale:** Executive Leadership + Department Heads (Scalable to 50–100 employees)  
+> **Tech Stack:** Next.js 16 (App Router), TypeScript, Tailwind CSS, shadcn-style UI, Lucide Icons, Recharts, Vercel Blob / PostgreSQL.
 
 ---
 
@@ -60,20 +61,17 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## 👥 Demo & Initial Client Setup (1 Admin + 7 Employees)
+## 👥 Official Bharat Loomtex Personnel
 
 Quick-switch between accounts at `/login` or via the topbar switcher:
 
-| Name | Role | Email |
-| :--- | :--- | :--- |
-| **Suneet Kumar** | Admin / Owner | `admin@bharatloomtex.com` |
-| **Rahul Sharma** | Senior Fullstack Engineer | `rahul.sharma@bharatloomtex.com` |
-| **Priya Patel** | Lead UI/UX Designer | `priya.patel@bharatloomtex.com` |
-| **Amit Verma** | AI Automation Specialist | `amit.verma@bharatloomtex.com` |
-| **Sneha Reddy** | Frontend Developer | `sneha.reddy@bharatloomtex.com` |
-| **Vikram Singh** | QA & Test Automation Lead | `vikram.singh@bharatloomtex.com` |
-| **Ananya Deshmukh** | Backend & Cloud Engineer | `ananya.deshmukh@bharatloomtex.com` |
-| **Rohit Kumar** | Client Solutions & Data Analyst | `rohit.kumar@bharatloomtex.com` |
+| Name | Role | Department & Designation | Email |
+| :--- | :--- | :--- | :--- |
+| **Mr. Sumeet Khungar** | MD (Admin) | Managing Director • Assigns to Everyone | `admin@bharatloomtex.com` |
+| **Meenakshi Khungar** | Director (Manager) | Director • Assigns to 3 Dept Heads | `meenakshi.khungar@bharatloomtex.com` |
+| **Chandan Goswani** | Head (Employee) | Production, HR & Design Head | `chandan.goswani@bharatloomtex.com` |
+| **Marketing Head** | Head (Employee) | Marketing & Sales (Position Unfulfilled) | `marketing.head@bharatloomtex.com` |
+| **Accounts Head** | Head (Employee) | Accounts & Finance Head | `accounts.head@bharatloomtex.com` |
 
 ---
 
