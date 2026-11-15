@@ -15,7 +15,7 @@ import { TaskCalendarView } from '@/components/tasks/TaskCalendarView';
 import { TaskDetailsDrawer } from '@/components/tasks/TaskDetailsDrawer';
 import { TaskCreateModal } from '@/components/tasks/TaskCreateModal';
 import { Button } from '@/components/ui/Button';
-import { Task, Project, EmployeeExtended } from '@/lib/types';
+import { Task, Project, EmployeeExtended, Profile } from '@/lib/types';
 
 function AdminTasksContent() {
   const searchParams = useSearchParams();
@@ -25,6 +25,7 @@ function AdminTasksContent() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [employees, setEmployees] = useState<EmployeeExtended[]>([]);
+  const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
 
   // View state
@@ -49,14 +50,17 @@ function AdminTasksContent() {
 
   const loadFiltersData = async () => {
     try {
-      const [pRes, eRes] = await Promise.all([
+      const [pRes, eRes, meRes] = await Promise.all([
         fetch('/api/projects'),
         fetch('/api/employees'),
+        fetch('/api/auth/me'),
       ]);
       const pData = await pRes.json();
       const eData = await eRes.json();
+      const meData = await meRes.json();
       if (pData.success) setProjects(pData.projects);
       if (eData.success) setEmployees(eData.employees);
+      if (meData.success) setCurrentUser(meData.user);
     } catch (err) {
       console.error(err);
     }
@@ -239,8 +243,8 @@ function AdminTasksContent() {
 
       <TaskDetailsDrawer
         taskId={selectedTaskId}
-        currentUserId="00000000-0000-0000-0000-000000000001"
-        currentUserRole="admin"
+        currentUserId={currentUser?.id || "00000000-0000-0000-0000-000000000001"}
+        currentUserRole={(currentUser?.role as any) || "admin"}
         onClose={() => setSelectedTaskId(null)}
         onTaskUpdated={loadTasks}
       />

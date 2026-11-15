@@ -10,9 +10,9 @@ export async function POST(
     const { id } = await params;
     const user = await getCurrentUser();
 
-    if (user.role !== 'admin') {
+    if (user.role !== 'admin' && user.role !== 'manager') {
       return NextResponse.json(
-        { success: false, error: 'Unauthorized: Only Admins can approve tasks.' },
+        { success: false, error: 'Unauthorized: Only Admins and Directors can approve tasks.' },
         { status: 403 }
       );
     }

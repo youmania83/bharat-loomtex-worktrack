@@ -19,13 +19,14 @@ import { AttendanceHoursTable } from '@/components/dashboard/AttendanceHoursTabl
 import { TaskDetailsDrawer } from '@/components/tasks/TaskDetailsDrawer';
 import { TaskCreateModal } from '@/components/tasks/TaskCreateModal';
 import { Button } from '@/components/ui/Button';
-import { DashboardMetrics, EmployeePerformance } from '@/lib/types';
+import { DashboardMetrics, EmployeePerformance, Profile } from '@/lib/types';
 import { useRouter } from 'next/navigation';
 
 export default function AdminDashboardPage() {
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
   const [performanceData, setPerformanceData] = useState<EmployeePerformance[]>([]);
   const [tasks, setTasks] = useState<any[]>([]);
+  const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
 
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
@@ -38,18 +39,21 @@ export default function AdminDashboardPage() {
 
   const loadDashboardData = async () => {
     try {
-      const [mRes, pRes, tRes] = await Promise.all([
+      const [mRes, pRes, tRes, meRes] = await Promise.all([
         fetch('/api/analytics/metrics'),
         fetch('/api/analytics/performance'),
         fetch('/api/tasks'),
+        fetch('/api/auth/me'),
       ]);
       const mData = await mRes.json();
       const pData = await pRes.json();
       const tData = await tRes.json();
+      const meData = await meRes.json();
 
       if (mData.success) setMetrics(mData.metrics);
       if (pData.success) setPerformanceData(pData.performance);
       if (tData.success && Array.isArray(tData.tasks)) setTasks(tData.tasks);
+      if (meData.success) setCurrentUser(meData.user);
     } catch (err) {
       console.error(err);
     } finally {
@@ -190,8 +194,8 @@ export default function AdminDashboardPage() {
 
       <TaskDetailsDrawer
         taskId={selectedTaskId}
-        currentUserId="00000000-0000-0000-0000-000000000001"
-        currentUserRole="admin"
+        currentUserId={currentUser?.id || "00000000-0000-0000-0000-000000000001"}
+        currentUserRole={(currentUser?.role as any) || "admin"}
         onClose={() => setSelectedTaskId(null)}
         onTaskUpdated={loadDashboardData}
       />

@@ -21,9 +21,10 @@ import {
   INITIAL_NOTIFICATIONS,
   INITIAL_WORK_SESSIONS,
 } from './mockData';
+import { loadPersistentState, savePersistentState } from './storageEngine';
 
 // Global singleton in memory so changes persist across requests during the server lifecycle
-class MemoryStore {
+export class MemoryStore {
   profiles: Profile[] = [...INITIAL_PROFILES];
   employees: EmployeeExtended[] = [...INITIAL_EMPLOYEES];
   projects: Project[] = [...INITIAL_PROJECTS];
@@ -36,6 +37,48 @@ class MemoryStore {
 
   constructor() {
     this.refreshProjectMetrics();
+  }
+
+  async syncFromStorage(): Promise<void> {
+    try {
+      const state = await loadPersistentState();
+      if (state && Array.isArray(state.profiles) && state.profiles.length > 0) {
+        if (Array.isArray(state.tasks)) this.tasks = state.tasks;
+        if (Array.isArray(state.comments)) this.comments = state.comments;
+        if (Array.isArray(state.timeLogs)) this.timeLogs = state.timeLogs;
+        if (Array.isArray(state.activityLogs)) this.activityLogs = state.activityLogs;
+        if (Array.isArray(state.notifications)) this.notifications = state.notifications;
+        if (Array.isArray(state.workSessions)) this.workSessions = state.workSessions;
+        if (Array.isArray(state.projects) && state.projects.length > 0) this.projects = state.projects;
+        if (Array.isArray(state.employees) && state.employees.length > 0) this.employees = state.employees;
+        if (Array.isArray(state.profiles) && state.profiles.length > 0) this.profiles = state.profiles;
+        this.refreshProjectMetrics();
+      } else {
+        await this.persist();
+      }
+    } catch (e) {
+      console.warn('[MemoryStore] syncFromStorage error:', e);
+    }
+  }
+
+  async persist(): Promise<void> {
+    try {
+      await savePersistentState({
+        profiles: this.profiles,
+        employees: this.employees,
+        projects: this.projects,
+        tasks: this.tasks,
+        comments: this.comments,
+        timeLogs: this.timeLogs,
+        activityLogs: this.activityLogs,
+        notifications: this.notifications,
+        workSessions: this.workSessions,
+        version: 1,
+        updatedAt: Date.now(),
+      });
+    } catch (e) {
+      console.error('[MemoryStore] persist error:', e);
+    }
   }
 
   // --- Helpers ---
@@ -182,7 +225,7 @@ class MemoryStore {
       result = result.filter((t) => t.assigned_to === filters.userId);
     } else if (filters?.role === 'manager' && filters.userId) {
       // Manager (Meenakshi Khungar) sees tasks assigned by her, tasks assigned to her, or tasks in her 3 departments
-      if (filters?.employeeId) {
+      if (filters?.employeeId && filters.employeeId !== 'all') {
         result = result.filter((t) => t.assigned_to === filters.employeeId);
       } else {
         result = result.filter(
@@ -192,7 +235,7 @@ class MemoryStore {
             MEENAKSHI_ASSIGNABLE_IDS.includes(t.assigned_to)
         );
       }
-    } else if (filters?.employeeId) {
+    } else if (filters?.employeeId && filters.employeeId !== 'all') {
       result = result.filter((t) => t.assigned_to === filters.employeeId);
     }
 
@@ -312,13 +355,19 @@ class MemoryStore {
     this.tasks[idx].completion_notes = notes;
     this.tasks[idx].updated_at = new Date().toISOString();
 
-    // Notify Admin
+    // Notify both the assigner (e.g. Director) AND Admin (MD)
+    const assignerId = this.tasks[idx].assigned_by;
     const admin = this.profiles.find((p) => p.role === 'admin');
     const emp = this.profiles.find((p) => p.id === employeeId);
-    if (admin) {
+
+    const recipientIds = new Set<string>();
+    if (assignerId) recipientIds.add(assignerId);
+    if (admin) recipientIds.add(admin.id);
+
+    recipientIds.forEach((uid) => {
       this.notifications.unshift({
-        id: `notif-${Date.now()}`,
-        user_id: admin.id,
+        id: `notif-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+        user_id: uid,
         title: 'Task Submitted for Review',
         message: `${emp?.full_name || 'An employee'} submitted "${this.tasks[idx].title}" for approval.`,
         type: 'task_submitted',
@@ -326,7 +375,7 @@ class MemoryStore {
         is_read: false,
         created_at: new Date().toISOString(),
       });
-    }
+    });
 
     this.logActivity(id, employeeId, 'submitted', old, this.tasks[idx], `Submitted for approval with notes: ${notes}`);
     return this.getTask(id)!;

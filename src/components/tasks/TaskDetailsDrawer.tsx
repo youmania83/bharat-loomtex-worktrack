@@ -12,7 +12,7 @@ import { formatDate, formatDateTime, formatHours } from '@/lib/utils/formatters'
 interface TaskDetailsDrawerProps {
   taskId: string | null;
   currentUserId: string;
-  currentUserRole: 'admin' | 'employee';
+  currentUserRole: 'admin' | 'manager' | 'employee';
   onClose: () => void;
   onTaskUpdated?: () => void;
 }
@@ -446,8 +446,8 @@ export function TaskDetailsDrawer({
 
               {/* Bottom Action Bar */}
               <div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between gap-3">
-                {currentUserRole === 'admin' ? (
-                  /* Admin Approval Actions */
+                {currentUserRole === 'admin' || currentUserRole === 'manager' ? (
+                  /* Management Approval Actions */
                   <div className="flex items-center gap-2 w-full justify-end">
                     {task.status === 'submitted' ? (
                       <>

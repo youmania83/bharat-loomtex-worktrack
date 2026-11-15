@@ -49,7 +49,7 @@ export function Topbar({ user }: TopbarProps) {
       <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between shrink-0 shadow-xs">
         <div className="flex items-center gap-3">
           <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            {user.role === 'admin' ? 'Management Console' : 'Employee Workspace'}
+            {user.role === 'admin' || user.role === 'manager' ? 'Management Console' : 'Employee Workspace'}
           </span>
           <span className="text-slate-300">•</span>
           <span className="text-xs font-medium text-slate-700">
