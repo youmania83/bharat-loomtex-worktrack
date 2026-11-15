@@ -88,6 +88,7 @@ export async function savePersistentState(state: StoredState): Promise<void> {
       await put(BLOB_FILENAME, jsonString, {
         access: 'private',
         addRandomSuffix: false,
+        allowOverwrite: true,
         token,
       });
     } catch (err) {
