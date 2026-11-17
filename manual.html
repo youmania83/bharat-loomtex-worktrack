@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bharat Loomtex WorkTrack - Operating Manual</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    @page {
+      size: A4;
+      margin: 16mm 14mm 16mm 14mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #1E293B;
+      background: #FFFFFF;
+      font-size: 11pt;
+      line-height: 1.55;
+    }
+
+    /* Cover Page */
+    .cover-page {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 40px 30px;
+      page-break-after: always;
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      color: #FFFFFF;
+      border-radius: 12px;
+    }
+
+    .cover-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cover-logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #2563EB, #4F46E5);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 22px;
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    }
+
+    .cover-brand {
+      font-size: 18pt;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .cover-brand span {
+      color: #60A5FA;
+    }
+
+    .cover-tagline {
+      font-size: 8.5pt;
+      color: #94A3B8;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .cover-main {
+      margin: auto 0;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(37, 99, 235, 0.25);
+      border: 1px solid rgba(96, 165, 250, 0.4);
+      color: #93C5FD;
+      font-size: 9pt;
+      font-weight: 600;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .cover-title {
+      font-size: 32pt;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+      color: #F8FAFC;
+    }
+
+    .cover-subtitle {
+      font-size: 13pt;
+      color: #94A3B8;
+      font-weight: 400;
+      max-width: 580px;
+      line-height: 1.5;
+    }
+
+    .cover-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      font-size: 8.5pt;
+    }
+
+    .cover-meta-label {
+      color: #64748B;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .cover-meta-val {
+      color: #E2E8F0;
+      font-weight: 600;
+    }
+
+    /* Content styling */
+    .page {
+      padding-top: 10px;
+    }
+
+    .section-break {
+      page-break-before: always;
+    }
+
+    .avoid-break {
+      page-break-inside: avoid;
+    }
+
+    h1 {
+      font-size: 18pt;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.4px;
+      border-bottom: 2px solid #E2E8F0;
+      padding-bottom: 8px;
+      margin-top: 24px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-num {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      background: #2563EB;
+      color: #FFFFFF;
+      font-size: 11pt;
+      font-weight: 700;
+      border-radius: 6px;
+      text-align: center;
+      line-height: 28px;
+    }
+
+    h2 {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #1E293B;
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+
+    h3 {
+      font-size: 11pt;
+      font-weight: 600;
+      color: #334155;
+      margin-top: 12px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      margin-bottom: 10px;
+      color: #334155;
+    }
+
+    /* Table of contents */
+    .toc {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 20px 0 30px 0;
+    }
+
+    .toc-title {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #0F172A;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 24px;
+    }
+
+    .toc-item {
+      font-size: 9.5pt;
+      display: flex;
+      align-items: center;
+      color: #1E293B;
+      font-weight: 500;
+    }
+
+    .toc-num {
+      font-weight: 700;
+      color: #2563EB;
+      width: 24px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 16px 0;
+      font-size: 9pt;
+      page-break-inside: avoid;
+    }
+
+    th {
+      background: #0F172A;
+      color: #FFFFFF;
+      text-align: left;
+      padding: 8px 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #E2E8F0;
+      color: #334155;
+      vertical-align: middle;
+    }
+
+    tr:nth-child(even) td {
+      background: #F8FAFC;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 7.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .badge-admin { background: #EEF2FF; color: #4338CA; border: 1px solid #C7D2FE; }
+    .badge-manager { background: #FDF4FF; color: #86198F; border: 1px solid #F5D0FE; }
+    .badge-employee { background: #F0FDF4; color: #166534; border: 1px solid #BBF7D0; }
+    .badge-urgent { background: #FEF2F2; color: #991B1B; border: 1px solid #FECACA; }
+    .badge-high { background: #FFFBEB; color: #92400E; border: 1px solid #FDE68A; }
+    .badge-medium { background: #EFF6FF; color: #1E40AF; border: 1px solid #BFDBFE; }
+    .badge-low { background: #F1F5F9; color: #475569; border: 1px solid #CBD5E1; }
+
+    /* Cards & Callouts */
+    .callout {
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 12px 0;
+      font-size: 9.5pt;
+      page-break-inside: avoid;
+    }
+
+    .callout-info {
+      background: #EFF6FF;
+      border-left: 4px solid #2563EB;
+      color: #1E3A8A;
+    }
+
+    .callout-warning {
+      background: #FFFBEB;
+      border-left: 4px solid #D97706;
+      color: #78350F;
+    }
+
+    .callout-success {
+      background: #F0FDF4;
+      border-left: 4px solid #16A34A;
+      color: #14532D;
+    }
+
+    .callout-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Steps */
+    .step-list {
+      margin: 12px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 12px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 10px 14px;
+      page-break-inside: avoid;
+    }
+
+    .step-badge {
+      width: 24px;
+      height: 24px;
+      background: #2563EB;
+      color: #FFFFFF;
+      font-size: 9pt;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-title {
+      font-weight: 700;
+      font-size: 10pt;
+      color: #0F172A;
+      margin-bottom: 2px;
+    }
+
+    .step-desc {
+      font-size: 9pt;
+      color: #475569;
+      line-height: 1.45;
+    }
+
+    .code-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5pt;
+      background: #E2E8F0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #0F172A;
+    }
+
+    /* Grid layout for features */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .feature-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 12px 14px;
+      page-break-inside: avoid;
+    }
+
+    .feature-card-title {
+      font-weight: 700;
+      font-size: 10pt;
+      color: #0F172A;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .feature-card-desc {
+      font-size: 8.5pt;
+      color: #475569;
+      line-height: 1.45;
+    }
+
+    /* Formula box */
+    .formula-box {
+      background: #0F172A;
+      color: #F8FAFC;
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin: 12px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9pt;
+      page-break-inside: avoid;
+    }
+
+    .formula-highlight {
+      color: #60A5FA;
+      font-weight: 700;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 8pt;
+      color: #94A3B8;
+      border-top: 1px solid #E2E8F0;
+      padding-top: 12px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== COVER PAGE ==================== -->
+  <div class="cover-page">
+    <div class="cover-header">
+      <div class="cover-logo-icon">❖</div>
+      <div>
+        <div class="cover-brand">BHARAT <span>LOOMTEX</span></div>
+        <div class="cover-tagline">WorkTrack Operations Platform</div>
+      </div>
+    </div>
+
+    <div class="cover-main">
+      <div class="cover-badge">Enterprise Operations Manual</div>
+      <div class="cover-title">System Operating Manual<br>&amp; User Guide</div>
+      <div class="cover-subtitle">
+        A complete guide to task orchestration, live time tracking, review approvals, attendance logging, and transparent productivity analytics.
+      </div>
+    </div>
+
+    <div class="cover-footer">
+      <div>
+        <div class="cover-meta-label">Client Organization</div>
+        <div class="cover-meta-val">Bharat Loomtex</div>
+      </div>
+      <div>
+        <div class="cover-meta-label">Managing Director</div>
+        <div class="cover-meta-val">Mr. Sumeet Khungar</div>
+      </div>
+      <div>
+        <div class="cover-meta-label">Live Production Portal</div>
+        <div class="cover-meta-val">bharatloomtex.risonaitech.com</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TABLE OF CONTENTS ==================== -->
+  <div class="page">
+    <div class="toc">
+      <div class="toc-title">Table of Contents</div>
+      <ul class="toc-list">
+        <li class="toc-item"><span class="toc-num">1.</span> System Overview &amp; Architecture</li>
+        <li class="toc-item"><span class="toc-num">7.</span> Review, Approval &amp; Rejection Protocol</li>
+        <li class="toc-item"><span class="toc-num">2.</span> User Roles &amp; Authority Matrix</li>
+        <li class="toc-item"><span class="toc-num">8.</span> Productivity Scoring Formula</li>
+        <li class="toc-item"><span class="toc-num">3.</span> Authentication &amp; Shift Attendance</li>
+        <li class="toc-item"><span class="toc-num">9.</span> AI Operational &amp; Executive Synthesis</li>
+        <li class="toc-item"><span class="toc-num">4.</span> Task Orchestration (MD &amp; Director)</li>
+        <li class="toc-item"><span class="toc-num">10.</span> Notification Center &amp; Delay Alerts</li>
+        <li class="toc-item"><span class="toc-num">5.</span> Employee Workspace Guide</li>
+        <li class="toc-item"><span class="toc-num">11.</span> CSV Exporting &amp; Data Safety</li>
+        <li class="toc-item"><span class="toc-num">6.</span> Task Timer &amp; Concurrency Lock</li>
+        <li class="toc-item"><span class="toc-num">12.</span> Frequently Asked Questions (FAQ)</li>
+      </ul>
+    </div>
+
+    <!-- ==================== SECTION 1: SYSTEM OVERVIEW ==================== -->
+    <h1><span class="section-num">1</span> System Overview &amp; Architecture</h1>
+    <p>
+      <strong>Rison WorkTrack</strong> is an enterprise operations and task management system built specifically for <strong>Bharat Loomtex</strong>. It provides unified daily task assignment, project milestone management, real-time work timers, shift attendance auditing, and mathematically sound productivity reports.
+    </p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-title">🌐 Dedicated Branded Portal</div>
+        <div class="feature-card-desc">
+          Live at <span class="code-pill">https://bharatloomtex.risonaitech.com</span> with zero third-party platform branding and automatic enterprise-grade SSL encryption.
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">⚡ Real-Time Cloud Synchronization</div>
+        <div class="feature-card-desc">
+          Powered by high-speed Vercel persistent storage with origin cache bypass (<span class="code-pill">useCache: false</span>). Changes made by leadership or staff sync instantly across all devices.
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">⏱️ Anti-Fraud Concurrency Lock</div>
+        <div class="feature-card-desc">
+          Guarantees employees cannot log multiple tasks in parallel. Starting a second timer cleanly pauses the first, preserving authentic work audit trails.
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">📊 Mathematical Performance Scoring</div>
+        <div class="feature-card-desc">
+          Replaces arbitrary managerial ratings with a 4-factor formula (30% Completion + 30% On-Time + 25% Quality + 15% Work Consistency).
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SECTION 2: ROLES & AUTHORITY ==================== -->
+    <h1><span class="section-num">2</span> User Roles &amp; Authority Matrix</h1>
+    <p>
+      The system models Bharat Loomtex's exact governance structure. Every user is authenticated with verified organizational assignment and review rights.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Personnel Name</th>
+          <th>Designation / Department</th>
+          <th>Role Tier</th>
+          <th>Organizational Assignment &amp; Review Rights</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Mr. Sumeet Khungar</strong></td>
+          <td>Managing Director (MD)<br><small>Executive Leadership</small></td>
+          <td><span class="badge badge-admin">ADMIN</span></td>
+          <td>Universal assignment rights to <strong>all staff</strong>. Full authority to create projects, approve deliverables, return work, and inspect all productivity audits.</td>
+        </tr>
+        <tr>
+          <td><strong>Meenakshi Khungar</strong></td>
+          <td>Director<br><small>Executive Management</small></td>
+          <td><span class="badge badge-manager">MANAGER</span></td>
+          <td>Authorized to assign tasks to <strong>Chandan Goswani, Marketing Head, and Accounts Head</strong>. Full review and approval authority for all submitted deliverables.</td>
+        </tr>
+        <tr>
+          <td><strong>Chandan Goswani</strong></td>
+          <td>Production, HR &amp; Design Head<br><small>Plant Operations</small></td>
+          <td><span class="badge badge-employee">EMPLOYEE</span></td>
+          <td>Receives tasks, runs live timers, updates progress, reports blockers, and submits work for executive approval. Strictly isolated from peer private queues.</td>
+        </tr>
+        <tr>
+          <td><strong>Marketing Head</strong></td>
+          <td>Marketing Head<br><small>Marketing &amp; Sales (Unfulfilled)</small></td>
+          <td><span class="badge badge-employee">EMPLOYEE</span></td>
+          <td>Department queue maintained for upcoming campaign schedules and wholesale distribution rollouts.</td>
+        </tr>
+        <tr>
+          <td><strong>Accounts Head</strong></td>
+          <td>Accounts Head<br><small>Accounts &amp; Finance</small></td>
+          <td><span class="badge badge-employee">EMPLOYEE</span></td>
+          <td>Handles purchase audits, vendor ledgers, tax filings, and factory expense reconciliation tasks.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-warning">
+      <div class="callout-title">⚠️ Organizational Assignment Boundary Policy</div>
+      Director Meenakshi Khungar can assign tasks strictly to the three Department Heads. Attempts to assign tasks outside this boundary are intercepted and blocked by the governance engine with a descriptive policy explanation.
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 3: AUTHENTICATION & ATTENDANCE ==================== -->
+  <div class="section-break">
+    <h1><span class="section-num">3</span> Authentication &amp; Shift Attendance</h1>
+
+    <h2>3.1 Signing In to the Portal</h2>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-badge">1</div>
+        <div class="step-content">
+          <div class="step-title">Navigate to the Official Login URL</div>
+          <div class="step-desc">Open <strong>https://bharatloomtex.risonaitech.com/login</strong> on any desktop, laptop, or mobile browser.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-badge">2</div>
+        <div class="step-content">
+          <div class="step-title">Enter Official Email or Use Registered Staff Cards</div>
+          <div class="step-desc">Enter your email (e.g. <span class="code-pill">admin@bharatloomtex.com</span>, <span class="code-pill">meenakshi.khungar@bharatloomtex.com</span>, or <span class="code-pill">accounts.head@bharatloomtex.com</span>) or click your name in the registered quick-switch roster.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-badge">3</div>
+        <div class="step-content">
+          <div class="step-title">Automatic Direction to Designated Workspace</div>
+          <div class="step-desc">Executive Management is directed to the <strong>Operations Command Center</strong> (<span class="code-pill">/admin/dashboard</span>). Department staff are routed to their <strong>Personal Workspace</strong> (<span class="code-pill">/employee/dashboard</span>).</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>3.2 Automatic Shift Clock-In &amp; Clock-Out Tracking</h2>
+    <p>
+      To measure daily work duration transparently without invasive surveillance, WorkTrack ties shift attendance to verified active sessions:
+    </p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-title">🟢 Clock-In (On Login)</div>
+        <div class="feature-card-desc">
+          The moment an employee logs into the portal, the system opens an active shift session. The login timestamp and date are saved to the attendance ledger.
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🔴 Clock-Out (On Logout)</div>
+        <div class="feature-card-desc">
+          When the employee clicks <strong>Log Out</strong> in the top navigation bar, the system cleanly closes their shift session, pauses any active task timer, calculates total shift hours, and redirects to the logout confirmation page.
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SECTION 4: TASK ORCHESTRATION ==================== -->
+    <h1><span class="section-num">4</span> Task Orchestration Guide (MD &amp; Director)</h1>
+    <p>Executive leadership can create, schedule, prioritize, and assign deliverables with precision.</p>
+
+    <h2>4.1 Creating a New Task</h2>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-badge">1</div>
+        <div class="step-content">
+          <div class="step-title">Open the Task Assignment Modal</div>
+          <div class="step-desc">Click the blue <strong>"Assign New Task"</strong> button located on the top right of the Admin Dashboard or Task Management page (<span class="code-pill">/admin/tasks</span>).</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-badge">2</div>
+        <div class="step-content">
+          <div class="step-title">Specify Title, Description &amp; Scope</div>
+          <div class="step-desc">Enter an actionable title (e.g. <em>"Panipat Loom Maintenance Ledger Audit"</em>) and full scope instructions in the description box.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-badge">3</div>
+        <div class="step-content">
+          <div class="step-title">Select Task Type &amp; Project</div>
+          <div class="step-desc">Choose <strong>Daily Task</strong> for routine work, or <strong>Project Task</strong> and link it to an active corporate initiative (e.g. <em>Winter Jacquard Weaving Run</em>).</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-badge">4</div>
+        <div class="step-content">
+          <div class="step-title">Assign Personnel, Priority &amp; Target Deadline</div>
+          <div class="step-desc">Select the assignee from the authorized personnel list, set the priority level (<span class="badge badge-low">LOW</span>, <span class="badge badge-medium">MEDIUM</span>, <span class="badge badge-high">HIGH</span>, <span class="badge badge-urgent">URGENT</span>), set the completion deadline date, and input estimated hours.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-badge">5</div>
+        <div class="step-content">
+          <div class="step-title">Publish &amp; Dispatch</div>
+          <div class="step-desc">Click <strong>"Create &amp; Assign Task"</strong>. The task immediately appears in the employee's workspace and sends a new task notification.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>4.2 Navigating the Three Unified Task Views</h2>
+    <ul>
+      <li><strong>List View:</strong> Detailed tabular data showing assignee cards, priority, status badges, deadlines, logged vs. estimated hours, and real-time progress bars.</li>
+      <li><strong>Kanban Board:</strong> 5 stage columns: <em>Not Started &rarr; In Progress &rarr; On Hold / Blocked &rarr; Submitted for Review &rarr; Completed</em>. Cards can be opened with one click.</li>
+      <li><strong>Calendar View:</strong> Month grid plotting deliverable deadlines so management can foresee workload bottlenecks.</li>
+    </ul>
+  </div>
+
+  <!-- ==================== SECTION 5 & 6: EMPLOYEE & TIMER ==================== -->
+  <div class="section-break">
+    <h1><span class="section-num">5</span> Employee Workspace Guide (Department Heads)</h1>
+    <p>Department Heads work inside a distraction-free, privacy-isolated workspace designed for execution.</p>
+
+    <h2>5.1 Personal Task Management</h2>
+    <p>
+      Under <strong>"My Assigned Tasks"</strong> (<span class="code-pill">/employee/tasks</span>), employees can filter tasks using top tabs:
+      <em>All My Tasks, In Progress, Awaiting Approval, Completed, and Overdue</em>.
+    </p>
+
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-badge">1</div>
+        <div class="step-content">
+          <div class="step-title">Inspect Deliverable Requirements</div>
+          <div class="step-desc">Click <strong>Open &rarr;</strong> on any task to open the full drawer displaying task requirements, deadline countdown, and creator details.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-badge">2</div>
+        <div class="step-content">
+          <div class="step-title">Update Real-Time Progress</div>
+          <div class="step-desc">Use the interactive progress slider inside the drawer to update percentage completion (e.g. 25%, 50%, 75%). Management sees this progress instantly.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-badge">3</div>
+        <div class="step-content">
+          <div class="step-title">Report Blockers &amp; Delays</div>
+          <div class="step-desc">If work is delayed due to an external impediment, type the reason in the comment box, check <strong>"Flag as Blocker"</strong>, and post. The task moves to <em>On Hold</em> and triggers an immediate executive alert.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-badge">4</div>
+        <div class="step-content">
+          <div class="step-title">Submit Deliverable for Approval</div>
+          <div class="step-desc">When work is 100% finished, click <strong>"Submit for Approval"</strong>, enter brief completion notes, and confirm. The task status updates to <em>Awaiting Management Approval</em>.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SECTION 6: TIME TRACKING ==================== -->
+    <h1><span class="section-num">6</span> Task Timer &amp; Concurrency Safety Lock</h1>
+    <p>
+      Employees can track exact work hours on any assigned task using the built-in precision timer widget.
+    </p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-title">▶️ Start &amp; Pause Controls</div>
+        <div class="feature-card-desc">
+          Click <strong>Start Timer</strong> to begin recording time. Click <strong>Pause</strong> when taking breaks. Total elapsed duration is converted to decimal hours automatically.
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🔒 Concurrency Safety Lock</div>
+        <div class="feature-card-desc">
+          An employee can only have <strong>one active timer</strong> running. Starting a timer on Task B automatically pauses Task A and saves its logged hours cleanly.
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SECTION 7: APPROVAL PROTOCOL ==================== -->
+    <h1><span class="section-num">7</span> Review, Approval &amp; Feedback Protocol</h1>
+    <p>
+      Both <strong>Mr. Sumeet Khungar (MD)</strong> and <strong>Meenakshi Khungar (Director)</strong> have full authority to approve or return submitted deliverables.
+    </p>
+
+    <div class="callout callout-info">
+      <div class="callout-title">📥 Receiving Review Notifications</div>
+      When an employee submits a deliverable, an in-app notification appears on management topbars: <em>"Deliverable Submitted for Review"</em>. Clicking the notification opens the review drawer directly.
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-title">✅ Option A: Approve &amp; Complete</div>
+        <div class="feature-card-desc">
+          Click <strong>"Approve &amp; Complete"</strong>. The task status updates to <em>Completed</em>, logs the approval timestamp, updates performance metrics, and notifies the employee.
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">↩️ Option B: Return with Feedback</div>
+        <div class="feature-card-desc">
+          Click <strong>"Return with Feedback"</strong>, enter mandatory correction notes, and confirm. The task returns to the employee marked for revision with clear correction instructions.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 8 & 9: ANALYTICS & AI ==================== -->
+  <div class="section-break">
+    <h1><span class="section-num">8</span> Productivity Scoring Formula</h1>
+    <p>
+      WorkTrack utilizes a transparent, four-factor mathematical scoring index to evaluate employee performance without arbitrary managerial bias.
+    </p>
+
+    <div class="formula-box">
+      Performance Score = <span class="formula-highlight">(0.30 × Completion Rate)</span> + <span class="formula-highlight">(0.30 × On-Time Rate)</span> + <span class="formula-highlight">(0.25 × Quality Rate)</span> + <span class="formula-highlight">(0.15 × Work Consistency)</span>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Metric Component</th>
+          <th>Weight</th>
+          <th>Mathematical Definition</th>
+          <th>Business Impact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Completion Rate</strong></td>
+          <td>30%</td>
+          <td>(Completed Tasks / Total Assigned Tasks) × 100</td>
+          <td>Measures overall delivery volume against assigned operational responsibilities.</td>
+        </tr>
+        <tr>
+          <td><strong>On-Time Delivery Rate</strong></td>
+          <td>30%</td>
+          <td>(Tasks Completed On or Before Due Date / Total Completed Tasks) × 100</td>
+          <td>Rewards adherence to plant production deadlines and financial schedules.</td>
+        </tr>
+        <tr>
+          <td><strong>Quality / Approval Rate</strong></td>
+          <td>25%</td>
+          <td>(Submissions Approved Without Rejection / Total Review Submissions) × 100</td>
+          <td>Measures accuracy and reduces rework; penalizes tasks returned for corrections.</td>
+        </tr>
+        <tr>
+          <td><strong>Work Progress Consistency</strong></td>
+          <td>15%</td>
+          <td>Average progress percentage updated regularly across active workload</td>
+          <td>Encourages steady daily progress updates rather than last-minute rushing.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-title">🌟 Star Performer (80% – 100%)</div>
+        <div class="feature-card-desc">High delivery volume, zero overdue tasks, and work approved on initial submission.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🟢 On Track (60% – 79%)</div>
+        <div class="feature-card-desc">Solid performance meeting all standard operational and production expectations.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">⚠️ Needs Support (&lt; 60%)</div>
+        <div class="feature-card-desc">Workload bottleneck detected or multiple deadlines missed; requires management assistance.</div>
+      </div>
+    </div>
+
+    <!-- ==================== SECTION 9: AI BRIEFINGS ==================== -->
+    <h1><span class="section-num">9</span> AI Operational &amp; Executive Synthesis</h1>
+    <p>
+      Located under <strong>AI Executive Reports</strong> (<span class="code-pill">/admin/ai-reports</span>), this module synthesizes verified database metrics into executive briefings.
+    </p>
+
+    <ul>
+      <li><strong>Daily Operational Briefing:</strong> Summary of tasks completed today, active tasks in progress, tasks awaiting management approval, overdue escalations, and flagged blockers.</li>
+      <li><strong>Weekly Executive Review:</strong> Department-wise performance ratings, delivery consistency trends, workload distribution balance, and suggested management actions.</li>
+    </ul>
+
+    <!-- ==================== SECTION 10: NOTIFICATIONS ==================== -->
+    <h1><span class="section-num">10</span> Notification Center &amp; Critical Alerts</h1>
+    <ul>
+      <li><strong>🚨 Automated Overdue Alerts:</strong> When a deadline passes without completion, an automated critical alert is sent to leadership.</li>
+      <li><strong>⚠️ 36-Hour Delay Warning:</strong> Tasks with &lt; 36 hours remaining and progress under 40% are flagged as high risk of delay.</li>
+      <li><strong>🔔 Review Submissions &amp; Approvals:</strong> Instant notifications keep management and employees aligned without back-and-forth emails.</li>
+    </ul>
+
+    <!-- ==================== SECTION 11: EXPORTS ==================== -->
+    <h1><span class="section-num">11</span> CSV Exporting &amp; Data Safety</h1>
+    <p>
+      To download company performance audits for board meetings or records, navigate to <strong>Productivity Analytics</strong> (<span class="code-pill">/admin/analytics</span>) and click <strong>"Export to CSV"</strong>. The generated spreadsheet contains verified employee hours, completion rates, and performance ratings.
+    </p>
+
+    <!-- ==================== SECTION 12: FAQ ==================== -->
+    <h1><span class="section-num">12</span> Frequently Asked Questions (FAQ)</h1>
+    <p><strong>Q: What happens if an employee forgets to stop their timer?</strong><br>
+    A: When logging out at the end of the shift, the system automatically stops and finalizes any active timer safely.</p>
+    
+    <p><strong>Q: Can employees see tasks assigned to colleagues?</strong><br>
+    A: No. Strict role isolation ensures employees can only view and access their own assigned deliverables.</p>
+
+    <p><strong>Q: How long is task data stored in the cloud?</strong><br>
+    A: Data does not expire. All records, time logs, and comments are stored permanently in Vercel Cloud Storage.</p>
+
+    <div class="footer-note">
+      © 2026 Bharat Loomtex. Powered by Rison WorkTrack — Built for Enterprise Scalability.
+    </div>
+  </div>
+
+</body>
+</html>

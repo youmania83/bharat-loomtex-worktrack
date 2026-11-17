@@ -14,6 +14,7 @@ import {
   Shield,
   Layers,
   LogOut,
+  BookOpen,
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils/cn';
@@ -109,8 +110,22 @@ export function Sidebar({ role }: SidebarProps) {
         })}
       </nav>
 
-      {/* Footer Branding & Logout */}
-      <div className="p-4 border-t border-slate-800/80 space-y-3">
+      {/* Footer Branding, Manual & Logout */}
+      <div className="p-4 border-t border-slate-800/80 space-y-2.5">
+        <a
+          href="/Bharat_Loomtex_WorkTrack_User_Manual.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-slate-800/50 hover:bg-slate-800 text-xs text-slate-300 font-medium transition-colors border border-slate-700/50 hover:border-slate-600"
+          title="Download System Operating Manual (PDF)"
+        >
+          <div className="flex items-center gap-2">
+            <BookOpen className="w-3.5 h-3.5 text-blue-400" />
+            <span>Operating Manual</span>
+          </div>
+          <span className="text-[10px] text-blue-400 font-mono font-bold">PDF</span>
+        </a>
+
         <button
           onClick={handleLogout}
           className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-slate-800/70 hover:bg-red-950/40 hover:text-red-300 border border-slate-700/60 hover:border-red-800 text-xs text-slate-300 font-medium transition-colors"
